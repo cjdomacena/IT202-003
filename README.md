@@ -1,5 +1,5 @@
 
 # Development Setup
 
-- This branch is for development deployment
+- This branch is for production build
 
