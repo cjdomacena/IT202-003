@@ -11,7 +11,16 @@ The loop should output only odd values. #}}
 	{
 		//use the $arr variable to iterate over
 		echo "<br>Processing Array:<br><pre>" . var_export($arr, true) . "</pre>";
-		echo "<br>Odds output:<br>";
+
+
+		foreach ($arr as $item)
+		{
+			if($item % 2 != 0)
+			{
+				echo "<br>Odds output: " . $item . "<br>";
+			}
+		}
+
 		//TODO add logic here to echo out only odd values
 
 	}
