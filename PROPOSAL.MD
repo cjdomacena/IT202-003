@@ -28,16 +28,11 @@ by: **Christian Domacena**
 	- [ ]  Username is required
 
 	- [ ] Confirm password’s match. 
-  <br>
-  <br>
 
   - [ ] Users Table
   
     - [ ] Id, username, email, password (60 characters), created, modified. 
   
-<br>
-<br>
-
   - [ ] Password must be hashed (plain text passwords will lose points)
   
   - [ ] Email should be unique
@@ -47,8 +42,6 @@ by: **Christian Domacena**
   - [ ] System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
   
     - [ ] The only fields that may be cleared are the password fields
-
-<br>
 
 - [ ] User will be able to login to their account (given they enter the correct credentials)
 
