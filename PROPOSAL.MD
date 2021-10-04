@@ -30,14 +30,20 @@ by: **Christian Domacena**
 	- [ ] Confirm password’s match. 
   <br>
   <br>
+
   - [ ] Users Table
   
     - [ ] Id, username, email, password (60 characters), created, modified. 
+  
 <br>
 <br>
+
   - [ ] Password must be hashed (plain text passwords will lose points)
+  
   - [ ] Email should be unique
+  
   - [ ] Username should be unique
+  
   - [ ] System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
   
     - [ ] The only fields that may be cleared are the password fields
