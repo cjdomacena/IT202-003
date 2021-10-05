@@ -18,7 +18,7 @@ by: **Christian Domacena**
 <summary><strong>Milestone 1 </strong> </summary>
 
 
-- [ ] **Uses will be able to register a new account**
+- [ ] **Users will be able to register a new account**
   - [ ] Form Fields
   
     - [ ] Username, email, password, confirm password (other fields optional) 
