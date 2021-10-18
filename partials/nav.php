@@ -1,3 +1,4 @@
+<script src="./../public_html/Project/helper.js"></script>
 <?php
 //Note: this is to resolve cookie issues with port numbers
 $domain = $_SERVER["HTTP_HOST"];
