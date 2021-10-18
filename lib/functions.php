@@ -20,7 +20,7 @@ function se($v, $k = null, $default = "", $isEcho = true)
     }
     if ($isEcho) {
         //https://www.php.net/manual/en/function.htmlspecialchars.php
-        flash(htmlspecialchars($returnValue, ENT_QUOTES));
+        echo htmlspecialchars($returnValue, ENT_QUOTES);
     } else {
         //https://www.php.net/manual/en/function.htmlspecialchars.php
         return htmlspecialchars($returnValue, ENT_QUOTES);
@@ -92,4 +92,27 @@ function getMessages()
         return $flashes;
     }
     return array();
+}
+//TODO generic helpers
+function reset_session()
+{
+    session_unset();
+    session_destroy();
+    session_start();
+}
+function users_check_duplicate($errorInfo)
+{
+    if ($errorInfo[1] === 1062) {
+        //https://www.php.net/manual/en/function.preg-match.php
+        preg_match("/Users.(\w+)/", $errorInfo[2], $matches);
+        if (isset($matches[1])) {
+            flash("The chosen " . $matches[1] . " is not available.", "warning");
+        } else {
+            //TODO come up with a nice error message
+            flash("<pre>" . var_export($errorInfo, true) . "</pre>");
+        }
+    } else {
+        //TODO come up with a nice error message
+        flash("<pre>" . var_export($errorInfo, true) . "</pre>");
+    }
 }
