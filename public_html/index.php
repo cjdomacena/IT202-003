@@ -1,1 +1,5 @@
-<?php phpinfo()?>
+<?php 
+
+
+die(header("Location: /Project/login.php"))
+?>
