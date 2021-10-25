@@ -70,8 +70,37 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                     $hash = $user["password"];
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
-                        ///echo "Weclome $email";
                         $_SESSION["user"] = $user;
+                        
+                        /*
+                        SELECT Role.name  -> We select the role name
+
+                        FROM Roles JOIN UserRoles -> We temporarily combine two tables since they have two intersecting columns (role_id)
+
+                        WHERE UserRoles.user_id = :user_id  -> We check wether the user_id in the JOINED TABLE is equal to the current user's user_id
+ 
+                        AND Roles.is_active = 1 -> We check if the Role that we are getting is currently active. 
+
+                        AND UserRoles.is_active = 1 -> We check if the current user's role is active.
+
+                        If the three conditions are met, we return the name of the role (Role.name)
+
+                        */
+                        $stmt = $db->prepare("SELECT Role.name FROM Roles JOIN UserRoles on Roles.id = UserRoles.role_id WHERE UserRoles.user_id = :user_id and Roles.is_active = 1 and UserRoles.is_active = 1");
+
+                        // We fil in the user id for the query
+                        $stmt->execute([":user_id" => $user["id"]]);
+
+                        $role = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        if($roles)
+                        {
+                            $_SESSION["user"]["roles"] = $roles;       //at least 1 role
+                        }else 
+                        {
+                            $_SESSION["user"]["roles"] = []; // no roles
+                        }
+
                         die(header("Location: home.php"));
                     } else {
                         //echo "Invalid password";
