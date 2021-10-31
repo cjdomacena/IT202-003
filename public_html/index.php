@@ -1,5 +1,3 @@
 <?php 
-
-
-die(header("Location: /Project/login.php"))
+require_once(__DIR__ . '/../partials/nav.php')
 ?>
