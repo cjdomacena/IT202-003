@@ -2,18 +2,18 @@
 require(__DIR__ . "/../../partials/nav.php"); ?>
 
 <div class="min-h-auto flex  justify-center py-12 px-4 sm:px-6 lg:px-8 flex-col items-center">
-<div class="mx-auto container grid place-items-center py-8 text-xl-900">
-    <div class="flex">
-        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-        </svg>
-    </div>
-    <div class="">
-        <h1 class="text-2xl font-bold">Sign in to your accont</h1>
-    </div>
+    <div class="mx-auto container grid place-items-center py-8 text-xl-900">
+        <div class="flex">
+            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+            </svg>
+        </div>
+        <div class="">
+            <h1 class="text-2xl font-bold">Sign in to your accont</h1>
+        </div>
 
 
-</div>
+    </div>
     <div class="max-w-md w-full space-y-8 p-4 bg-gray-100 rounded-md shadow">
         <form onsubmit="return validate(this)" method="POST" class="mt-4 space-y-8">
             <div class="rounded-md shadow-sm -space-y-px">
@@ -77,27 +77,31 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     $email = se($_POST, "email", "", false);
     //same as above but for password
     $password = se($_POST, "password", "", false);
-
     //TODO 3: validate/use
     //$errors = [];
     $hasErrors = false;
     if (empty($email)) {
         //array_push($errors, "Email must be set");
-        flash("Email must be set", "warning");
+        flash("Username or email must be set", "warning");
         $hasErrors = true;
     }
-
     //sanitize
     //$email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $email = sanitize_email($email);
+    if (str_contains($email, "@")) {
+        $email = sanitize_email($email);
+        //validate
+        //if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!is_valid_email($email)) {
+            //array_push($errors, "Invalid email address");
+            flash("Invalid email address", "warning");
 
-    //validate
-    //if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    if (!is_valid_email($email)) {
-        //array_push($errors, "Invalid email address");
-        flash("Invalid email address", "warning");
-
-        $hasErrors = true;
+            $hasErrors = true;
+        }
+    } else {
+        if (!preg_match('/^[a-z0-9_-]{3,30}$/i', $email)) {
+            flash("Username must only be alphanumeric and can only contain - or _");
+            $hasErrors = true;
+        }
     }
     if (empty($password)) {
         //array_push($errors, "Password must be set");
@@ -109,14 +113,10 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         flash("Password must be at least 8 characters", "warning");
         $hasErrors = true;
     }
-    if ($hasErrors) {
-        //Nothing to output here, flash will do it
-        //can likely flip the if condition
-        //echo "<pre>" . var_export($errors, true) . "</pre>";
-    } else {
+    if (!$hasErrors) {
         //TODO 4
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, username, email, password from Users where email = :email");
+        $stmt = $db->prepare("SELECT id, username, email, password from Users where email = :email or username = :email");
         try {
             $r = $stmt->execute([":email" => $email]);
             if ($r) {
