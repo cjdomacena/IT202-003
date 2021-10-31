@@ -125,16 +125,18 @@
     - [ ] (mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
 
       - List of Evidence of Feature Completion
-        - Navbar 
-            - ![Navbar in local env](Styles/navbar_local.png)
+       
+        - Navbar in local env
+   
+          ![Local Env](Styles/navbar_local.png)
 
         - Status: (In progress)
 
-        - Direct Link (Direct link to specific file)
+        - [Link to file](https://github.com/cjdomacena/IT202-003/blob/Milestone1/partials/nav.php)
 
       - Pull Request/s
 
-        - [Pull Request #](insertLinkHere) 
+        - [Navbar / PR #39](https://github.com/cjdomacena/IT202-003/pull/39/commits/2dbeddaee0bec252c154cc5f225ba135dc4381e3) 
 
       - Screenshots
 
