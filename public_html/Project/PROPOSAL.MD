@@ -125,8 +125,10 @@
     - [ ] (mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
 
       - List of Evidence of Feature Completion
+        - Navbar 
+            - ![Navbar in local env] ("./../../Milestone1_evidence/Styles/navbar_local.png")
 
-        - Status: (In progress, Incomplete, Pending)
+        - Status: (In progress)
 
         - Direct Link (Direct link to specific file)
 
