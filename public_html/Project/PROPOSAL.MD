@@ -126,7 +126,7 @@
 
       - List of Evidence of Feature Completion
         - Navbar 
-            - ![Navbar in local env] ("./../../Milestone1_evidence/Styles/navbar_local.png")
+            - ![Navbar in local env] (Styles/navbar_local.png)
 
         - Status: (In progress)
 
