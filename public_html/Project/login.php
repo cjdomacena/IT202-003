@@ -11,15 +11,13 @@ require(__DIR__ . "/../../partials/nav.php"); ?>
         <div class="">
             <h1 class="text-2xl font-bold">Sign in to your accont</h1>
         </div>
-
-
     </div>
     <div class="max-w-md w-full space-y-8 p-4 bg-gray-100 rounded-md shadow">
         <form onsubmit="return validate(this)" method="POST" class="mt-4 space-y-8">
             <div class="rounded-md shadow-sm -space-y-px">
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" name="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" placeholder="Email address or Username" />
+                    <input type="text" name="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" placeholder="Email address or Username" />
                 </div>
 
             </div>
