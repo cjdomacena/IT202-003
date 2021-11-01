@@ -25,6 +25,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 ?>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <!-- include css and js files -->
 <link rel="stylesheet" href="<?php echo get_url('tailwind.css') ?>">
 <script src="<?php echo get_url('helpers.js'); ?>"></script>
