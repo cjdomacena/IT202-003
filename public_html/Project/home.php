@@ -9,6 +9,10 @@ if (is_logged_in()) {
     echo "<pre>" . var_export($_SESSION, true) . "</pre>";
     echo   "<pre?>" . var_dump($_SESSION["user"]) . "</pre>";
 }
+else
+{
+    echo "Not logged in";
+}
 ?>
 <?php
 require(__DIR__ . "/../../partials/flash.php");

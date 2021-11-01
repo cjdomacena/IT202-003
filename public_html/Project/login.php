@@ -132,12 +132,13 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         $stmt->execute([":user_id" => $user["id"]]);
                         $roles = $stmt->fetchAll(PDO::FETCH_ASSOC); //fetch all since we'll want multiple
                         //save roles or empty array
+                        die(header("Location: home.php"));
                         if ($roles) {
                             $_SESSION["user"]["roles"] = $roles; //at least 1 role
                         } else {
                             $_SESSION["user"]["roles"] = []; //no roles
                         }
-                        die(header("Location: home.php"));
+               
                     } else {
                         //echo "Invalid password";
                         flash("Invalid password", "danger");
