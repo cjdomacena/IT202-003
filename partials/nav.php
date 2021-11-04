@@ -32,9 +32,9 @@ require_once(__DIR__ . "/../lib/functions.php");
 
 
 <header class="w-full">
-    <nav class="container-2xl bg-gray-100 p-4 flex justify-between px-8 shadow">
+    <nav class="container-2xl bg-indigo-600 p-4 flex justify-between px-8 shadow">
         <div id="logo" class="h-8">
-            <a href="/public_html/<?php echo get_url('index.php'); ?>" class="text-gray-900 flex text-xl hover:text-gray-400 items-center">
+            <a href="/public_html/<?php echo get_url('index.php'); ?>" class="text-gray-100 flex text-xl hover:text-gray-300 items-center">
                 <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
                 </svg>
@@ -43,22 +43,22 @@ require_once(__DIR__ . "/../lib/functions.php");
         <div class="h-8">
 
         </div>
-        <ul class="list-none flex space-x-4 text-xl text-gray-900 h-8 items-center">
+        <ul class="list-none flex space-x-4 text text-gray-100 h-8 items-center">
             <?php if (is_logged_in()) : ?>
-                <li class="hover:text-gray-400"><a href="/public_html/<?php echo get_url('home.php'); ?>">Home</a></li>
+                <li class="hover:text-indigo-200"><a href="/public_html/<?php echo get_url('home.php'); ?>">Home</a></li>
                 <li class="hover:text-gray-400"><a href="<?php echo get_url('profile.php'); ?>">Profile</a></li>
             <?php endif; ?>
             <?php if (!is_logged_in()) : ?>
-                <li class="hover:text-gray-400"><a href="<?php echo get_url('login.php'); ?>">Login</a></li>
-                <li class="hover:text-gray-400"><a href="<?php echo get_url('register.php'); ?>">Register</a></li>
+                <li class="hover:text-indigo-200"><a href="<?php echo get_url('login.php'); ?>">Login</a></li>
+                <li class="hover:text-indigo-200"><a href="<?php echo get_url('register.php'); ?>">Register</a></li>
             <?php endif; ?>
             <?php if (has_role("admin")) : ?>
-                <li class="hover:text-gray-400"><a href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
-                <li class="hover:text-gray-400"><a href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
-                <li class="hover:text-gray-400"><a href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li>
+                <li class="hover:text-indigo-200"><a href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
+                <li class="hover:text-indigo-200"><a href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
+                <li class="hover:text-indigo-200"><a href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li>
             <?php endif; ?>
             <?php if (is_logged_in()) : ?>
-                <li class="hover:text-gray-400 text-red-100"><a href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
+                <li class="hover:text-indigo-200 text-red-400"><a href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
             <?php endif; ?>
 
             <li class="border-l-2 pl-3 border-gray-900  border-opacity-25 hover:text-gray-400"><a href="/cart" class="flex">
