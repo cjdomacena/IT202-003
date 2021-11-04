@@ -178,14 +178,19 @@ function draw() {
 	// Move and draw the enemies
 	enemies.forEach(function (enemy, i) {
 		enemy.x -= enemy.s;
+		let count = i + 1;
+		if (isColliding(enemy, ship)) {
+			// Custom
+			collideCount = count;
+		}
 		if (enemy.x < 0) {
 			if (collideCount < lives) {
-				collideCount = i + 1;
+				collideCount = count;
 			}
 			else {
 				gameOver = true;
 			}
-
+		
 		}
 
 		context.fillStyle = '#00FF00';
@@ -193,12 +198,9 @@ function draw() {
 	});
 
 	// Collide the ship with enemies
-	enemies.forEach(function (enemy, i) {
-		if (isColliding(enemy, ship)) {
-			// Custom
-			collideCount = i + 1;
-		}
-	});
+	// enemies.forEach(function (enemy, i) {
+
+	// });
 	// Move the ship
 	if (down) {
 		ship.y += ship.s;
