@@ -170,6 +170,7 @@ function shoot() {
 	}
 }
 let collideCount = 0;
+let lives = 3;
 // The main draw loop
 function draw() {
 	erase();
@@ -178,8 +179,7 @@ function draw() {
 	enemies.forEach(function (enemy, i) {
 		enemy.x -= enemy.s;
 		if (enemy.x < 0) {
-			// Custom
-			if (collideCount < 3) {
+			if (collideCount < lives) {
 				collideCount = i + 1;
 			}
 			else {
@@ -260,12 +260,13 @@ function draw() {
 		context.fillStyle = '#0000FF';
 		bullet.draw();
 	}
+	let livesRemaining = lives - collideCount;
 	// Draw the score
 	context.fillStyle = '#000000';
 	context.font = '24px Arial';
 	context.textAlign = 'left';
 	context.fillText('Score: ' + score, 1, 25)
-	context.fillText('Collide Count: ' + collideCount, 1, 50)
+	context.fillText('Lives: ' + livesRemaining, 1, 50)
 	// End or continue the game
 	if (gameOver) {
 		endGame();
