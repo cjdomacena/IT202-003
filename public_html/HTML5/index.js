@@ -169,7 +169,7 @@ function shoot() {
 		bullet.y = ship.y + ship.l / 2;
 	}
 }
-
+let collideCount = 0;
 // The main draw loop
 function draw() {
 	erase();
@@ -177,16 +177,18 @@ function draw() {
 	// Move and draw the enemies
 	enemies.forEach(function (enemy) {
 		enemy.x -= enemy.s;
-		if (enemy.x < 0) {
+		if (enemy.x < 0 && collideCount === 3) {
 			gameOver = true;
 		}
 		context.fillStyle = '#00FF00';
 		enemy.draw();
 	});
+
 	// Collide the ship with enemies
 	enemies.forEach(function (enemy, i) {
 		if (isColliding(enemy, ship)) {
-			gameOver = true;
+			// Custom
+			collideCount = i + 1;
 		}
 	});
 	// Move the ship
@@ -255,6 +257,7 @@ function draw() {
 	context.font = '24px Arial';
 	context.textAlign = 'left';
 	context.fillText('Score: ' + score, 1, 25)
+	context.fillText('Collide Count: ' + collideCount, 1, 50)
 	// End or continue the game
 	if (gameOver) {
 		endGame();
