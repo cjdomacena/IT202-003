@@ -175,11 +175,19 @@ function draw() {
 	erase();
 	var gameOver = false;
 	// Move and draw the enemies
-	enemies.forEach(function (enemy) {
+	enemies.forEach(function (enemy, i) {
 		enemy.x -= enemy.s;
-		if (enemy.x < 0 && collideCount === 3) {
-			gameOver = true;
+		if (enemy.x < 0) {
+			// Custom
+			if (collideCount < 3) {
+				collideCount = i + 1;
+			}
+			else {
+				gameOver = true;
+			}
+
 		}
+
 		context.fillStyle = '#00FF00';
 		enemy.draw();
 	});
