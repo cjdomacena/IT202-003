@@ -29,7 +29,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 <!-- include css and js files -->
 <link rel="stylesheet" href="<?php echo get_url('tailwind.css') ?>">
 <script src="<?php echo get_url("utils/index.js") ?>" defer></script>
-<script src="<?php echo get_url('helpers.js'); ?>"></script>
+<script src="<?php echo get_url('helper.js'); ?>"></script>
 <header class="w-full">
     <nav class="container-2xl bg-indigo-600 p-4 flex justify-between px-8 shadow">
         <div id="logo" class="h-8">
@@ -42,11 +42,16 @@ require_once(__DIR__ . "/../lib/functions.php");
         <div class="h-8">
 
         </div>
-        <ul class="list-none flex space-x-4 text text-gray-100 h-8 items-center">
+        <ul class="list-none flex space-x-4 text text-gray-100 h-8 items-center ">
             <?php if (is_logged_in()) : ?>
                 <li class="hover:text-indigo-200"><a href="/public_html/<?php echo get_url('home.php'); ?>">Home</a></li>
-                <li class="relative">
-                    <a class="hover:text-gray-400 cursor-pointer" id="profile-link">Profile</a>
+                <li class="relative pl-2">
+                    <div class="flex hover:text-gray-400 cursor-pointer items-center justify-center" id="profile-link">
+                        <p class=" cursor-pointer">Profile</p>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
                     <div class="absolute top-8 right-0 w-48 bg-gray-100 p-4 rounded shadow h-auto z-50 invisible" id="collapsible-nav">
 
                     </div>
