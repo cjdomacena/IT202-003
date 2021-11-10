@@ -44,46 +44,57 @@ try {
 }
 
 ?>
-<h1>List Roles</h1>
-<form method="POST">
-    <input type="search" name="role" placeholder="Role Filter" />
-    <input type="submit" value="Search"/>
-</form>
-<table>
-    <thead>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Active</th>
-        <th>Action</th>
-    </thead>
-    <tbody>
-        <?php if (empty($roles)) : ?>
-            <tr>
-                <td colspan="100%">No roles</td>
-            </tr>
-        <?php else : ?>
-            <?php foreach ($roles as $role) : ?>
-                <tr>
-                    <td><?php se($role, "id"); ?></td>
-                    <td><?php se($role, "name"); ?></td>
-                    <td><?php se($role, "description"); ?></td>
-                    <td><?php echo (se($role, "is_active", 0, false) ? "active" : "disabled"); ?></td>
-                    <td>
-                        <form method="POST">
-                            <input type="hidden" name="role_id" value="<?php se($role, 'id'); ?>" />
-                            <?php if (isset($search) && !empty($search)) : ?>
-                                <?php /* if this is part of a search, lets persist the search criteria so it reloads correctly*/ ?>
-                                <input type="hidden" name="role" value="<?php se($search, null); ?>" />
-                            <?php endif; ?>
-                            <input type="submit" value="Toggle" />
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </tbody>
-</table>
+<div class="container mx-auto p-4 bg-gray-100">
+    <h1 class="text-xl">List Roles</h1>
+    <div class="mt-4">
+        <div>
+            <form method="POST">
+                <input type="search" name="role" placeholder="Role Filter" />
+                <input type="submit" value="Search" />
+            </form>
+        </div>
+        <div class="bg-white rounded shadow">
+            <table class="table-fixed border-collapse min-w-full rounded">
+                <thead class="text-left bg-gray-200">
+                    <th class="p-2">ID</th>
+                    <th class="p-2">Name</th>
+                    <th class="p-2">Description</th>
+                    <th class="p-2 w-48">Status</th>
+                    <th class="p-2 w-48">Action</th>
+                </thead>
+                <tbody>
+                    <?php if (empty($roles)) : ?>
+                        <tr>
+                            <td class="w-full border border-gray-600">No roles</td>
+                        </tr>
+                    <?php else : ?>
+                        <?php foreach ($roles as $role) : ?>
+                            <tr class="py-4 ">
+                                <td class="  p-2"><?php se($role, "id"); ?></td>
+                                <td class="  p-2"><?php se($role, "name"); ?></td>
+                                <td class="  p-2"><?php se($role, "description"); ?></td>
+                                <td class="  p-2">
+                                    <span class="px-2 py-1 font-semibold leading-tight <?php echo (se($role, "is_active", 0, false) ? "bg-green-100" : "bg-red-100 ") ?> rounded-sm text-sm"><?php echo (se($role, "is_active", 0, false) ? "Active" : "Disabled"); ?></span>
+                                </td>
+                                <td class=" ">
+                                    <form method="POST" class="p-2 m-0">
+                                        <input type="hidden" name="role_id" value="<?php se($role, 'id'); ?>" />
+                                        <?php if (isset($search) && !empty($search)) : ?>
+                                            <?php /* if this is part of a search, lets persist the search criteria so it reloads correctly*/ ?>
+                                            <input type="hidden" name="role" value="<?php se($search, null); ?>" />
+                                        <?php endif; ?>
+                                        <button type="submit" value="Toggle" class="py-2 px-4 bg-indigo-600 rounded text-gray-100">Toggle</button>
+                                    
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 <?php
 //note we need to go up 1 more directory
 require_once(__DIR__ . "/../../../partials/flash.php");
