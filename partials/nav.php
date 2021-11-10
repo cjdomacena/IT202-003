@@ -44,7 +44,7 @@ require_once(__DIR__ . "/../lib/functions.php");
         </div>
         <ul class="list-none flex space-x-4 text text-gray-100 h-8 items-center ">
             <?php if (is_logged_in()) : ?>
-                <li class="hover:text-indigo-200"><a href="/public_html/<?php echo get_url('home.php'); ?>">Home</a></li>
+                <li class="hover:text-indigo-200"><a href="<?php echo get_url('home.php'); ?>">Home</a></li>
                 <li class="relative pl-2">
                     <div class="flex hover:text-gray-400 cursor-pointer items-center justify-center" id="profile-link">
                         <p class=" cursor-pointer">Profile</p>
