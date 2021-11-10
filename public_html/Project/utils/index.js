@@ -44,11 +44,19 @@ for (let i = 0; i < menuItems.length; i++)
 	ul.appendChild(li);
 }
 
+// Can be added later (based on preference)
+// profileLink.addEventListener("mouseenter", () =>
+// {
+// 	collapse.classList.toggle("invisible");
+// 	collapse.classList.toggle("visible");
+
+// 	collapse.appendChild(ul);
+// })
+
 // Track user click events WITHIN the document
 // This will allow simple functionality for the dropdown to be closed when user clicked outside of the "Profile" link to toggle the collapsed-nav.
 document.addEventListener("click", (e) =>
 {
-
 	// If the profileLink is the same as the (e) that was given by the event listener
 	if (!profileLink.contains(e.target))
 	{
@@ -64,15 +72,12 @@ document.addEventListener("click", (e) =>
 
 		// Toggle between invisible and visible
 		collapse.classList.toggle("invisible");
-
-
 		collapse.classList.toggle("visible");
 
 		collapse.appendChild(ul);
 	}
 })
-collapse.classList.add("transition-all");
-collapse.classList.add("ease-in-out");
+
 // Just add styles to the <ul>
 ul.classList.add("space-y-4");
 ul.classList.add("text-indigo-600");
