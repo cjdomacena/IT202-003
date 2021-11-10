@@ -46,7 +46,12 @@ require_once(__DIR__ . "/../lib/functions.php");
         <ul class="list-none flex space-x-4 text text-gray-100 h-8 items-center">
             <?php if (is_logged_in()) : ?>
                 <li class="hover:text-indigo-200"><a href="/public_html/<?php echo get_url('home.php'); ?>">Home</a></li>
-                <li class="hover:text-gray-400"><a href="<?php echo get_url('profile.php'); ?>">Profile</a></li>
+                <li class="relative">
+                    <a class="hover:text-gray-400 cursor-pointer" id="profile-link">Profile</a>
+                    <div class="absolute top-8 right-0 w-48 bg-gray-100 p-4 rounded shadow h-auto z-50 invisible" id="collapsible-nav">
+
+                    </div>
+                </li>
             <?php endif; ?>
             <?php if (!is_logged_in()) : ?>
                 <li class="hover:text-indigo-200"><a href="<?php echo get_url('login.php'); ?>">Login</a></li>
@@ -70,25 +75,78 @@ require_once(__DIR__ . "/../lib/functions.php");
         </ul>
     </nav>
 </header>
-<!--
-<nav class="bg-gray-100">
-    <ul>
-        <?php if (is_logged_in()) : ?>
-            <li><a href="<?php echo get_url('home.php'); ?>">Home</a></li>
-            <li><a href="<?php echo get_url('profile.php'); ?>">Profile</a></li>
-        <?php endif; ?>
-        <?php if (!is_logged_in()) : ?>
-            <li><a href="<?php echo get_url('login.php'); ?>">Login</a></li>
-            <li><a href="<?php echo get_url('register.php'); ?>">Register</a></li>
-        <?php endif; ?>
-        <?php if (has_role("admin")) : ?>
-            <li><a href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
-            <li><a href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
-            <li><a href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li>
-        <?php endif; ?>
-        <?php if (is_logged_in()) : ?>
-            <li><a href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
-        <?php endif; ?>
-    </ul>
-</nav>
-        -->
+<script>
+    // Grab the <a> with id of profile-link
+    const profileLink = document.getElementById("profile-link");
+
+    // Grab collapsible-nav 
+    const collapse = document.getElementById("collapsible-nav");
+
+    // Create a ul element
+    // This will live inside the collapsible-nav
+    const ul = document.createElement("ul");
+
+    // Initialize the links that will be displayed in the collapsible-nav
+    const menuItems = ["Edit Email", "Edit Username", "Edit Password"];
+
+    // Loop through the menu items to create new <li> element
+    for (let i = 0; i < menuItems.length; i++) {
+
+        // Create new <li>
+        const li = document.createElement("li");
+
+        // Create new <a>
+        // This will live inside the <li> element
+        const link = document.createElement("a");
+
+        // Create a new text node for the link
+        link.appendChild(document.createTextNode(menuItems[i]));
+
+        // Clean the initial menuItems (menuItems[i]) to be used as a href attribute
+        const cleanedLink = menuItems[i].toLowerCase();
+
+        // Will be split with an underscore(_)
+        link.href = cleanedLink.split("_");
+
+        // Add the link inside the <li> element as its child
+        li.appendChild(link);
+
+        // Add classes
+        li.classList.add("cursor-pointer");
+
+        li.classList.add("hover:text-indigo-900");
+
+        // Add the <li> that contains <a> as its child to the previously created <ul>
+        ul.appendChild(li);
+    }
+
+    // Track user click events WITHIN the document
+    // This will allow simple functionality for the dropdown to be closed when user clicked outside of the "Profile" link to toggle the collapsed-nav.
+    document.addEventListener("click", (e) => {
+
+        // If the profileLink is the same as the (e) that was given by the event listener
+        if (!profileLink.contains(e.target)) {
+
+            // Remove the visible class
+            collapse.classList.remove("visible");
+
+            // Make the collapsible-nav invisible
+            collapse.classList.add("invisible");
+
+        } else {
+            
+            // Toggle between invisible and visible
+            collapse.classList.toggle("invisible");
+
+
+            collapse.classList.toggle("visible");
+
+
+            collapse.appendChild(ul);
+        }
+    })
+
+    // Just add styles to the <ul>
+    ul.classList.add("space-y-4");
+    ul.classList.add("text-indigo-600");
+</script>
