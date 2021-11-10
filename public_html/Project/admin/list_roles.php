@@ -45,12 +45,19 @@ try {
 
 ?>
 <div class="container mx-auto p-4 bg-gray-100">
-    <h1 class="text-xl">List Roles</h1>
+
     <div class="mt-4">
         <div>
             <form method="POST">
-                <input type="search" name="role" placeholder="Role Filter" />
-                <input type="submit" value="Search" />
+                <div class="flex items-center w-auto justify-between">
+                    <div>
+                        <h1 class="text-xl">List Roles</h1>
+                    </div>
+                    <div class="flex">
+                        <input type="search" name="role" placeholder="Role Filter" class="appearance-none rounded-none relative block w-48 p-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+                        <input type="submit" value="Search" class="ml-4 bg-indigo-600 mt-2 px-2 py-1 text-gray-100 rounded hover:bg-indigo-400" />
+                    </div>
+                </div>
             </form>
         </div>
         <div class="bg-white rounded shadow">
@@ -83,8 +90,11 @@ try {
                                             <?php /* if this is part of a search, lets persist the search criteria so it reloads correctly*/ ?>
                                             <input type="hidden" name="role" value="<?php se($search, null); ?>" />
                                         <?php endif; ?>
-                                        <button type="submit" value="Toggle" class="py-2 px-4 bg-indigo-600 rounded text-gray-100">Toggle</button>
-                                    
+                                        <button type="submit" value="Toggle" class="py-2 px-4 bg-indigo-600 rounded text-gray-100 hover:bg-indigo-400">Toggle</button>
+                                        <!-- <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                            <input type="checkbox" name="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
+                                            <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                        </div> -->
                                     </form>
                                 </td>
                             </tr>
