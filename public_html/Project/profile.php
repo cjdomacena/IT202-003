@@ -8,12 +8,18 @@ if (!is_logged_in()) {
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
-
     $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
+    // $password = se($_POST, "currentPassword", "", false);
     $db = getDB();
-    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+    // $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+    // $stmt = $db->prepare("SELECT username, email from Users where email = :email or username = :email");
+    $currentUsername = get_username();
+    $currentEmail = get_user_email();
+    $stmt = $db->prepare("SELECT username, email FROM Users WHERE EXISTS (SELECT username, email FROM Users WHERE username = :username OR email = :email)");
     try {
-        $stmt->execute($params);
+        // $r = $stmt->execute([":username" => $username, ":email" => $email]);
+        // echo $currentEmail . " " . $currentUsername;
+
     } catch (Exception $e) {
         if ($e->errorInfo[1] === 1062) {
             //https://www.php.net/manual/en/function.preg-match.php
@@ -22,11 +28,11 @@ if (isset($_POST["save"])) {
                 flash("The chosen " . $matches[1] . " is not available.", "warning");
             } else {
                 //TODO come up with a nice error message
-                echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                echo "<pre>" . var_export($e->errorInfo, true) . "Wzzap</pre>";
             }
         } else {
             //TODO come up with a nice error message
-            echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            echo "<pre>" . var_export($e->errorInfo, true) . "Wazasd123</pre>";
         }
     }
     //select fresh data from table
@@ -87,32 +93,32 @@ $email = get_user_email();
 $username = get_username();
 ?>
 <div class="w-full p-4">
-<form method="POST" onsubmit="return validate(this);">
-    <div class="mb-3">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="<?php se($email); ?>" class="appearance-none bg-gray-200 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" disabled/>
-    </div>
-    <div class="mb-3">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="<?php se($username); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2"/>
-    </div>
-    <!-- DO NOT PRELOAD PASSWORD -->
-    <div class="pt-3">
-        <h2 class="py-4 text-xl">Password Reset</h2>
-    <div class="mb-3">
-        <label for="cp">Current Password</label>
-        <input type="password" name="currentPassword" id="cp" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2"/>
-    </div>
-    <div class="mb-3">
-        <label for="np">New Password</label>
-        <input type="password" name="newPassword" id="np" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2"/>
-    </div>
-    <div class="mb-3">
-        <label for="conp">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="conp" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2"/>
-    </div>
-    <div>
-                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value="save" name="Update Profile">
+    <form method="POST" onsubmit="return validate(this);">
+        <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="<?php se($email); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+        </div>
+        <div class="mb-3">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="<?php se($username); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+        </div>
+        <!-- DO NOT PRELOAD PASSWORD -->
+        <div class="pt-3">
+            <h2 class="py-4 text-xl">Password Reset</h2>
+            <div class="mb-3">
+                <label for="cp">Current Password</label>
+                <input type="password" name="currentPassword" id="cp" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+            </div>
+            <div class="mb-3">
+                <label for="np">New Password</label>
+                <input type="password" name="newPassword" id="np" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+            </div>
+            <div class="mb-3">
+                <label for="conp">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="conp" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+            </div>
+            <div>
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value="save" name="save">
                     <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                         <!-- Heroicon name: solid/lock-closed -->
                         <svg class="h-5 w-5 text-gray-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -122,7 +128,7 @@ $username = get_username();
                     Update Profile
                 </button>
             </div>
-        </form>
+    </form>
 </div>
 
 </div>
@@ -136,23 +142,11 @@ $username = get_username();
 
         //example of using flash via javascript
         //find the flash container, create a new element, appendChild
-        if (pw !== con) {
-            //find the container
-            /*let flash = document.getElementById("flash");
-            //create a div (or whatever wrapper we want)
-            let outerDiv = document.createElement("div");
-            outerDiv.className = "row justify-content-center";
-            let innerDiv = document.createElement("div");
-            //apply the CSS (these are bootstrap classes which we'll learn later)
-            innerDiv.className = "alert alert-warning";
-            //set the content
-            innerDiv.innerText = "Password and Confirm password must match";
-            outerDiv.appendChild(innerDiv);
-            //add the element to the DOM (if we don't it merely exists in memory)
-            flash.appendChild(outerDiv);*/
-            flash("Password and Confirm password must match", "warning");
-            isValid = false;
-        }
+        // if (pw !== con) {
+        //     // flash("Password and Confirm password must match", "warning");
+        //     isValid = false;
+        //     console.log("Hello")
+        // }
         return isValid;
     }
 </script>
