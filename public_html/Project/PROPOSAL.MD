@@ -36,7 +36,7 @@
 
     - List of Evidence of Feature Completion
 
-      - Status: (Completed)
+      - Status: (Incomplete)(It wipes the email and username when email/username is taken)
 
       - [Initial register.php from slides](https://github.com/cjdomacena/IT202-003/pull/34/commits/8a36c500b63f27a9a4a168e08ebc939496fb31cc#diff-a6efd6bcdcc38b7d158885263301aac736d98718cecbb4d34a946211a9a655ae)
       - [Updated register.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/register.php)
@@ -44,9 +44,13 @@
     - Pull Request/s
 
       - [Pull Request #34](https://github.com/cjdomacena/IT202-003/pull/34/commits/8a36c500b63f27a9a4a168e08ebc939496fb31cc#diff-a6efd6bcdcc38b7d158885263301aac736d98718cecbb4d34a946211a9a655ae) 
+     
+      - [Pull Request #67](https://github.com/cjdomacena/IT202-003/pull/67)
+      
+        - (11/11/2021) some flash parameters to be updated using tailwind.
 
     - Screenshots
-  
+      
         - Register form with styling. 
   
           - ![image](https://user-images.githubusercontent.com/67976753/141268895-23179f97-8d62-456c-a698-1379aefa1103.png)
@@ -67,11 +71,16 @@
   
         - Register with Email errors
           
-          - 
+          - Email already taken (It wipes the form)
+          
+            - ![image](https://user-images.githubusercontent.com/67976753/141272281-611a4385-f178-4bf4-9f20-66547615e400.png)
+  
+        - Register with username errors
+          
+          - Username is already taken (It wipes the form)
+          
+            -![image](https://user-images.githubusercontent.com/67976753/141272714-b7e50ca5-ceae-4dde-8239-7d89b2b02aa8.png)
         
-        
-
-       
 
   - [ ] (mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
 
