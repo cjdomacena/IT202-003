@@ -32,7 +32,7 @@
 
 - [x] Milestone 1
 
-  - [ x ] (10/18/2021) User will be able to register a new account
+  - [x] (10/18/2021) User will be able to register a new account
 
     - List of Evidence of Feature Completion
 
@@ -82,7 +82,7 @@
             -![image](https://user-images.githubusercontent.com/67976753/141272714-b7e50ca5-ceae-4dde-8239-7d89b2b02aa8.png)
         
 
-  - [ x ] (10/11/2021) User will be able to login to their account (given they enter the correct credentials)
+  - [x] (10/11/2021) User will be able to login to their account (given they enter the correct credentials)
 
     - List of Evidence of Feature Completion
 
@@ -143,7 +143,7 @@
           - Displays role
       
 
-  - [ x ] (10/18/2021) User will be able to logout
+  - [x] (10/18/2021) User will be able to logout
 
     - List of Evidence of Feature Completion
 
@@ -178,7 +178,7 @@
           - After logging out, user will not be able to go back.
      
 
-    - [ x ] (25/10/2021) Basic security rules implemented
+    - [x] (25/10/2021) Basic security rules implemented
 
     - List of Evidence of Feature Completion
 
@@ -219,7 +219,7 @@
             - See below.
 
             
-    - [ x ] (25/10/2021) Basic Roles implemented
+    - [x] (25/10/2021) Basic Roles implemented
 
       - List of Evidence of Feature Completion
 
@@ -251,7 +251,7 @@
           
           - Pivot table between Roles and Users table (Not sure if its called pivot table)
     
-    - [ x ] (11/11/2021 with everything styled) Site should have basic styles/theme applied; everything should be styled
+    - [x] (11/11/2021 with everything styled) Site should have basic styles/theme applied; everything should be styled
 
       - List of Evidence of Feature Completion
        
@@ -365,7 +365,7 @@
   
   
       
-    - [ x ] (11/10/2021) Any output messages/errors should be “user friendly”
+    - [x] (11/10/2021) Any output messages/errors should be “user friendly”
 
       - List of Evidence of Feature Completion
 
@@ -450,7 +450,7 @@
           - Shows warning message when searching and username field is empty.
   
   
-    - [ x ] (11/11/2021 of completion) User will be able to see their profile
+    - [x] (11/11/2021 of completion) User will be able to see their profile
 
       - List of Evidence of Feature Completion
 
@@ -470,7 +470,7 @@
 
         - Only shows email and username (for now)
 
-    - [ ] (11/11/2021) User will be able to edit their profile
+    - [x] (11/11/2021) User will be able to edit their profile
 
       - List of Evidence of Feature Completion
 
