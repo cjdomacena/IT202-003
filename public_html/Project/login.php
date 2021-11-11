@@ -14,7 +14,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     $hasErrors = false;
     if (empty($email)) {
         //array_push($errors, "Email must be set");
-        flash("Username or email must be set", "warning");
+        flash("Username or email must be set", "bg-red-200");
         $hasErrors = true;
     }
     //sanitize
