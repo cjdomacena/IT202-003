@@ -143,23 +143,34 @@
           - Displays role
       
 
-  - [ ] (10/dd/yyyy of completion) User will be able to logout
+  - [ ] (10/18/2021 of completion) User will be able to logout
 
     - List of Evidence of Feature Completion
 
-      - Status: (In progress, Incomplete, Pending)
+      - Status: (Incomplete)
+        
+          - Flash message doesn't appear when loggin out.
 
-      - Direct Link (Direct link to specific file)
+      - Direct Link (https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/logout.php)
 
     - Pull Request/s
 
-      - [Pull Request #](insertLinkHere) 
+      - [Pull Request #34](https://github.com/cjdomacena/IT202-003/pull/34/) 
+        
+        - Fell behind about a week, this PR is to get all my Project files updated based on class slides.
+  
+      - [Direct link to commit (PR #34)](https://github.com/cjdomacena/IT202-003/pull/34/commits/7a2d6ff17f145627ffdf276595e30be87954fa80)
+  
+        - Direct link because I did give the commit a proper name to its appropriate change.
 
     - Screenshots
 
-        - Use ![image](Hello) format.
+        - User will be able to logout      
+  
+          - ![2021-11-11-04-50-31](https://user-images.githubusercontent.com/67976753/141277107-8da55d33-81c0-487d-ace2-6a729bfb9b90.gif)
+        
+          - Flash message does not appear upon logging out.
 
-        - Describe what's on the image.
 
     - [ ] Basic security rules implemented
 
