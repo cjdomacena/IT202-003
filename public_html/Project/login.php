@@ -25,24 +25,24 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         //if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         if (!is_valid_email($email)) {
             //array_push($errors, "Invalid email address");
-            flash("Invalid email address", "warning");
+            flash("Invalid email address", "bg-red-200");
 
             $hasErrors = true;
         }
     } else {
         if (!preg_match('/^[a-z0-9_-]{3,30}$/i', $email)) {
-            flash("Username must only be alphanumeric and can only contain - or _");
+            flash("Username must only be alphanumeric and can only contain - or _", "bg-red-200");
             $hasErrors = true;
         }
     }
     if (empty($password)) {
         //array_push($errors, "Password must be set");
-        flash("Password must be set");
+        flash("Password must be set", "bg-red-200");
         $hasErrors = true;
     }
     if (strlen($password) < 8) {
         //array_push($errors, "Password must be 8 or more characters");
-        flash("Password must be at least 8 characters", "warning");
+        flash("Password must be at least 8 characters", "bg-red-200");
         $hasErrors = true;
     }
     if ($hasErrors) {
@@ -163,14 +163,10 @@ require(__DIR__ . "/../../partials/flash.php");
 
         const email = form.email.value;
         const isEmail = email.includes("@") ? true : false;
-        const userNameRegex = new RegExp('/^[a-z0-9_-]{3,30}$/i')
 
-        if (!userNameRegex.test(email) && !isEmail) {
-
-            flash("Invalid credentials", "bg-red-200");
+        if (email.length < 8 && isEmail) {
+            flash("Invalid Credentials ", "bg-red-200");
             return false;
-        } else {
-            return true;
         }
 
     }
