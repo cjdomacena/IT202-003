@@ -14,9 +14,9 @@ if (isset($_POST["role_id"])) {
         $stmt = $db->prepare("UPDATE Roles SET is_active = !is_active WHERE id = :rid");
         try {
             $stmt->execute([":rid" => $role_id]);
-            flash("Updated Role", "success");
+            flash("Updated Role", "bg-green-200");
         } catch (PDOException $e) {
-            flash(var_export($e->errorInfo, true), "danger");
+            flash(var_export($e->errorInfo, true), "bg-red-200");
         }
     }
 }
@@ -40,7 +40,7 @@ try {
         flash("No matches found", "warning");
     }
 } catch (PDOException $e) {
-    flash(var_export($e->errorInfo, true), "danger");
+    flash(var_export($e->errorInfo, true), "bg-red-200");
 }
 
 ?>

@@ -77,16 +77,16 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         die(header("Location: home.php"));
                     } else {
                         //echo "Invalid password";
-                        flash("Invalid password", "danger");
+                        flash("Invalid password", "bg-red-200");
                     }
                 } else {
                     //echo "Invalid email";
-                    flash("Email not found", "danger");
+                    flash("Email not found", "bg-red-200");
                 }
             }
         } catch (Exception $e) {
             //echo "<pre>" . var_export($e, true) . "</pre>";
-            flash(var_export($e, true));
+            flash(var_export($e, true), "bg-red-200");
         }
     }
 }
