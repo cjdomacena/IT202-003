@@ -30,9 +30,9 @@
 <details open>
 <summary><strong>Milestone 1</strong></summary>
 
-- [ ] Milestone 1
+- [ x ] Milestone 1
 
-  - [ ] (10/18/2021) User will be able to register a new account
+  - [ x ] (10/18/2021) User will be able to register a new account
 
     - List of Evidence of Feature Completion
 
@@ -82,7 +82,7 @@
             -![image](https://user-images.githubusercontent.com/67976753/141272714-b7e50ca5-ceae-4dde-8239-7d89b2b02aa8.png)
         
 
-  - [ ] (10/11/2021) User will be able to login to their account (given they enter the correct credentials)
+  - [ x ] (10/11/2021) User will be able to login to their account (given they enter the correct credentials)
 
     - List of Evidence of Feature Completion
 
@@ -143,7 +143,7 @@
           - Displays role
       
 
-  - [ ] (10/18/2021 of completion) User will be able to logout
+  - [ x ] (10/18/2021) User will be able to logout
 
     - List of Evidence of Feature Completion
 
@@ -178,55 +178,80 @@
           - After logging out, user will not be able to go back.
      
 
-    - [ ] (25/10/2021) Basic security rules implemented
+    - [ x ] (25/10/2021) Basic security rules implemented
 
-        - List of Evidence of Feature Completion
+    - List of Evidence of Feature Completion
 
-    - Status: (Completed)
+      - Status: (Completed)
 
-    - [Nav partials](https://github.com/cjdomacena/IT202-003/blob/production/partials/nav.php)
-      
-      - Displays different navigation based on user role.
+      - [Nav partials](https://github.com/cjdomacena/IT202-003/blob/production/partials/nav.php)
 
-    - Pull Request/s
-      
-      - Nav (Show different nav items based on user role)
-  
-      - [Pull Request #38](https://github.com/cjdomacena/IT202-003/pull/38/commits/484ec69acaeb1e30dd08b50c3ba5f690828e2857) 
-        
-        - This was the initial PR.
-        
-        - Was behind about a week and updated nav to catch up based on slides.
-
-    - Screenshots
-
-        - User with no role (In this case, admin role is disabled for this user)
-  
-          - ![image](https://user-images.githubusercontent.com/67976753/141279215-a1215893-8732-4635-9e38-933b1d50e00e.png)
-
-          - Only shows appropriate navigation items based on user role.
-  
-        - 
-
-    - [ ] Basic Roles implemented
-
-      - List of Evidence of Feature Completion
-
-        - Status: (In progress, Incomplete, Pending)
-
-        - Direct Link (Direct link to specific file)
+        - Displays different navigation based on user role.
 
       - Pull Request/s
 
-        - [Pull Request #](insertLinkHere) 
+        - Nav (Show different nav items based on user role)
+
+        - [Pull Request #38](https://github.com/cjdomacena/IT202-003/pull/38/commits/484ec69acaeb1e30dd08b50c3ba5f690828e2857) 
+
+          - This was the initial PR.
+
+          - Was behind about a week and updated nav to catch up based on slides.
+
+    - Screenshots
+        
+        - Authentication
+
+          - User with no role (In this case, admin role is disabled for this user)
+
+            - ![image](https://user-images.githubusercontent.com/67976753/141279215-a1215893-8732-4635-9e38-933b1d50e00e.png)
+
+            - Only shows appropriate navigation items based on user role.
+
+          - User is not able to access specific pages based on User's role
+
+            - ![image](https://user-images.githubusercontent.com/67976753/141280732-1ec314af-d4ee-41b5-a5cf-3e1bca78c1e9.png)
+
+            - User will be redirected to home when tried to access, in this case, create_role.php
+        
+        - Roles table
+      
+            - See below.
+
+            
+    - [ x ] (25/10/2021) Basic Roles implemented
+
+      - List of Evidence of Feature Completion
+
+        - Status: (Completed)
+
+        - [sql folder](https://github.com/cjdomacena/IT202-003/tree/production/public_html/Project/sql)
+
+      - Pull Request/s
+
+        - [Pull Request #37](https://github.com/cjdomacena/IT202-003/pull/37) 
 
       - Screenshots
+  
+          - Users table
+      
+          - ![image](https://user-images.githubusercontent.com/67976753/141281622-2cf9c7dd-dbc0-4a33-b5c8-33a5a5e6a56c.png)
+      
+          - Displays users table.
+      
+        - Roles table
 
-        - Use ![image](Hello) format.
-
-        - Describe what's on the image.
-
-    - [ ] (mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
+          - ![image](https://user-images.githubusercontent.com/67976753/141281372-96f429ff-8491-4cf5-a56f-8ea3132dc05b.png)
+      
+          - Current roles table
+  
+        - User Roles table
+      
+          - ![image](https://user-images.githubusercontent.com/67976753/141281451-4633b232-a2c2-46fb-9f49-68b54bc199be.png)
+          
+          - Pivot table between Roles and Users table (Not sure if its called pivot table)
+    
+    - [ x ] (11/11/2021 with everything styled) Site should have basic styles/theme applied; everything should be styled
 
       - List of Evidence of Feature Completion
        
@@ -241,20 +266,114 @@
       - Pull Request/s
 
         - [Navbar / PR #39](https://github.com/cjdomacena/IT202-003/pull/39/commits/2dbeddaee0bec252c154cc5f225ba135dc4381e3) 
-
+        
+            - [Dropdown Menu](https://github.com/cjdomacena/IT202-003/pull/55)
+  
+        - [List Roles PR#58](https://github.com/cjdomacena/IT202-003/pull/58)
+        
+            - [Link to file](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/admin/list_roles.php)
+  
+        - [Assign Roles PR#64](https://github.com/cjdomacena/IT202-003/pull/64/commits/1c3ca08dc47416db7da84cd8312176734f8e6d65)
+    
+            - [Link to file](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/admin/assign_roles.php)
+  
+        - [Create Roles PR#51](https://github.com/cjdomacena/IT202-003/pull/51)
+  
+            - [Link to file](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/admin/create_role.php)
+  
+         - [Registration & Log in PR#46](https://github.com/cjdomacena/IT202-003/pull/46)
+  
+            - [Link to file (Register)](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/register.php)
+  
+            - [Link to file(Login)](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/login.php)
+  
+         - [Profile Edits (Edit Profile, Reset Password, View Profile)](https://github.com/cjdomacena/IT202-003/pull/62)
+  
+            - [Link to file (Edit Profile)](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/profile.php)
+  
+            - [Link to file(Reset Password)](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/account/reset_password.php)
+            
+            - [Link to file(View Profile)](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/account/view_profile.php)
+  
       - Screenshots
+  
+        - Homepage (index.php) 
 
-        - Use ![image](Hello) format.
+          - ![image](https://user-images.githubusercontent.com/67976753/141281877-63ff57dd-e35e-4b77-9834-1d6798d3b2a0.png)
 
-        - Describe what's on the image.
+          - Displays a simple welcome hero message.
+      
+        - Login page
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282015-4e180553-0ac4-4e54-8239-8e5605e5c4d6.png)
+  
+          - Login form
+  
+        - Registration page
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282114-d6cbe573-8099-426f-94f9-bad2674ea138.png)
 
-    - [ ] (mm/dd/yyyy of completion) Any output messages/errors should be “user friendly”
+          - Registration form
+  
+        - Homepage for logged in users (home.php) (role = admin)
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282263-ad66b107-cfda-42f0-beb6-9f8ea5921113.png)
+      
+          - Displays a welcome message.
+  
+        - Edit profile (profile.php)
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282365-c683eeb7-cc85-4758-a812-cc42e17797e8.png)
+  
+          - Only shows input for email and username
+  
+        - Reset password (reset_password.php)
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282485-bd0634bd-035f-4114-9802-9ee4b64e326c.png)
+    
+          - Shows email and username inputs, but user won't be able to edit them.
+  
+          - Make users able to reset their password.
+  
+        - View Profile (view_profile.php)
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282658-79047644-cb54-4347-9d38-aed95756d0b7.png)
+    
+          - Shows disabled inputs for username and email
+    
+        - Create Role
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282764-2acd8137-a7fd-4ef1-8aa6-2245a89a38e6.png)
+
+          - Inputs for creating roles
+  
+        - List Roles
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282826-bc9c1d57-e6bd-4b0d-aca8-ecc3f9b388ec.png)
+    
+          - Displays a table of roles
+  
+        - Assign Roles
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282885-7c0dea51-6996-45ab-a9bd-8554cce9e464.png)
+    
+          - This is the default view
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141282986-bb32651a-6dee-4b3d-ae0a-5363623bae9c.png)
+        
+          - View with all the users
+  
+  
+      
+    - [ x ] (11/10/2021) Any output messages/errors should be “user friendly”
 
       - List of Evidence of Feature Completion
 
-        - Status: (In progress, Incomplete, Pending)
+        - Status: (Completed)
 
-        - Direct Link (Direct link to specific file)
+        - [Registration](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/register.php)
+    
+        - [Login](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/login.php)
 
       - Pull Request/s
 
