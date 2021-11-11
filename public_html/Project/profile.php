@@ -4,30 +4,37 @@ if (!is_logged_in()) {
     die(header("Location: login.php"));
 }
 ?>
+
+
+
 <?php
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
+
+    $current_password = se($_POST, "currentPassword", null, false);
+    $new_password = se($_POST, "newPassword", null, false);
+    $confirm_password = se($_POST, "confirmPassword", null, false);
+
     $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
     // $password = se($_POST, "currentPassword", "", false);
     $db = getDB();
-    // $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
-    // $stmt = $db->prepare("SELECT username, email from Users where email = :email or username = :email");
-    $currentUsername = get_username();
-    $currentEmail = get_user_email();
-    $stmt = $db->prepare("SELECT username, email FROM Users WHERE EXISTS (SELECT username, email FROM Users WHERE username = :username OR email = :email)");
-    try {
-        // $r = $stmt->execute([":username" => $username, ":email" => $email]);
-        // echo $currentEmail . " " . $currentUsername;
 
+    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+
+    try {
+        $stmt->execute($params);
     } catch (Exception $e) {
         if ($e->errorInfo[1] === 1062) {
             //https://www.php.net/manual/en/function.preg-match.php
+            // Error message contains / Users.columnName/
+            // This pregmath will take the Users.columnName
             preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
             if (isset($matches[1])) {
-                flash("The chosen " . $matches[1] . " is not available.", "warning");
+                flash("The chosen " . $matches[1] . " is not available.", "bg-red-200");
             } else {
                 //TODO come up with a nice error message
+                flash("Something went wrong...", "bg-red-200");
                 echo "<pre>" . var_export($e->errorInfo, true) . "Wzzap</pre>";
             }
         } else {
@@ -54,9 +61,7 @@ if (isset($_POST["save"])) {
 
 
     //check/update password
-    $current_password = se($_POST, "currentPassword", null, false);
-    $new_password = se($_POST, "newPassword", null, false);
-    $confirm_password = se($_POST, "confirmPassword", null, false);
+
     if (!empty($current_password) && !empty($new_password) && !empty($confirm_password)) {
         if ($new_password === $confirm_password) {
             //TODO validate current
@@ -92,7 +97,7 @@ if (isset($_POST["save"])) {
 $email = get_user_email();
 $username = get_username();
 ?>
-<div class="w-full p-4">
+<div class="container mx-auto p-4 mt-4">
     <form method="POST" onsubmit="return validate(this);">
         <div class="mb-3">
             <label for="email">Email</label>
@@ -131,7 +136,6 @@ $username = get_username();
     </form>
 </div>
 
-</div>
 
 <script>
     function validate(form) {

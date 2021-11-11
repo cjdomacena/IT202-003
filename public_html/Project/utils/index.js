@@ -44,6 +44,23 @@ for (let i = 0; i < menuItems.length; i++)
 	ul.appendChild(li);
 }
 
+const li = document.createElement("li");
+
+// Create new <a>
+// This will live inside the <li> element
+const link = document.createElement("a");
+
+// Create a new text node for the link
+link.appendChild(document.createTextNode("Profile"));
+link.href = "./profile.php";
+li.appendChild(link);
+
+// Add classes
+li.classList.add("cursor-pointer");
+
+li.classList.add("hover:text-indigo-900");
+ul.appendChild(li)
+
 // Can be added later (based on preference)
 // profileLink.addEventListener("mouseenter", () =>
 // {
