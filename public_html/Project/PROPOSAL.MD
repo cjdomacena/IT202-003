@@ -30,7 +30,7 @@
 <details open>
 <summary><strong>Milestone 1</strong></summary>
 
-- [ x ] Milestone 1
+- [x] Milestone 1
 
   - [ x ] (10/18/2021) User will be able to register a new account
 
