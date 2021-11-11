@@ -30,9 +30,9 @@
 <details open>
 <summary><strong>Milestone 1</strong></summary>
 
-- [ x ] Milestone 1
+- [x] Milestone 1
 
-  - [ x ] (10/18/2021) User will be able to register a new account
+  - [x] (10/18/2021) User will be able to register a new account
 
     - List of Evidence of Feature Completion
 
@@ -82,7 +82,7 @@
             -![image](https://user-images.githubusercontent.com/67976753/141272714-b7e50ca5-ceae-4dde-8239-7d89b2b02aa8.png)
         
 
-  - [ x ] (10/11/2021) User will be able to login to their account (given they enter the correct credentials)
+  - [x] (10/11/2021) User will be able to login to their account (given they enter the correct credentials)
 
     - List of Evidence of Feature Completion
 
@@ -143,7 +143,7 @@
           - Displays role
       
 
-  - [ x ] (10/18/2021) User will be able to logout
+  - [x] (10/18/2021) User will be able to logout
 
     - List of Evidence of Feature Completion
 
@@ -178,7 +178,7 @@
           - After logging out, user will not be able to go back.
      
 
-    - [ x ] (25/10/2021) Basic security rules implemented
+    - [x] (25/10/2021) Basic security rules implemented
 
     - List of Evidence of Feature Completion
 
@@ -219,7 +219,7 @@
             - See below.
 
             
-    - [ x ] (25/10/2021) Basic Roles implemented
+    - [x] (25/10/2021) Basic Roles implemented
 
       - List of Evidence of Feature Completion
 
@@ -251,7 +251,7 @@
           
           - Pivot table between Roles and Users table (Not sure if its called pivot table)
     
-    - [ x ] (11/11/2021 with everything styled) Site should have basic styles/theme applied; everything should be styled
+    - [x] (11/11/2021 with everything styled) Site should have basic styles/theme applied; everything should be styled
 
       - List of Evidence of Feature Completion
        
@@ -365,7 +365,7 @@
   
   
       
-    - [ x ] (11/10/2021) Any output messages/errors should be “user friendly”
+    - [x] (11/10/2021) Any output messages/errors should be “user friendly”
 
       - List of Evidence of Feature Completion
 
@@ -377,49 +377,168 @@
 
       - Pull Request/s
 
-        - [Pull Request #](insertLinkHere) 
+        - [Pull Request #33](https://github.com/cjdomacena/IT202-003/pull/33) 
+  
+          - Flash based on slides
+  
+          - There's more changes to flash throughout the project, but I failed to keep track of them upon changing to tailwind
 
       - Screenshots
 
-        - Use ![image](Hello) format.
+        - Login errors
 
-        - Describe what's on the image.
+          - ![image](https://user-images.githubusercontent.com/67976753/141285435-daf7acb7-565d-4f9d-a257-a73e974fc235.png)
+  
+          - Display user friendly errors
+  
+        - Registration Errors (JS Validation) 
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141285909-5ff0ff94-5036-499e-a188-e8f0a0f445ee.png)
+      
+          - Flash using helper.js
+  
+        - Registration Erros (PHP validation)
+  
+          - Register with password errors
 
-    - [ ] (mm/dd/yyyy of completion) User will be able to see their profile
+            - Passwords match, but does not meet the requirements
+
+              - ![image](https://user-images.githubusercontent.com/67976753/141269763-8989e9e0-a369-44b9-8d6a-f9a19b45e627.png)
+
+            - Password meet requirements, but does not match
+
+              - ![image](https://user-images.githubusercontent.com/67976753/141270119-165a3fe3-e1e3-48a4-b457-e67ab5cccfc8.png)
+
+            - Password does not meet requirements and does not match
+
+              - ![image](https://user-images.githubusercontent.com/67976753/141270328-dfa92dbb-551e-44f1-8fad-74a48d9e78c5.png)
+
+          - Register with Email errors
+
+            - Email already taken (It wipes the form)
+
+              - ![image](https://user-images.githubusercontent.com/67976753/141272281-611a4385-f178-4bf4-9f20-66547615e400.png)
+
+          - Register with username errors
+
+            - Username is already taken (It wipes the form)
+
+              -![image](https://user-images.githubusercontent.com/67976753/141272714-b7e50ca5-ceae-4dde-8239-7d89b2b02aa8.png)
+
+        - Reset Password (JS Validation)
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141286264-92b8aa89-32d8-48f6-86f2-ae8a0f6dcf96.png)
+  
+             - Password does not match and does not meet requirements
+  
+        - Reset Password (PHP validation)
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141286621-800fac20-3da3-48d7-8f83-0592968266d3.png)
+
+          - New password and confirm password match and meet requirements, but current password is incorrect.
+  
+        - List Roles
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141286763-857e7983-a7b5-4dbd-891b-52b84386ec61.png)
+
+          - When filtering displays a flash message.
+
+        - Assign Roles
+        
+          - ![image](https://user-images.githubusercontent.com/67976753/141286854-7b7b90f5-24ea-45cc-a41e-27fc8530b634.png)
+  
+          - Shows warning message when searching and username field is empty.
+  
+  
+    - [x] (11/11/2021 of completion) User will be able to see their profile
 
       - List of Evidence of Feature Completion
 
-        - Status: (In progress, Incomplete, Pending)
+        - Status: (Completed)
 
-        - Direct Link (Direct link to specific file)
+        - [Link to file](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/account/view_profile.php)
       
       - Pull Request/s
 
-        - [Pull Request #](insertLinkHere) 
+        - [Pull Request #62](https://github.com/cjdomacena/IT202-003/pull/62) 
+  
+          - [Link to specific commit](https://github.com/cjdomacena/IT202-003/pull/62/commits/4979bfa251e65cd7f8b2029bde9224cb368f1669)
 
       - Screenshots
 
-        - Use ![image](Hello) format.
+        - ![image](https://user-images.githubusercontent.com/67976753/141287224-59985a97-205c-4641-94a1-ec8c2e6db6f7.png)
 
-        - Describe what's on the image.
+        - Only shows email and username (for now)
 
-    - [ ] (mm/dd/yyyy of completion) User will be able to edit their profile
+    - [x] (11/11/2021) User will be able to edit their profile
 
       - List of Evidence of Feature Completion
 
-        - Status: (In progress, Incomplete, Pending)
+        - Status: (Complete)
 
-        - Direct Link (Direct link to specific file)
+        - [Link to file (Edit Profile)](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/profile.php)
+  
+        - [Link to file(Reset Password)](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/account/reset_password.php)
+            
+        - [Link to file(View Profile)](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/account/view_profile.php)
 
       - Pull Request/s
 
-        - [Pull Request #](insertLinkHere) 
+        - [Profile Edits (Edit Profile, Reset Password, View Profile) PR #62](https://github.com/cjdomacena/IT202-003/pull/62)
 
       - Screenshots
 
-        - Use ![image](Hello) format.
+        - Edit Profile
 
-        - Describe what's on the image.
+          - Success
+  
+            - ![image](https://user-images.githubusercontent.com/67976753/141288114-eff90313-1b0e-4609-a605-f8fdf3ca0180.png)
+
+              - Displays success upon successful update of username.
+
+            - ![image](https://user-images.githubusercontent.com/67976753/141288225-a3218ede-3936-4b61-b64f-c0c6d2bf2b66.png)
+
+              - Displays success upon successful update of email.
+  
+          - Errors
+  
+            - ![image](https://user-images.githubusercontent.com/67976753/141288428-c696b45b-0338-40d3-bade-b7aa11e9bc67.png)
+    
+              - Displays an error when email is taken.
+    
+            - ![image](https://user-images.githubusercontent.com/67976753/141288515-38ab18e3-4103-41ed-876c-32dbcd4d03a3.png)
+    
+              - Displays an error when username is taken.
+  
+         - Reset Password
+              - Success
+  
+                - ![image](https://user-images.githubusercontent.com/67976753/141288795-a3b05d27-1f95-4c8b-8455-f0698256f778.png)
+    
+                  - Displays success message upon successful password reset/change
+  
+              - Errors
+
+                - Reset Password (JS Validation)
+
+                  - ![image](https://user-images.githubusercontent.com/67976753/141286264-92b8aa89-32d8-48f6-86f2-ae8a0f6dcf96.png)
+
+                     - Password does not match and does not meet requirements
+
+                - Reset Password (PHP validation)
+
+                  - ![image](https://user-images.githubusercontent.com/67976753/141286621-800fac20-3da3-48d7-8f83-0592968266d3.png)
+
+                  - New password and confirm password match and meet requirements, but current password is incorrect. 
+           
+        - View Profile
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141288320-b8a275ff-efaa-4a02-abc8-d0f9ded6c890.png)
+      
+             - Displays profile info
+  
+          
+
 
 </details>
   
