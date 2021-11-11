@@ -56,6 +56,7 @@ function has_role($role)
     }
     return false;
 }
+
 function get_username()
 {
     if (is_logged_in()) { //we need to check for login first because "user" key may not exist
@@ -129,4 +130,11 @@ function get_url($dest)
     }
     //handle relative path
     return $BASE_PATH . $dest;
+}
+
+function get_role()
+{
+    $roles = $_SESSION["user"]["roles"];
+
+    return $roles;
 }
