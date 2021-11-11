@@ -1,100 +1,101 @@
 
-// Grab the <a> with id of profile-link
-const profileLink = document.getElementById("profile-link");
-
-// Grab collapsible-nav 
-const collapse = document.getElementById("collapsible-nav");
-
-// Create a ul element
-// This will live inside the collapsible-nav
-const ul = document.createElement("ul");
-
-// Initialize the links that will be displayed in the collapsible-nav
-const menuItems = ["Edit Email", "Edit Username", "Edit Password"];
-
-// Loop through the menu items to create new <li> element
-for (let i = 0; i < menuItems.length; i++)
+// IIFE
+(function dropdown()
 {
+	// Grab the <a> with id of profile-link
+	const profileLink = document.getElementById("profile-link");
 
-	// Create new <li>
-	const li = document.createElement("li");
+	// Grab collapsible-nav 
+	const collapse = document.getElementById("collapsible-nav");
 
-	// Create new <a>
-	// This will live inside the <li> element
-	const link = document.createElement("a");
+	// Create a ul element
+	// This will live inside the collapsible-nav
+	const ul = document.createElement("ul");
 
-	// Create a new text node for the link
-	link.appendChild(document.createTextNode(menuItems[i]));
 
-	// Clean the initial menuItems (menuItems[i]) to be used as a href attribute
-	const cleanedLink = menuItems[i].toLowerCase();
 
-	// Will be split with an underscore(_)
-	link.href = cleanedLink.split(" ").join("_");
+	// Initialize the links that will be displayed in the collapsible-nav
+	// const menuItems = ["Edit Email", "Edit Username", "Edit Password"];
 
-	// Add the link inside the <li> element as its child
-	li.appendChild(link);
+	const menuItems = [{
+		label: "Edit Profile",
+		path: "profile.php",
+	},
+	{
+		label: "Reset Password",
+		path: "account/reset_password.php"
+	}
+	]
 
-	// Add classes
-	li.classList.add("cursor-pointer");
+	addItem(menuItems, ul);
 
-	li.classList.add("hover:text-indigo-900");
+	document.addEventListener("click", (e) =>
+	{
+		// If the profileLink is the same as the (e) that was given by the event listener
+		if (!profileLink.contains(e.target))
+		{
 
-	// Add the <li> that contains <a> as its child to the previously created <ul>
-	ul.appendChild(li);
-}
+			// Remove the visible class
+			collapse.classList.remove("visible");
 
-const li = document.createElement("li");
+			// Make the collapsible-nav invisible
+			collapse.classList.add("invisible");
 
-// Create new <a>
-// This will live inside the <li> element
-const link = document.createElement("a");
+		} else
+		{
 
-// Create a new text node for the link
-link.appendChild(document.createTextNode("Profile"));
-link.href = "./profile.php";
-li.appendChild(link);
+			// Toggle between invisible and visible
+			collapse.classList.toggle("invisible");
+			collapse.classList.toggle("visible");
 
-// Add classes
-li.classList.add("cursor-pointer");
+			collapse.appendChild(ul);
+		}
+	})
 
-li.classList.add("hover:text-indigo-900");
-ul.appendChild(li)
+	// Just add styles to the <ul>
+	ul.classList.add("space-y-4");
+	ul.classList.add("text-indigo-600");
+})();
 
-// Can be added later (based on preference)
-// profileLink.addEventListener("mouseenter", () =>
-// {
-// 	collapse.classList.toggle("invisible");
-// 	collapse.classList.toggle("visible");
-
-// 	collapse.appendChild(ul);
-// })
 
 // Track user click events WITHIN the document
+
 // This will allow simple functionality for the dropdown to be closed when user clicked outside of the "Profile" link to toggle the collapsed-nav.
-document.addEventListener("click", (e) =>
+
+// JS version of get_url
+function get_url_js(dest)
 {
-	// If the profileLink is the same as the (e) that was given by the event listener
-	if (!profileLink.contains(e.target))
+	BASE_PATH = "/Project/";
+	if (dest[0] === "/")
 	{
-
-		// Remove the visible class
-		collapse.classList.remove("visible");
-
-		// Make the collapsible-nav invisible
-		collapse.classList.add("invisible");
-
-	} else
-	{
-
-		// Toggle between invisible and visible
-		collapse.classList.toggle("invisible");
-		collapse.classList.toggle("visible");
-
-		collapse.appendChild(ul);
+		return dest;
 	}
-})
+	return BASE_PATH + dest;
+}
 
-// Just add styles to the <ul>
-ul.classList.add("space-y-4");
-ul.classList.add("text-indigo-600");
+function addItem(links, parent)
+{
+	// Destructure label and path
+	links.map(({ label, path }) =>
+	{
+		const li = document.createElement("li");
+
+		// This will live inside the <li> element
+		const link = document.createElement("a");
+
+		// Create a new text node for the link
+		link.appendChild(document.createTextNode(label));
+		if (path.includes("/\[a-zA-Z]$\/profile")) console.log(path);
+		link.href = get_url_js(path);
+		li.appendChild(link);
+
+		// Add classes
+		li.classList.add("cursor-pointer");
+
+		li.classList.add("hover:text-indigo-900");
+		parent.appendChild(li);
+	})
+
+	return parent;
+
+}
