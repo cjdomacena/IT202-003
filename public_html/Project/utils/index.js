@@ -32,7 +32,7 @@
 
 	addItem(menuItems, ul);
 
-	document.addEventListener("click", (e) =>
+	profileLink.addEventListener("click", (e) =>
 	{
 		// If the profileLink is the same as the (e) that was given by the event listener
 		if (!profileLink.contains(e.target))
@@ -105,18 +105,21 @@ function addItem(menu, parent)
 // Validation utility functions
 function validatePassword(pw, cp)
 {
-	const pwRegEx = new RegExp('/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/');
+	const pwRegEx = new RegExp(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})$/, 's');
 	let errorMessage = [];
-	if (!pwRegEx.test(pw))
+
+	if (!pwRegEx.test(pw) || !pwRegEx(cp))
 	{
-		// flash("Password must contain at least 1 digit, 1 special character, 1 letter, must be 8 Characters long", "bg-red-200");
-		// return false;
+		debugger;
 		errorMessage.push("Password must contain atleast: 8 characters, 1 digit, 1 special character, 1 Uppercase character");
 	}
+
 	if (pw !== cp)
 	{
+		debugger;
 		errorMessage.push("Password must match");
 	}
+
 	return errorMessage;
 }
 
@@ -124,12 +127,9 @@ function validateUser(email, uname)
 {
 	const unameRegEx = new RegExp('/^[a-z0-9_-]{3,30}$/i');
 	let errorMessage = [];
-	if (!isEmail(email))
+	if (!unameRegEx.test(uname))
 	{
-		if (!unameRegEx.test(uname))
-		{
-			errorMessage.push("Username must only be alphanumeric and can only contain - or _");
-		}
+		errorMessage.push("Username must only be alphanumeric and can only contain - or _");
 	}
 	return errorMessage;
 }

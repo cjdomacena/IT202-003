@@ -45,6 +45,7 @@ if (isset($_POST["save"])) {
 $email = get_user_email();
 $username = get_username();
 ?>
+
 <div class="w-1/2 mx-auto p-4 mt-4">
 	<div class="my-8 space-y-2 bg-yellow-300 rounded p-4">
 		<h1 class="text-xl">Reset Password</h1>
@@ -88,25 +89,27 @@ $username = get_username();
 	</form>
 </div>
 
+
+
+<?php
+//note we need to go up 1 more directory
+require_once(__DIR__ . "/../../../partials/flash.php");
+?>
+
 <script>
 	// Do password validation
 	function validate(form) {
 		const new_password = form.newPassword.value;
 		const confirm_password = form.confirmPassword.value;
 		const errors = validatePassword(new_password, confirm_password);
-		
+		debugger;
 		if (errors.length > 0) {
 			errors.map((error) => {
 				flash(error, "bg-red-200");
 			})
 			return false;
-		} else {
-			return true;
 		}
+		return false;
+
 	}
 </script>
-
-<?php
-//note we need to go up 1 more directory
-require_once(__DIR__ . "/../../../partials/flash.php");
-?>

@@ -4,8 +4,10 @@ if (!is_logged_in()) {
     die(header("Location: login.php"));
 }
 ?>
-
-
+<?php
+$email = get_user_email();
+$username = get_username();
+?>
 
 <?php
 if (isset($_POST["save"])) {
@@ -17,25 +19,41 @@ if (isset($_POST["save"])) {
     $db = getDB();
 
     $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
-
-    try {
-        $stmt->execute($params);
-    } catch (Exception $e) {
-        if ($e->errorInfo[1] === 1062) {
-            //https://www.php.net/manual/en/function.preg-match.php
-            // Error message contains / Users.columnName/
-            // This pregmath will take the Users.columnName
-            preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
-            if (isset($matches[1])) {
-                flash("The chosen " . $matches[1] . " is not available.", "bg-red-200");
+    $hasError = false;
+    $email = sanitize_email($email);
+    if (!is_valid_email($email)) {
+        flash("Invalid email", "bg-red-200");
+        $hasError = true;
+    }
+    if (!preg_match('/^[a-z0-9_-]{3,30}$/i', $username)) {
+        flash("Username must only be alphanumeric and can only contain - or _", "bg-red-200");
+        $hasError = true;
+    }
+    if (strlen($username) < 3) {
+        flash("Username must be 3 or more characters", "bg-red-200");
+        $hasError = true;
+    }
+    if (!$hasError) {
+        try {
+            $stmt->execute($params);
+            flash("User profile successfully updated", "bg-green-200", "fade");
+        } catch (Exception $e) {
+            if ($e->errorInfo[1] === 1062) {
+                //https://www.php.net/manual/en/function.preg-match.php
+                // Error message contains / Users.columnName/
+                // This pregmath will take the Users.columnName
+                preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
+                if (isset($matches[1])) {
+                    flash("The chosen " . $matches[1] . " is not available.", "bg-red-200");
+                } else {
+                    //TODO come up with a nice error message
+                    flash("Something went wrong...", "bg-red-200");
+                    echo "<pre>" . var_export($e->errorInfo, true) . "Wzzap</pre>";
+                }
             } else {
                 //TODO come up with a nice error message
-                flash("Something went wrong...", "bg-red-200");
-                echo "<pre>" . var_export($e->errorInfo, true) . "Wzzap</pre>";
+                echo "<pre>" . var_export($e->errorInfo, true) . "Wazasd123</pre>";
             }
-        } else {
-            //TODO come up with a nice error message
-            echo "<pre>" . var_export($e->errorInfo, true) . "Wazasd123</pre>";
         }
     }
     //select fresh data from table
@@ -57,12 +75,11 @@ if (isset($_POST["save"])) {
 }
 ?>
 
-<?php
-$email = get_user_email();
-$username = get_username();
-?>
-<div class="container mx-auto p-4 mt-4">
-    <h1 class="text-xl my-4">Profile</h1>
+
+<div class="w-1/2 mx-auto p-4 mt-4">
+    <div class="my-4 space-y-4 p-4 bg-yellow-300">
+        <h1 class="text-xl ">View Profile</h1>
+    </div>
     <form method="POST" onsubmit="return validate(this);">
         <div class="mb-3">
             <label for="email">Email</label>
@@ -88,17 +105,29 @@ $username = get_username();
 </div>
 
 
-<script>
-    function validate(form) {
-        let pw = form.newPassword.value;
-        let con = form.confirmPassword.value;
-        let isValid = true;
-        //TODO add other client side validation....
-
-
-        return isValid;
-    }
-</script>
 <?php
 require_once(__DIR__ . "/../../partials/flash.php");
 ?>
+
+<script>
+    function validate(form) {
+        const em = form.email.value;
+        const uname = form.username.value;
+        const unameRegEx = new RegExp(/^[a-z0-9_-]{3,30}$/, 'i');
+        if (!unameRegEx.test(uname) && uname.length > 3) {
+            console.log("Passed");
+            return true;
+        }
+
+
+        return false;
+        // if (validateUser(em, uname)) {
+        //     validateUser(em, uname).map((error) => {
+        //         flash(error, "bg-red-200", "fade");
+        //     })
+        //     return false;
+        // } else {
+        //     return true;
+        // }
+    }
+</script>
