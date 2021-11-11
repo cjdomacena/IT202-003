@@ -118,12 +118,9 @@ require_once(__DIR__ . "/../../partials/flash.php");
             errors.map((error) => {
                 flash(error, "bg-red-200", 2000, "fade");
             })
-            console.log("something wrrong")
             return false;
         } else {
-            console.log("Something went right")
-            return false;
+            return true;
         }
-
     }
 </script>
