@@ -4,37 +4,37 @@ if (!is_logged_in()) {
 	die(header("Location: login.php"));
 }
 ?>
-
 <?php
 
 if (isset($_POST["save"])) {
 	$current_password = se($_POST, "currentPassword", null, false);
 	$new_password = se($_POST, "newPassword", null, false);
 	$confirm_password = se($_POST, "confirmPassword", null, false);
-	$params = ["id" => get_user_id()];
 	$db = getDB();
 
-	if ($new_password === $confirm_password) {
-		$stmt = $db->prepare("SELECT password from Users where id = :id");
-		try {
-			$stmt->execute($params);
-			$result = $stmt->fetch(PDO::FETCH_ASSOC);
-			if (isset($result["password"])) {
-				if (password_verify($current_password, $result["password"])) {
-					$query = "UPDATE Users set password = :password where id = :id";
-					$stmt = $db->prepare($query);
-					$stmt->execute([":id" => get_user_id(), ":password" => password_hash($new_password, PASSWORD_BCRYPT)]);
+	if (isset($current_password) && isset($new_password) && isset($confirm_password)) {
+		if ($new_password === $confirm_password) {
+			$stmt = $db->prepare("SELECT password from Users where id = :id");
+			try {
+				$stmt->execute([":id" => get_user_id()]);
+				$result = $stmt->fetch(PDO::FETCH_ASSOC);
+				if (isset($result["password"])) {
+					if (password_verify($current_password, $result["password"])) {
+						$query = "UPDATE Users SET password = :password where id = :id";
+						$stmt = $db->prepare($query);
+						$stmt->execute([":id" => get_user_id(), ":password" => password_hash($new_password, PASSWORD_BCRYPT)]);
+						flash("Password successfully reset!", "bg-green-200");
+					} else {
+						flash("Current Password is invalid!", "bg-red-200");
+					}
 				}
-				flash("Password successfully reset!", "bg-green-200");
+			} catch (Exception $e) {
+				flash("Something went wrong...", "bg-red-200");
+				echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
 			}
-		} catch (Exception $e) {
-			flash("Something went wrong...", "bg-red-200");
-			echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
 		}
 	}
 }
-
-
 
 ?>
 
@@ -45,8 +45,11 @@ if (isset($_POST["save"])) {
 $email = get_user_email();
 $username = get_username();
 ?>
-<div class="container mx-auto p-4 mt-4">
-	<h1 class="my-8">Reset Password</h1>
+<div class="w-1/2 mx-auto p-4 mt-4">
+	<div class="my-8 space-y-2 bg-yellow-300 rounded p-4">
+		<h1 class="text-xl">Reset Password</h1>
+		<p>Password must contain atleast: 8 characters, 1 digit, 1 special character, 1 Uppercase character</p>
+	</div>
 	<form method="POST" onsubmit="return validate(this);">
 		<div class="mb-3">
 			<label for="email">Email</label>
@@ -57,8 +60,8 @@ $username = get_username();
 			<input type="text" name="username" id="username" value="<?php se($username); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" disabled />
 		</div>
 		<!-- DO NOT PRELOAD PASSWORD -->
+		<hr class="my-8" />
 		<div class="pt-3">
-			<h2 class="py-4 text-xl">Password Reset</h2>
 			<div class="mb-3">
 				<label for="cp">Current Password</label>
 				<input type="password" name="currentPassword" id="cp" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
@@ -79,7 +82,7 @@ $username = get_username();
 							<path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
 						</svg>
 					</span>
-					Update Profile
+					Reset Password
 				</button>
 			</div>
 	</form>
@@ -87,6 +90,20 @@ $username = get_username();
 
 <script>
 	// Do password validation
+	function validate(form) {
+		const new_password = form.newPassword.value;
+		const confirm_password = form.confirmPassword.value;
+		const errors = validatePassword(new_password, confirm_password);
+		
+		if (errors.length > 0) {
+			errors.map((error) => {
+				flash(error, "bg-red-200");
+			})
+			return false;
+		} else {
+			return true;
+		}
+	}
 </script>
 
 <?php
