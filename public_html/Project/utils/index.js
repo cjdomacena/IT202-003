@@ -14,9 +14,8 @@
 
 
 
-	// Initialize the links that will be displayed in the collapsible-nav
-	// const menuItems = ["Edit Email", "Edit Username", "Edit Password"];
 
+	// Menu items for collapsible nav
 	const menuItems = [{
 		label: "Edit Profile",
 		path: "profile.php",
@@ -24,6 +23,10 @@
 	{
 		label: "Reset Password",
 		path: "account/reset_password.php"
+	},
+	{
+		label: "View Profile",
+		path: "account/view_profile.php"
 	}
 	]
 
@@ -58,9 +61,6 @@
 })();
 
 
-// Track user click events WITHIN the document
-
-// This will allow simple functionality for the dropdown to be closed when user clicked outside of the "Profile" link to toggle the collapsed-nav.
 
 // JS version of get_url
 function get_url_js(dest)
@@ -73,10 +73,11 @@ function get_url_js(dest)
 	return BASE_PATH + dest;
 }
 
-function addItem(links, parent)
+// Add items to parent(should be a ul in this case)
+function addItem(menu, parent)
 {
-	// Destructure label and path
-	links.map(({ label, path }) =>
+	// Destructure label and path from links object
+	menu.map(({ label, path }) =>
 	{
 		const li = document.createElement("li");
 
@@ -98,4 +99,42 @@ function addItem(links, parent)
 
 	return parent;
 
+}
+
+
+// Validation utility functions
+function validatePassword(pw, cp)
+{
+	const pwRegEx = new RegExp('/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/');
+	let errorMessage = [];
+	if (!pwRegEx.test(pw))
+	{
+		// flash("Password must contain at least 1 digit, 1 special character, 1 letter, must be 8 Characters long", "bg-red-200");
+		// return false;
+		errorMessage.push("Password must contain atleast: 8 characters, 1 digit, 1 special character, 1 Uppercase character");
+	}
+	if (pw !== cp)
+	{
+		errorMessage.push("Password must match");
+	}
+	return errorMessage;
+}
+
+function validateUser(email, uname)
+{
+	const unameRegEx = new RegExp('/^[a-z0-9_-]{3,30}$/i');
+	let errorMessage = [];
+	if (!isEmail(email))
+	{
+		if (!unameRegEx.test(uname))
+		{
+			errorMessage.push("Username must only be alphanumeric and can only contain - or _");
+		}
+	}
+	return errorMessage;
+}
+
+function isEmail(email)
+{
+	return email.includes("@") ? true : false;
 }
