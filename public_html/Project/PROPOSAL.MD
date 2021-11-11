@@ -178,23 +178,35 @@
           - After logging out, user will not be able to go back.
      
 
-    - [ ] Basic security rules implemented
+    - [ ] (25/10/2021) Basic security rules implemented
 
         - List of Evidence of Feature Completion
 
-    - Status: (In progress, Incomplete, Pending)
+    - Status: (Completed)
 
-    - Direct Link (Direct link to specific file)
+    - [Nav partials](https://github.com/cjdomacena/IT202-003/blob/production/partials/nav.php)
+      
+      - Displays different navigation based on user role.
 
     - Pull Request/s
-
-      - [Pull Request #](insertLinkHere) 
+      
+      - Nav (Show different nav items based on user role)
+  
+      - [Pull Request #38](https://github.com/cjdomacena/IT202-003/pull/38/commits/484ec69acaeb1e30dd08b50c3ba5f690828e2857) 
+        
+        - This was the initial PR.
+        
+        - Was behind about a week and updated nav to catch up based on slides.
 
     - Screenshots
 
-        - Use ![image](Hello) format.
+        - User with no role (In this case, admin role is disabled for this user)
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141279215-a1215893-8732-4635-9e38-933b1d50e00e.png)
 
-        - Describe what's on the image.
+          - Only shows appropriate navigation items based on user role.
+  
+        - 
 
     - [ ] Basic Roles implemented
 
