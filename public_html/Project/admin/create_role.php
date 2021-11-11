@@ -28,7 +28,7 @@ if (isset($_POST["role"]) && isset($_POST["role_description"])) {
     }
 }
 ?>
-<div class=" mx-auto mt-5 p-4 space-y-4">
+<div class=" mx-auto mt-5 p-4 space-y-4 w-1/2">
     <div>
         <h1 class="text-xl">Create Role</h1>
     </div>
