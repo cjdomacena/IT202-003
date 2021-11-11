@@ -95,6 +95,10 @@
       - [Pull Request 60 (Most recent)](https://github.com/cjdomacena/IT202-003/pull/60) 
         
         - Added additional validation using js
+      
+      - [Direct link to Commit (PR #39)](https://github.com/cjdomacena/IT202-003/pull/39/commits/c7356a461b085c0aa72afca72e0371ac5608bdad)
+        
+        - It got mixed up with my other commits
 
     - Screenshots
       
@@ -139,7 +143,7 @@
           - Displays role
       
 
-  - [ ] (mm/dd/yyyy of completion) User will be able to logout
+  - [ ] (10/dd/yyyy of completion) User will be able to logout
 
     - List of Evidence of Feature Completion
 
