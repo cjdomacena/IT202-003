@@ -104,11 +104,40 @@
 
           - Basic login form.
   
-      - User will be able to login with correct credentials
+      - User will be able to login with correct credentials (Using username)
         
         - ![2021-11-11-04-32-32](https://user-images.githubusercontent.com/67976753/141274289-01e28259-4407-4059-b5c7-0114fdd5fe9f.gif)
-
         
+        - User logs in using username and will be redirected to home.php.
+      
+      - User will be able to login with correct credentials (Using email)
+        
+        - ![2021-11-11-04-35-21](https://user-images.githubusercontent.com/67976753/141274677-6ca50626-dd1e-41e3-9123-1b3da43933ce.gif)
+
+        - User logs in using email and will be redirected to home.php.
+      
+      - Login Validation
+        
+        - Invalid email (does not exist) 
+        
+          - ![image](https://user-images.githubusercontent.com/67976753/141275057-9d85e32d-4bb4-41d8-abe2-6be1158a2ca2.png)
+        
+          - Displays flash when email does not exists.
+  
+        - Invalid password
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141275148-c2d5f6f8-c57b-42e5-9663-abc4a1aa475c.png)
+        
+          - Displays flash when password is incorrect.
+  
+      - Stores session upon successful login 
+        
+          - ![image](https://user-images.githubusercontent.com/67976753/141275409-008bedef-1e32-41cf-b220-a6dc2a128c29.png)
+      
+          - Displays a welcome message using flash with the user's username
+        
+          - Displays role
+      
 
   - [ ] (mm/dd/yyyy of completion) User will be able to logout
 
