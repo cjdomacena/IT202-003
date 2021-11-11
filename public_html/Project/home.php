@@ -4,9 +4,15 @@ require(__DIR__ . "/../../partials/nav.php");
 <h1>Home</h1>
 <?php
 if (is_logged_in()) {
-    // echo "Welcome home, " . get_username();
-    //comment this out if you don't want to see the session variables
+    $roles = get_role();
     flash("Wecome! " . get_username(), "bg-green-200");
+    // Display roles
+    if ($roles) {
+        array_map(function ($role) {
+            echo "Roles: <br/>";
+            echo $role["name"] . "<br/>";
+        }, $roles);
+    }
 } else {
     echo "Not logged in";
 }

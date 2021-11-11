@@ -15,7 +15,7 @@ function flash(message = "", color = "info", speed = 1000, type = "")
     //add the element to the DOM (if we don't it merely exists in memory)
     flash.appendChild(outerDiv);
 
-    if (type === "fade")
+    if (type == "fade")
     {
         fadeOut(outerDiv, speed);
         if (outerDiv.classList.contains("opacity-0")) outerDiv.remove();
