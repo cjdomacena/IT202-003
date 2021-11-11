@@ -1,8 +1,9 @@
-function flash(message = "", color = "info") {
+function flash(message = "", color = "info")
+{
     let flash = document.getElementById("flash");
     //create a div (or whatever wrapper we want)
     let outerDiv = document.createElement("div");
-    outerDiv.className = "row justify-content-center";
+    outerDiv.className = "row justify-content-center p-4 " + color + " rounded my-4";
     let innerDiv = document.createElement("div");
 
     //apply the CSS (these are bootstrap classes which we'll learn later)
