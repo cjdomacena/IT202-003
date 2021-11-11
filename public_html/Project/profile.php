@@ -90,17 +90,17 @@ if (isset($_POST["save"])) {
             <input type="text" name="username" id="username" value="<?php se($username); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
         </div>
 
-        <div>
-            <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value="save" name="save">
-                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                    <!-- Heroicon name: solid/lock-closed -->
-                    <svg class="h-5 w-5 text-gray-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                    </svg>
-                </span>
-                Update Profile
-            </button>
-        </div>
+
+        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value="save" name="save">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                <!-- Heroicon name: solid/lock-closed -->
+                <svg class="h-5 w-5 text-gray-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                </svg>
+            </span>
+            Update Profile
+        </button>
+
     </form>
 </div>
 
@@ -113,21 +113,17 @@ require_once(__DIR__ . "/../../partials/flash.php");
     function validate(form) {
         const em = form.email.value;
         const uname = form.username.value;
-        const unameRegEx = new RegExp(/^[a-z0-9_-]{3,30}$/, 'i');
-        if (!unameRegEx.test(uname) && uname.length > 3) {
-            console.log("Passed");
-            return true;
+        const errors = validateUser(em, uname)
+        if (errors.length > 0) {
+            errors.map((error) => {
+                flash(error, "bg-red-200", 2000, "fade");
+            })
+            console.log("something wrrong")
+            return false;
+        } else {
+            console.log("Something went right")
+            return false;
         }
 
-
-        return false;
-        // if (validateUser(em, uname)) {
-        //     validateUser(em, uname).map((error) => {
-        //         flash(error, "bg-red-200", "fade");
-        //     })
-        //     return false;
-        // } else {
-        //     return true;
-        // }
     }
 </script>

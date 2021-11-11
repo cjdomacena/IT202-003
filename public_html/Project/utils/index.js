@@ -110,13 +110,13 @@ function validatePassword(pw, cp)
 
 	if (!pwRegEx.test(pw) || !pwRegEx(cp))
 	{
-		debugger;
+
 		errorMessage.push("Password must contain atleast: 8 characters, 1 digit, 1 special character, 1 Uppercase character");
 	}
 
 	if (pw !== cp)
 	{
-		debugger;
+
 		errorMessage.push("Password must match");
 	}
 
@@ -125,11 +125,17 @@ function validatePassword(pw, cp)
 
 function validateUser(email, uname)
 {
-	const unameRegEx = new RegExp('/^[a-z0-9_-]{3,30}$/i');
+	const unameRegEx = new RegExp(/^[a-z0-9_-]{3,30}$/, 'i');
 	let errorMessage = [];
+	debugger;
 	if (!unameRegEx.test(uname))
 	{
+		debugger;
 		errorMessage.push("Username must only be alphanumeric and can only contain - or _");
+	}
+	if (uname.length < 3) 
+	{
+		errorMessage.push("Username must be 3 or more characters");
 	}
 	return errorMessage;
 }
