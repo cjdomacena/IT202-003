@@ -36,7 +36,7 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         $hasError = true;
     }
     if (strlen($password) < 8) {
-        flash("Password too short");
+        flash("Password too short", "bg-red-200");
         $hasError = true;
     }
     if (strlen($password) > 0 && $password !== $confirm) {
@@ -44,8 +44,6 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         $hasError = true;
     }
     if ($hasError) {
-        //flash("<pre>" . var_export($errors, true) . "</pre>");
-        flash(var_export($errors, true), "bg-red-200");
     } else {
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();

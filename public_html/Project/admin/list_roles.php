@@ -37,7 +37,7 @@ try {
     if ($results) {
         $roles = $results;
     } else {
-        flash("No matches found", "warning");
+        flash("No matches found", "bg-red-200");
     }
 } catch (PDOException $e) {
     flash(var_export($e->errorInfo, true), "bg-red-200");
