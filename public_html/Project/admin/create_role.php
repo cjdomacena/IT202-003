@@ -3,7 +3,7 @@
 require(__DIR__ . "/../../../partials/nav.php");
 
 if (!has_role("admin")) {
-    flash("You don't have permission to view this page", "warning");
+    flash("You don't have permission to view this page", "bg-yellow-300");
     die(header("Location: $BASE_PATH" . "home.php"));
 }
 
