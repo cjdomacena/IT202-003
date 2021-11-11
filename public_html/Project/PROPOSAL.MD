@@ -32,23 +32,46 @@
 
 - [ ] Milestone 1
 
-  - [ ] (mm/dd/yyyy of completion) User will be able to register a new account
+  - [ ] (10/18/2021) User will be able to register a new account
 
     - List of Evidence of Feature Completion
 
-      - Status: (In progress, Incomplete, Pending)
+      - Status: (Completed)
 
-      - Direct Link (Direct link to specific file)
+      - [Initial register.php from slides](https://github.com/cjdomacena/IT202-003/pull/34/commits/8a36c500b63f27a9a4a168e08ebc939496fb31cc#diff-a6efd6bcdcc38b7d158885263301aac736d98718cecbb4d34a946211a9a655ae)
+      - [Updated register.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/register.php)
 
     - Pull Request/s
 
-      - [Pull Request #](insertLinkHere) 
+      - [Pull Request #34](https://github.com/cjdomacena/IT202-003/pull/34/commits/8a36c500b63f27a9a4a168e08ebc939496fb31cc#diff-a6efd6bcdcc38b7d158885263301aac736d98718cecbb4d34a946211a9a655ae) 
 
     - Screenshots
+  
+        - Register form with styling. 
+  
+          - ![image](https://user-images.githubusercontent.com/67976753/141268895-23179f97-8d62-456c-a698-1379aefa1103.png)
+        
+        - Register with password errors
+        
+          - Passwords match, but does not meet the requirements
 
-      - Use ![image](Hello) format.
+            - ![image](https://user-images.githubusercontent.com/67976753/141269763-8989e9e0-a369-44b9-8d6a-f9a19b45e627.png)
 
-      - Describe what's on the image.
+          - Password meet requirements, but does not match
+
+            - ![image](https://user-images.githubusercontent.com/67976753/141270119-165a3fe3-e1e3-48a4-b457-e67ab5cccfc8.png)
+
+          - Password does not meet requirements and does not match
+
+            - ![image](https://user-images.githubusercontent.com/67976753/141270328-dfa92dbb-551e-44f1-8fad-74a48d9e78c5.png)
+  
+        - Register with Email errors
+          
+          - 
+        
+        
+
+       
 
   - [ ] (mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
 
