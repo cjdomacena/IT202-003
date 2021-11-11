@@ -1,6 +1,7 @@
 <?php
 
 require(__DIR__ . "/../../partials/nav.php"); ?>
+
 <?php
 //TODO 2: add PHP Code
 if (isset($_POST["email"]) && isset($_POST["password"])) {
@@ -24,24 +25,24 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         //if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         if (!is_valid_email($email)) {
             //array_push($errors, "Invalid email address");
-            flash("Invalid email address", "warning");
+            flash("Invalid email address", "bg-red-200");
 
             $hasErrors = true;
         }
     } else {
         if (!preg_match('/^[a-z0-9_-]{3,30}$/i', $email)) {
-            flash("Username must only be alphanumeric and can only contain - or _");
+            flash("Username must only be alphanumeric and can only contain - or _", "bg-red-200");
             $hasErrors = true;
         }
     }
     if (empty($password)) {
         //array_push($errors, "Password must be set");
-        flash("Password must be set");
+        flash("Password must be set", "bg-red-200");
         $hasErrors = true;
     }
     if (strlen($password) < 8) {
         //array_push($errors, "Password must be 8 or more characters");
-        flash("Password must be at least 8 characters", "warning");
+        flash("Password must be at least 8 characters", "bg-red-200");
         $hasErrors = true;
     }
     if ($hasErrors) {
@@ -77,16 +78,16 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         die(header("Location: home.php"));
                     } else {
                         //echo "Invalid password";
-                        flash("Invalid password", "danger");
+                        flash("Invalid password", "bg-red-200");
                     }
                 } else {
                     //echo "Invalid email";
-                    flash("Email not found", "danger");
+                    flash("Email not found", "bg-red-200");
                 }
             }
         } catch (Exception $e) {
             //echo "<pre>" . var_export($e, true) . "</pre>";
-            flash(var_export($e, true));
+            flash(var_export($e, true), "bg-red-200");
         }
     }
 }
@@ -150,15 +151,23 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 
     </div>
 </div>
-<script>
-    function validate(form) {
-        //TODO 1: implement JavaScript validation
-        //ensure it returns false for an error and true for success
-
-        return true;
-    }
-</script>
-
 <?php
 require(__DIR__ . "/../../partials/flash.php");
 ?>
+<script>
+    function validate(form, e) {
+        // Prevent multiple submits
+
+        //TODO 1: implement JavaScript validation
+        //ensure it returns false for an error and true for success
+
+        const email = form.email.value;
+        const isEmail = email.includes("@") ? true : false;
+
+        if (email.length < 8 && isEmail) {
+            flash("Invalid Credentials ", "bg-red-200");
+            return false;
+        }
+
+    }
+</script>
