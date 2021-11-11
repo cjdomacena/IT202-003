@@ -168,6 +168,7 @@ require(__DIR__ . "/../../partials/flash.php");
             flash("Invalid Credentials ", "bg-red-200");
             return false;
         }
+        else{return true;}
 
     }
 </script>
