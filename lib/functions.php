@@ -40,7 +40,7 @@ function is_logged_in($redirect = false, $destination = "login.php")
 {
     $isLoggedIn = isset($_SESSION["user"]);
     if ($redirect && !$isLoggedIn) {
-        flash("You must be logged in to view this page", "warning");
+        flash("You must be logged in to view this page", "bg-yellow-300");
         die(header("Location: $destination"));
     }
     return $isLoggedIn; //se($_SESSION, "user", false, false);
@@ -111,7 +111,7 @@ function users_check_duplicate($errorInfo)
         //https://www.php.net/manual/en/function.preg-match.php
         preg_match("/Users.(\w+)/", $errorInfo[2], $matches);
         if (isset($matches[1])) {
-            flash("The chosen " . $matches[1] . " is not available.", "warning");
+            flash("The chosen " . $matches[1] . " is not available.", "bg-yellow-300");
         } else {
             //TODO come up with a nice error message
             flash("<pre>" . var_export($errorInfo, true) . "</pre>");
