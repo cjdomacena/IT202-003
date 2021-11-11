@@ -170,7 +170,13 @@
           - ![2021-11-11-04-50-31](https://user-images.githubusercontent.com/67976753/141277107-8da55d33-81c0-487d-ace2-6a729bfb9b90.gif)
         
           - Flash message does not appear upon logging out.
-
+    
+        - Session is destroyed upon logging out
+      
+          - ![2021-11-11-04-55-21](https://user-images.githubusercontent.com/67976753/141277822-5f63aefe-8db8-407e-8262-2eecd65a13e2.gif)
+  
+          - After logging out, user will not be able to go back.
+     
 
     - [ ] Basic security rules implemented
 
