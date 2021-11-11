@@ -169,6 +169,5 @@ require(__DIR__ . "/../../partials/flash.php");
             return false;
         }
         else{return true;}
-
     }
 </script>
