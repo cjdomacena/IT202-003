@@ -32,17 +32,18 @@
 
 - [ ] Milestone 1
 
-  - [ ] (mm/dd/yyyy of completion) User will be able to register a new account
+  - [ ] (10/18/2021) User will be able to register a new account
 
     - List of Evidence of Feature Completion
 
-      - Status: (In progress, Incomplete, Pending)
+      - Status: (Completed)
 
-      - Direct Link (Direct link to specific file)
+      - [Initial register.php from slides](https://github.com/cjdomacena/IT202-003/pull/34/commits/8a36c500b63f27a9a4a168e08ebc939496fb31cc#diff-a6efd6bcdcc38b7d158885263301aac736d98718cecbb4d34a946211a9a655ae)
+      - [Updated register.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/register.php)
 
     - Pull Request/s
 
-      - [Pull Request #](insertLinkHere) 
+      - [Pull Request #34](https://github.com/cjdomacena/IT202-003/pull/34/commits/8a36c500b63f27a9a4a168e08ebc939496fb31cc#diff-a6efd6bcdcc38b7d158885263301aac736d98718cecbb4d34a946211a9a655ae) 
 
     - Screenshots
 
