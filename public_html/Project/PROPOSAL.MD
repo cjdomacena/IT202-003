@@ -36,10 +36,10 @@
 
     - List of Evidence of Feature Completion
 
-      - Status: (Incomplete)(It wipes the email and username when email/username is taken)
+      - Status: (Incomplete)(It wipes the email and username when email/username is taken upon submission)
 
       - [Initial register.php from slides](https://github.com/cjdomacena/IT202-003/pull/34/commits/8a36c500b63f27a9a4a168e08ebc939496fb31cc#diff-a6efd6bcdcc38b7d158885263301aac736d98718cecbb4d34a946211a9a655ae)
-      - [Updated register.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/register.php)
+      - [Direct link to file (Most recent)](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/register.php)
 
     - Pull Request/s
 
@@ -82,23 +82,33 @@
             -![image](https://user-images.githubusercontent.com/67976753/141272714-b7e50ca5-ceae-4dde-8239-7d89b2b02aa8.png)
         
 
-  - [ ] (mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
+  - [ ] (10/11/2021) User will be able to login to their account (given they enter the correct credentials)
 
     - List of Evidence of Feature Completion
 
-      - Status: (In progress, Incomplete, Pending)
+      - Status: (Complete)
 
-      - Direct Link (Direct link to specific file)
+      - [Direct link to file (Most recent)](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/login.php)
 
     - Pull Request/s
 
-      - [Pull Request #](insertLinkHere) 
+      - [Pull Request 60 (Most recent)](https://github.com/cjdomacena/IT202-003/pull/60) 
+        
+        - Added additional validation using js
 
     - Screenshots
+      
+      - Login Form
+  
+        - ![image](https://user-images.githubusercontent.com/67976753/141273733-3d2d0f7c-3ff4-460d-8125-62ff7cbe86a8.png).
 
-      - Use ![image](Hello) format.
+          - Basic login form.
+  
+      - User will be able to login with correct credentials
+        
+        - ![2021-11-11-04-32-32](https://user-images.githubusercontent.com/67976753/141274289-01e28259-4407-4059-b5c7-0114fdd5fe9f.gif)
 
-      - Describe what's on the image.
+        
 
   - [ ] (mm/dd/yyyy of completion) User will be able to logout
 
