@@ -157,20 +157,20 @@ require(__DIR__ . "/../../partials/flash.php");
 <script>
     function validate(form, e) {
         // Prevent multiple submits
-        e.preventDefault();
+
         //TODO 1: implement JavaScript validation
         //ensure it returns false for an error and true for success
-        let isValid = true;
+
         const email = form.email.value;
         const isEmail = email.includes("@") ? true : false;
         const userNameRegex = new RegExp('/^[a-z0-9_-]{3,30}$/i')
 
         if (!userNameRegex.test(email) && !isEmail) {
-            isValid = false;
+
             flash("Invalid credentials", "bg-red-200");
-            return isValid;
+            return false;
         } else {
-            return isValid;
+            return true;
         }
 
     }
