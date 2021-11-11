@@ -1,83 +1,146 @@
 
-// Grab the <a> with id of profile-link
-const profileLink = document.getElementById("profile-link");
-
-// Grab collapsible-nav 
-const collapse = document.getElementById("collapsible-nav");
-
-// Create a ul element
-// This will live inside the collapsible-nav
-const ul = document.createElement("ul");
-
-// Initialize the links that will be displayed in the collapsible-nav
-const menuItems = ["Edit Email", "Edit Username", "Edit Password"];
-
-// Loop through the menu items to create new <li> element
-for (let i = 0; i < menuItems.length; i++)
+// IIFE
+(function dropdown()
 {
+	// Grab the <a> with id of profile-link
+	const profileLink = document.getElementById("profile-link");
 
-	// Create new <li>
-	const li = document.createElement("li");
+	// Grab collapsible-nav 
+	const collapse = document.getElementById("collapsible-nav");
 
-	// Create new <a>
-	// This will live inside the <li> element
-	const link = document.createElement("a");
+	// Create a ul element
+	// This will live inside the collapsible-nav
+	const ul = document.createElement("ul");
 
-	// Create a new text node for the link
-	link.appendChild(document.createTextNode(menuItems[i]));
 
-	// Clean the initial menuItems (menuItems[i]) to be used as a href attribute
-	const cleanedLink = menuItems[i].toLowerCase();
 
-	// Will be split with an underscore(_)
-	link.href = cleanedLink.split(" ").join("_");
 
-	// Add the link inside the <li> element as its child
-	li.appendChild(link);
+	// Menu items for collapsible nav
+	const menuItems = [{
+		label: "Edit Profile",
+		path: "profile.php",
+	},
+	{
+		label: "Reset Password",
+		path: "account/reset_password.php"
+	},
+	{
+		label: "View Profile",
+		path: "account/view_profile.php"
+	}
+	]
 
-	// Add classes
-	li.classList.add("cursor-pointer");
+	addItem(menuItems, ul);
 
-	li.classList.add("hover:text-indigo-900");
+	profileLink.addEventListener("click", (e) =>
+	{
+		// If the profileLink is the same as the (e) that was given by the event listener
+		if (!profileLink.contains(e.target))
+		{
 
-	// Add the <li> that contains <a> as its child to the previously created <ul>
-	ul.appendChild(li);
+			// Remove the visible class
+			collapse.classList.remove("visible");
+
+			// Make the collapsible-nav invisible
+			collapse.classList.add("invisible");
+
+		} else
+		{
+
+			// Toggle between invisible and visible
+			collapse.classList.toggle("invisible");
+			collapse.classList.toggle("visible");
+
+			collapse.appendChild(ul);
+		}
+	})
+
+	// Just add styles to the <ul>
+	ul.classList.add("space-y-4");
+	ul.classList.add("text-indigo-600");
+})();
+
+
+
+// JS version of get_url
+function get_url_js(dest)
+{
+	BASE_PATH = "/Project/";
+	if (dest[0] === "/")
+	{
+		return dest;
+	}
+	return BASE_PATH + dest;
 }
 
-// Can be added later (based on preference)
-// profileLink.addEventListener("mouseenter", () =>
-// {
-// 	collapse.classList.toggle("invisible");
-// 	collapse.classList.toggle("visible");
-
-// 	collapse.appendChild(ul);
-// })
-
-// Track user click events WITHIN the document
-// This will allow simple functionality for the dropdown to be closed when user clicked outside of the "Profile" link to toggle the collapsed-nav.
-document.addEventListener("click", (e) =>
+// Add items to parent(should be a ul in this case)
+function addItem(menu, parent)
 {
-	// If the profileLink is the same as the (e) that was given by the event listener
-	if (!profileLink.contains(e.target))
+	// Destructure label and path from links object
+	menu.map(({ label, path }) =>
+	{
+		const li = document.createElement("li");
+
+		// This will live inside the <li> element
+		const link = document.createElement("a");
+
+		// Create a new text node for the link
+		link.appendChild(document.createTextNode(label));
+		if (path.includes("/\[a-zA-Z]$\/profile")) console.log(path);
+		link.href = get_url_js(path);
+		li.appendChild(link);
+
+		// Add classes
+		li.classList.add("cursor-pointer");
+
+		li.classList.add("hover:text-indigo-900");
+		parent.appendChild(li);
+	})
+
+	return parent;
+
+}
+
+
+// Validation utility functions
+function validatePassword(pw, cp)
+{
+	const pwRegEx = new RegExp(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})$/, 's');
+	let errorMessage = [];
+
+	if (!pwRegEx.test(pw) || !pwRegEx(cp))
 	{
 
-		// Remove the visible class
-		collapse.classList.remove("visible");
-
-		// Make the collapsible-nav invisible
-		collapse.classList.add("invisible");
-
-	} else
-	{
-
-		// Toggle between invisible and visible
-		collapse.classList.toggle("invisible");
-		collapse.classList.toggle("visible");
-
-		collapse.appendChild(ul);
+		errorMessage.push("Password must contain atleast: 8 characters, 1 digit, 1 special character, 1 Uppercase character");
 	}
-})
 
-// Just add styles to the <ul>
-ul.classList.add("space-y-4");
-ul.classList.add("text-indigo-600");
+	if (pw !== cp)
+	{
+
+		errorMessage.push("Password must match");
+	}
+
+	return errorMessage;
+}
+
+function validateUser(email, uname)
+{
+	const unameRegEx = new RegExp(/^[a-z0-9_-]{3,30}$/, 'i');
+	let errorMessage = [];
+	debugger;
+	if (!unameRegEx.test(uname))
+	{
+		debugger;
+		errorMessage.push("Username must only be alphanumeric and can only contain - or _");
+	}
+	if (uname.length < 3) 
+	{
+		errorMessage.push("Username must be 3 or more characters");
+	}
+	return errorMessage;
+}
+
+function isEmail(email)
+{
+	return email.includes("@") ? true : false;
+}

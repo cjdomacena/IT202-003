@@ -75,19 +75,19 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         <form onsubmit="return validate(this)" method="POST" class="mt-4 space-y-8">
             <div class="rounded-md shadow-sm -space-y-px">
                 <label for="email">Email</label>
-                <input type="email" name="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+                <input type="email" name="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" required />
             </div>
             <div>
                 <label for="username">Username</label>
-                <input type="text" name="username" maxlength="30" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+                <input type="text" name="username" maxlength="30" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" required minlength="3" />
             </div>
             <div>
                 <label for="pw">Password</label>
-                <input type="password" id="pw" name="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+                <input type="password" id="pw" name="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" required />
             </div>
             <div>
                 <label for="confirm">Confirm</label>
-                <input type="password" name="confirm" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+                <input type="password" name="confirm" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" required />
             </div>
             <div>
                 <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value="Login">
@@ -108,60 +108,20 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
 <script>
     function validate(form) {
         //TODO 1: implement JavaScript validation
-        //ensure it returns false for an error and true for success
-        // $email = se($_POST, "email", "", false);
-        // $password = se($_POST, "password", "", false);
-        // $confirm = se($_POST, "confirm", "", false);
-        // $username = se($_POST, "username", "", false);
         const em = form.email.value;
         const pw = form.password.value;
         const cp = form.confirm.value;
         const uname = form.username.value;
-
-
-        const errors = check(em, pw, cp, uname);
+        const errors = validateUser(em, uname).concat(validatePassword(pw, cp));
 
         if (errors) {
-            let speed = 1000;
             errors.map((message) => {
-
-                flash(message, "bg-red-200", speed);
-                speed += 1000;
+                flash(message, "bg-red-200");
             })
             return false;
         } else {
             return true;
         }
-
-    }
-    function check(email, pw, cp, uname) {
-        // Got from https://stackoverflow.com/questions/2370015/regular-expression-for-password-validation
-        const pwRegEx = new RegExp('/^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/');
-        const unameRegEx = new RegExp('/^[a-z0-9_-]{3,30}$/i');
-        let errorMessage = [];
-
-        // ^.* = Start
-        // (?=.{8,}) = Must be greater than 8 characters
-        // (?=.*[a-zA-Z]) = Letters
-        // (?=.*\d) = numbers
-        // (?=.*[!#$%&? "]) = Special characters
-        // .*$ = End
-
-        if (!pwRegEx.test(pw)) {
-            // flash("Password must contain at least 1 digit, 1 special character, 1 letter, must be 8 Characters long", "bg-red-200");
-            // return false;
-            errorMessage.push("Password must contain atleast: 8 characters, 1 digit, 1 special character");
-        }
-        if (!email.includes('@')) {
-            errorMessage.push("Not a valid email format")
-        }
-        if (pw !== cp) {
-            errorMessage.push("Password must match");
-        }
-        if (!unameRegEx.test(uname)) {
-            errorMessage.push("Username must only be alphanumeric and can only contain - or _");
-        }
-        return errorMessage;
     }
 </script>
 
