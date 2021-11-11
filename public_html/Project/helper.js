@@ -1,9 +1,9 @@
-function flash(message = "", color = "info")
+function flash(message = "", color = "info", speed = 1000, type = "")
 {
     let flash = document.getElementById("flash");
     //create a div (or whatever wrapper we want)
     let outerDiv = document.createElement("div");
-    outerDiv.className = "row justify-content-center p-4 " + color + " rounded my-4";
+    outerDiv.className = "row justify-content-center p-4 " + color + " rounded my-4 relative";
     let innerDiv = document.createElement("div");
 
     //apply the CSS (these are bootstrap classes which we'll learn later)
@@ -15,9 +15,13 @@ function flash(message = "", color = "info")
     //add the element to the DOM (if we don't it merely exists in memory)
     flash.appendChild(outerDiv);
 
+    if (type === "fade")
+    {
+        fadeOut(outerDiv, speed);
+        if (outerDiv.classList.contains("opacity-0")) outerDiv.remove();
+    }
 
-    fadeOut(outerDiv, 2000);
-    if (outerDiv.classList.contains("opacity-0")) outerDiv.remove();
+
 
 }
 
@@ -34,7 +38,7 @@ function fadeOut(element, speed)
         {
             clearInterval(isDoneId);
             element.remove();
-        }, 2000)
+        }, speed)
     }, 2000)
 
 
