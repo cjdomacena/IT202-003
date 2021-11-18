@@ -31,7 +31,7 @@
 
     moveMeUp(document.getElementById("flash"));
 
-    setInterval(() => {
+    setTimeout(() => {
         document.getElementById("flash").remove();
     }, 2000)
 </script>
