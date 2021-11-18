@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS Products(
   id int AUTO_INCREMENT not NULL,
+  user_id int not NULL,
   name VARCHAR(30) UNIQUE,
   description text,
   stock int DEFAULT 0,
@@ -8,7 +9,5 @@ CREATE TABLE IF NOT EXISTS Products(
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY(id),
-  FOREIGN KEY (`user_id`) REFERENCES Users(`id`),
-  FOREIGN KEY (`product_id`) REFERENCES Roles(`id`),
-  UNIQUE KEY (`user_id`, `product_id`)
+  FOREIGN KEY(user_id) REFERENCES Users(id)
 )
