@@ -21,7 +21,7 @@ if (is_logged_in()) {
 <div class="container mx-auto my-16">
     <div class="flex justify-between">
         <h1 class="underline capitalize" id="filter_title"></h1>
-        <select class=" rounded" id="filter" name="Sort" onclick="test()">
+        <select class=" rounded" id="filter" name="Sort" onchange="test()">
             <option value="all_products">All</option>
             <option value="filter_by_name">Name (A-Z)</option>
             <option value="filter_by_price_asc">Price (Low to High)</option>
