@@ -144,3 +144,4 @@ function isEmail(email)
 {
 	return email.includes("@") ? true : false;
 }
+
