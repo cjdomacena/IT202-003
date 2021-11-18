@@ -25,9 +25,10 @@ require_once(__DIR__ . "/../lib/functions.php");
 ?>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.min.css" />
 <!-- include css and js files -->
 <link rel="stylesheet" href="<?php echo get_url('tailwind.css') ?>">
+<script src="../path/to/@themesberg/flowbite/dist/flowbite.bundle.js"></script>
 <script src="<?php echo get_url("utils/index.js") ?>" defer></script>
 <script src="<?php echo get_url('helper.js'); ?>"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -46,15 +47,23 @@ require_once(__DIR__ . "/../lib/functions.php");
         <ul class="list-none flex space-x-4 text text-gray-100 h-8 items-center ">
             <?php if (is_logged_in()) : ?>
                 <li class="hover:text-indigo-200"><a href="<?php echo get_url('home.php'); ?>">Home</a></li>
-                <li class="relative pl-2">
-                    <div class="flex hover:text-gray-400 cursor-pointer items-center justify-center" id="profile-link">
-                        <p class=" cursor-pointer">Profile</p>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <div class="absolute top-8 right-0 w-48 bg-gray-100 p-4 rounded shadow h-auto z-50 invisible" id="collapsible-nav">
-
+                <li>
+                    <button id="dropdownButton" data-dropdown-toggle="dropdown" class="text-white hover:text-indigo-200 font-medium rounded-lg px-2 py-2.5 text-center inline-flex items-center" type="button">Account<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg></button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdown" class="hidden bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow w-44">
+                        <ul class="py-1" aria-labelledby="dropdownButton">
+                            <li>
+                                <a href="<?php echo get_url('account/view_profile.php'); ?>" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">View Profile</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo get_url('profile.php'); ?>" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo get_url('account/reset_password.php'); ?>" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Reset Password</a>
+                            </li>
+                        </ul>
                     </div>
                 </li>
             <?php endif; ?>
@@ -63,9 +72,10 @@ require_once(__DIR__ . "/../lib/functions.php");
                 <li class="hover:text-indigo-200"><a href="<?php echo get_url('register.php'); ?>">Register</a></li>
             <?php endif; ?>
             <?php if (has_role("admin")) : ?>
-                <li class="hover:text-indigo-200"><a href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
+                <!-- <li class="hover:text-indigo-200"><a href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
                 <li class="hover:text-indigo-200"><a href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
-                <li class="hover:text-indigo-200"><a href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li>
+                <li class="hover:text-indigo-200"><a href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li> -->
+
             <?php endif; ?>
             <?php if (is_logged_in()) : ?>
                 <li class="hover:text-indigo-200 text-red-400"><a href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
