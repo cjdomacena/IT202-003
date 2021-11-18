@@ -15,10 +15,13 @@
 </div>
 </div>
 
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
+
 
 
 <script>
     //used to pretend the flash messages are below the first nav element
+
     function moveMeUp(ele) {
         let target = document.getElementsByTagName("nav")[0];
         if (target) {
@@ -27,4 +30,8 @@
     }
 
     moveMeUp(document.getElementById("flash"));
+
+    setInterval(() => {
+        document.getElementById("flash").remove();
+    }, 2000)
 </script>
