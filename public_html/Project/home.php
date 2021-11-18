@@ -16,9 +16,18 @@ if (is_logged_in()) {
 } else {
     echo "Not logged in";
 }
+$products = [];
+$db = getDB();
+$stmt = $db->prepare("SELECT * FROM Products LIMIT 10");
+try {
+    $stmt->execute();
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    flash($e, "bg-red-200");
+}
+
 ?>
 
-<button onclick=req()>Test</button>
 <div class="container mx-auto my-16">
     <div class="flex justify-between">
         <h1 class="text-underline">All Products</h1>
@@ -33,43 +42,31 @@ if (is_logged_in()) {
         </div>
     </div>
 
-    <div class="grid xl:grid-cols-4 lg:grid-cols:4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mx-auto gap-4 m-4">
-        <div class="bg-white w-full h-72 rounded shadow">
+    <div class="grid xl:grid-cols-4 lg:grid-cols:4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mx-auto gap-4 m-4" id="card-container">
+        <?php foreach ($products as $index => $product) : ?>
 
-        </div>
-        <div class="bg-white w-full h-72 rounded shadow">
-
-        </div>
-        <div class="bg-white w-full h-72 rounded shadow">
-
-        </div>
-        <div class="bg-white w-full h-72 rounded shadow">
-
-        </div>
+            <div class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm">
+                <a href="#">
+                    <img class="rounded-t-lg object-cover h-64 w-full" src="<?php echo $product['image'] ?>" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2"><?php echo $product['name'] ?></h5>
+                    </a>
+                    <p class="font-normal text-gray-700 mb-3"><?php echo $product['description'] ?></p>
+                    <a href="#" class="text-indigo-800 font-medium text-sm py-2 text-center inline-flex items-center mt-4">
+                        Add to Cart
+                    </a>
+                    <a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id');?>" class="text-indigo-800 font-medium text-sm py-2 text-center inline-flex items-center mt-4 ml-4">
+                        View Product
+                    </a>
+                </div>
+            </div>
+        <?php endforeach ?>
     </div>
 </div>
 
-<script>
-    const image = document.getElementById("image")
-    let products;
-    const req = async () => {
-        try {
-            const res = await fetch("./api/get_products.php?products=all", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "X-Requested-With": "XMLHttpRequest",
-                },
-            })
 
-            // res returns a promise so we need to await
-            products = await res.json()
-            console.log(products);
-        } catch (e) {
-            flash(`Something went wrong: ${e}`, "bg-red-200")
-        }
-    }
-</script>
 <?php
 require(__DIR__ . "/../../partials/flash.php");
 ?>
