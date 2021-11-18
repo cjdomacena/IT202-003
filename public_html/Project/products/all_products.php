@@ -44,8 +44,9 @@
  					<?php
 
 						$cost = doubleval(se($product, 'cost', "", false));
-						$fmt = new NumberFormatter("en", NumberFormatter::CURRENCY);
-						echo $fmt->formatCurrency($cost, 'USD');
+						// $fmt = new NumberFormatter("en", NumberFormatter::CURRENCY);
+						// echo $fmt->formatCurrency($cost, 'USD');
+						echo "$".$cost;
 						?>
  				</p>
  			</div>
