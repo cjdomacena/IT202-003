@@ -43,6 +43,5 @@ function fadeOut(element, speed)
 
 
 
-
 }
 
