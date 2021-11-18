@@ -27,8 +27,6 @@ require_once(__DIR__ . "/../lib/functions.php");
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.min.css" />
 <!-- include css and js files -->
-<link rel="stylesheet" href="<?php echo get_url('tailwind.css') ?>">
-<script src="../path/to/@themesberg/flowbite/dist/flowbite.bundle.js"></script>
 <script src="<?php echo get_url("utils/index.js") ?>" defer></script>
 <script src="<?php echo get_url('helper.js'); ?>"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
