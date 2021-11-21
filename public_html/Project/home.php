@@ -1,11 +1,14 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 
-if (is_logged_in()) {
-    $roles = get_role();
-    flash("Wecome! " . get_username(), "bg-green-200",);
-}
+// if (is_logged_in()) {
+//     $roles = get_role();
+//     // flash("Wecome! " . get_username(), "bg-green-200",);
+//     echo "<script>get_cart_count();</script>";
+// }
+// 
 ?>
+
 
 <div class=" h-96 w-full bg-gray-100 mx-auto text-gray-900 grid place-items-center rounded border">
     <h1 class="text-2xl font-bold">Welcome to my Basic Shop</h1>
@@ -30,6 +33,7 @@ if (is_logged_in()) {
 </div>
 
 <script>
+    get_cart_count();
     $(document).ready(
 
         $.ajax({
@@ -66,3 +70,8 @@ if (is_logged_in()) {
 <?php
 require(__DIR__ . "/../../partials/flash.php");
 ?>
+
+<!-- Just for flash -->
+<script>
+    check();
+</script>
