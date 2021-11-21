@@ -86,16 +86,16 @@ require_once(__DIR__ . "/../lib/functions.php");
             <?php if (is_logged_in()) : ?>
                 <li class="hover:text-indigo-200 text-red-500"><a href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
             <?php endif; ?>
-            <li class="border-l-2 pl-3 border-gray-900  border-opacity-25 hover:text-gray-400 text-white">
-                <a href="#" class="flex">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
-                    <span class="text-sm font-medium inline-flex items-center p-1 rounded-full mr-2 w-4 h-4 text-center align-middle">
-                        <p class="text-center mx-auto" id="cart-count"></p>
-                    </span>
-                </a>
-            </li>
+                <li class="border-l-2 pl-3 border-gray-900  border-opacity-25 hover:text-gray-400 text-white" >
+                    <a href="#" class="flex">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <span class="text-sm font-medium inline-flex items-center p-1 rounded-full mr-2 w-4 h-4 text-center align-middle">
+                            <p class="text-center mx-auto" id="cart-count"></p>
+                        </span>
+                    </a>
+                </li>
         </ul>
     </nav>
 </header>
