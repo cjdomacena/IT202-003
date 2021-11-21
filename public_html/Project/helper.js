@@ -40,15 +40,34 @@ function fadeOut(element, speed)
     }, 2000)
 }
 
-function get_cart_count(message, status){
-    if(status === 400)
-    {
-        const cart = document.getElementById("cart-count");
-        cart.innerText = message.count
-    }
-    else
-    {
-        flash(message, "bg-red-200", 1000, "fade");
-    }
+function change_cart_counter(message){
+    const cart = document.getElementById("cart-count");
+    cart.innerText = message.count
+}
+function add_to_cart(e)
+{
+    const product_id = e.id
+    $.post("./products/add_to_cart.php", {
+        product_id: product_id
+    }, (res) => {
+        const data = JSON.parse(res);
+        const { message, status } = data
+        if(status === 200){
+            get_cart_count();
+            window.scrollTo(0,0);
+            flash(message,"bg-green-200", 1000, "fade");
+        }
+    })
 }
 
+function get_cart_count()
+{
+    $.get("./products/get_cart_count.php", (res) =>
+    {
+        let data = JSON.parse(res);
+        const { message, status } = data
+        if(status === 200){
+            change_cart_counter(message);
+        }
+    })
+}
