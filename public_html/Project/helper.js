@@ -69,5 +69,8 @@ function get_cart_count()
         if(status === 200){
             change_cart_counter(message);
         }
+        else{
+            flash(message, "bg-red-200", 1000, "fade")
+        }
     })
 }
