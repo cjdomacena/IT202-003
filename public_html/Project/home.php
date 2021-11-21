@@ -1,27 +1,25 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 
-if (is_logged_in()) {
-    $roles = get_role();
-    flash("Wecome! " . get_username(), "bg-green-200",);
-    // Display roles
-    // if ($roles) {
-    //     array_map(function ($role) {
-    //         echo "Roles: <br/>";
-    //         echo $role["name"] . "<br/>";
-    //     }, $roles);
-    // }
-}
+// if (is_logged_in()) {
+//     $roles = get_role();
+//     // flash("Wecome! " . get_username(), "bg-green-200",);
+//     echo "<script>get_cart_count();</script>";
+// }
+// 
 ?>
+
 
 <div class=" h-96 w-full bg-gray-100 mx-auto text-gray-900 grid place-items-center rounded border">
     <h1 class="text-2xl font-bold">Welcome to my Basic Shop</h1>
 </div>
 
+<button onclick="testing()">Hello</button>
+
 <div class="container mx-auto my-16">
     <div class="flex justify-between">
         <h1 class="underline capitalize" id="filter_title"></h1>
-        <select class=" rounded" id="filter" name="Sort" onchange="test()">
+        <select class=" rounded" id="filter" name="Sort" onchange="filter_items()">
             <option value="all_products">All</option>
             <option value="filter_by_name">Name (A-Z)</option>
             <option value="filter_by_price_asc">Price (Low to High)</option>
@@ -35,6 +33,7 @@ if (is_logged_in()) {
 </div>
 
 <script>
+    get_cart_count();
     $(document).ready(
 
         $.ajax({
@@ -51,7 +50,7 @@ if (is_logged_in()) {
         })
     )
 
-    function test() {
+    function filter_items() {
         let selected = $("select").val();
         console.log(selected)
         $.ajax({
@@ -71,3 +70,8 @@ if (is_logged_in()) {
 <?php
 require(__DIR__ . "/../../partials/flash.php");
 ?>
+
+<!-- Just for flash -->
+<script>
+    check();
+</script>
