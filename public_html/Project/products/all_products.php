@@ -23,6 +23,8 @@
 	}
 	?>
 
+
+
  <div class="grid xl:grid-cols-4 lg:grid-cols:4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mx-auto gap-4 m-4 w-full" id="card-container">
  	<?php foreach ($products as $index => $product) : ?>
  		<div class="bg-white shadow-md border border-gray-200 rounded-lg w-full">
@@ -34,9 +36,9 @@
  					<h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2"><?php echo $product['name'] ?></h5>
  				</a>
  				<p class="font-normal text-gray-700 mb-3"><?php echo $product['description'] ?></p>
- 				<a href="#" class="text-indigo-800 font-medium text-sm py-2 text-center inline-flex items-center mt-4">
+ 				<button class="text-indigo-800 font-medium text-sm py-2 text-center inline-flex items-center mt-4" id="<?php echo $product["id"]; ?>" onclick="add_to_cart(this)">
  					Add to Cart
- 				</a>
+ 				</button>
  				<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-indigo-800 font-medium text-sm py-2 text-center inline-flex items-center mt-4 ml-4">
  					View Product
  				</a>
@@ -44,13 +46,11 @@
  					<?php
 
 						$cost = doubleval(se($product, 'cost', "", false));
-						// $fmt = new NumberFormatter("en", NumberFormatter::CURRENCY);
-						// echo $fmt->formatCurrency($cost, 'USD');
-						echo "$".$cost;
+						echo "$" . $cost;
 						?>
  				</p>
  			</div>
  		</div>
  	<?php endforeach ?>
  </div>
- 
+
