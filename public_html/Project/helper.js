@@ -21,8 +21,6 @@ function flash(message = "", color = "info", speed = 1000, type = "")
         if (outerDiv.classList.contains("opacity-0")) outerDiv.remove();
     }
 
-
-
 }
 
 function fadeOut(element, speed)
@@ -40,8 +38,17 @@ function fadeOut(element, speed)
             element.remove();
         }, speed)
     }, 2000)
+}
 
-
-
+function get_cart_count(message, status){
+    if(status === 400)
+    {
+        const cart = document.getElementById("cart-count");
+        cart.innerText = message.count
+    }
+    else
+    {
+        flash(message, "bg-red-200", 1000, "fade");
+    }
 }
 
