@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS Cart(
+  id int AUTO_INCREMENT not NULL,
+  product_id int not NULL,
+  user_id int not NULL,
+  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`),
+  FOREIGN KEY(`product_id`) REFERENCES Products(`id`),
+  FOREIGN KEY(`user_id`) REFERENCES Users(`id`)
+)
