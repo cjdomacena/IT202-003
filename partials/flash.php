@@ -6,7 +6,7 @@
     <?php $messages = getMessages(); ?>
     <?php if ($messages) : ?>
         <?php foreach ($messages as $msg) : ?>
-            <div class="min-w-min p-4 <?php se($msg, 'color', 'info'); ?> rounded my-4 ">
+            <div class="min-w-min p-4 <?php se($msg, 'color', 'info'); ?> rounded my-4">
                 <div class="alert alert-<?php se($msg, 'color', 'info'); ?>" role="alert"><?php se($msg, "text", ""); ?></div>
             </div>
         <?php endforeach; ?>
@@ -30,4 +30,11 @@
     }
 
     moveMeUp(document.getElementById("flash"));
+
+
+    function check() {
+            if ("<?php echo is_logged_in() ?>") {
+                flash("Welcome! <?php echo get_username()?>", "bg-green-200", 1000, "fade");
+            }
+    }
 </script>
