@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS Cart(
   id int AUTO_INCREMENT not NULL,
-  product_id int not NULL,
-  user_id int not NULL,
+  product_id int not NULL UNIQUE,
+  user_id int not NULL UNIQUE,
+  quantity int DEFAULT 1,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`),
