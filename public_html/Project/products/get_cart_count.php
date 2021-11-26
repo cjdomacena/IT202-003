@@ -6,7 +6,7 @@
 	$result;
 	if (is_logged_in()) {
 		$db = getDB();
-		$stmt = $db->prepare("SELECT COUNT(user_id) as count  FROM Cart WHERE user_id = :uid");
+		$stmt = $db->prepare("SELECT SUM(quantity) as count  FROM Cart WHERE user_id = :uid");
 		$id = get_user_id();
 		try 
 		{
