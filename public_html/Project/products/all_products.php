@@ -5,13 +5,13 @@
 		$db = getDB();
 		$col = se($_GET, 'filter', "all_products", false);
 		if ($col == 'filter_by_price_asc') {
-			$stmt = $db->prepare("SELECT * FROM Products ORDER BY cost ASC LIMIT 10");
+			$stmt = $db->prepare("SELECT * FROM Products ORDER BY cost ASC LIMIT 10 WHERE stock > 0");
 		} else if ($col == 'filter_by_price_desc') {
-			$stmt = $db->prepare("SELECT * FROM Products ORDER BY cost DESC LIMIT 10");
+			$stmt = $db->prepare("SELECT * FROM Products ORDER BY cost DESC LIMIT 10 WHERE stock > 0");
 		} else if ($col == 'filter_by_name') {
-			$stmt = $db->prepare("SELECT * FROM Products ORDER BY name ASC LIMIT 10");
+			$stmt = $db->prepare("SELECT * FROM Products ORDER BY name ASC LIMIT 10 WHERE stock > 0");
 		} else {
-			$stmt = $db->prepare("SELECT * FROM Products ORDER BY name ASC LIMIT 10");
+			$stmt = $db->prepare("SELECT * FROM Products ORDER BY name ASC LIMIT 10 WHERE stock > 0");
 		}
 
 		try {
