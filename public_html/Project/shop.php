@@ -1,6 +1,5 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
-
 // if (is_logged_in()) {
 //     $roles = get_role();
 //     // flash("Wecome! " . get_username(), "bg-green-200",);
@@ -14,7 +13,6 @@ require(__DIR__ . "/../../partials/nav.php");
     <h1 class="text-2xl font-bold">Welcome to my Basic Shop</h1>
 </div>
 
-<button onclick="testing()">Hello</button>
 
 <div class="container mx-auto my-16">
     <div class="flex justify-between">
