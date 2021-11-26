@@ -7,7 +7,7 @@ function flash(message = "", color = "info", speed = 1000, type = "")
     let innerDiv = document.createElement("div");
 
     //apply the CSS (these are bootstrap classes which we'll learn later)
-    innerDiv.className = `alert alert-${color}`;
+    innerDiv.className = `alert alert-${ color }`;
     //set the content
     innerDiv.innerText = message;
 
@@ -40,22 +40,26 @@ function fadeOut(element, speed)
     }, 2000)
 }
 
-function change_cart_counter(message){
+function change_cart_counter(message)
+{
     const cart = document.getElementById("cart-count");
     cart.innerText = message.count
+    console.log(message)
 }
 function add_to_cart(e)
 {
     const product_id = e.id
     $.post("./products/add_to_cart.php", {
         product_id: product_id
-    }, (res) => {
+    }, (res) =>
+    {
         const data = JSON.parse(res);
         const { message, status } = data
-        if(status === 200){
+        if (status === 200)
+        {
             get_cart_count();
-            window.scrollTo(0,0);
-            flash(message,"bg-green-200", 1000, "fade");
+            window.scrollTo(0, 0);
+            flash(message, "bg-green-200", 1000, "fade");
         }
     })
 }
@@ -66,16 +70,19 @@ function get_cart_count()
     {
         let data = JSON.parse(res);
         const { message, status, logged_in } = data
-        if(logged_in){
+        console.log(logged_in)
+        if (logged_in)
+        {
             if (status === 200)
             {
                 change_cart_counter(message);
             }
             else
             {
-                flash(message, "bg-red-200", 1000, "fade")
+                flash(message, "bg-red-200", 1000, "fade");
             }
         }
-       
+
+
     })
 }

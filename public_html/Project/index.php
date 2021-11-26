@@ -23,6 +23,16 @@ require_once(__DIR__ . '/../../partials/nav.php')
 </div>
 
 <script>
+
+</script>
+
+<?php
+require(__DIR__ . "/../../partials/flash.php");
+?>
+
+<!-- Just for flash -->
+<script>
+	check();
 	get_cart_count();
 	$(document).ready(
 
@@ -55,13 +65,4 @@ require_once(__DIR__ . '/../../partials/nav.php')
 			}
 		})
 	}
-</script>
-
-<?php
-require(__DIR__ . "/../../partials/flash.php");
-?>
-
-<!-- Just for flash -->
-<script>
-	check();
 </script>
