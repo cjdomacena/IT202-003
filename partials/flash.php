@@ -33,8 +33,8 @@
 
 
     function check() {
-            if ("<?php echo is_logged_in() ?>") {
-                flash("Welcome! <?php echo get_username()?>", "bg-green-200", 1000, "fade");
-            }
+        if ("<?php echo is_logged_in() ?>") {
+            flash("Welcome! <?php echo get_username() ?>", "bg-green-200", 1000, "fade");
+        }
     }
 </script>

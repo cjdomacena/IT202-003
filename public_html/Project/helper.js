@@ -65,12 +65,17 @@ function get_cart_count()
     $.get("./products/get_cart_count.php", (res) =>
     {
         let data = JSON.parse(res);
-        const { message, status } = data
-        if(status === 200){
-            change_cart_counter(message);
+        const { message, status, logged_in } = data
+        if(logged_in){
+            if (status === 200)
+            {
+                change_cart_counter(message);
+            }
+            else
+            {
+                flash(message, "bg-red-200", 1000, "fade")
+            }
         }
-        else{
-            flash(message, "bg-red-200", 1000, "fade")
-        }
+       
     })
 }

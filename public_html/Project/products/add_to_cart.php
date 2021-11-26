@@ -1,15 +1,19 @@
 <?php
 require_once("./../../../lib/functions.php");
 session_start();
-if(is_logged_in())
-{	$r = ["message" => "Something went wrong...", "status" => 400];
+if (is_logged_in()) {
+	$r = ["message" => "Something went wrong...", "status" => 400];
 	if (isset($_POST["product_id"])) {
-		$user_id = get_user_id();
-		$product_id = (int)$_POST["product_id"];
+		$uid = get_user_id();
+		$pid = (int)$_POST["product_id"];
+		$quantity = 1;
 		$db = getDB();
-		$stmt = $db->prepare("INSERT INTO Cart (product_id, user_id) VALUES (:product_id,:user_id)");
+		$stmt = $db->prepare("INSERT INTO Cart (product_id, user_id, quantity) VALUES (:pid,:uid, :q) ON DUPLICATE KEY UPDATE quantity = quantity + :q");
 		try {
-			$stmt->execute([":user_id" => $user_id, ":product_id" => $product_id]);
+			$stmt->bindValue(":q", $quantity, PDO::PARAM_INT);
+			$stmt->bindValue(":uid", $uid, PDO::PARAM_INT);
+			$stmt->bindValue(":pid", $pid, PDO::PARAM_INT);
+			$stmt->execute();
 			$r["message"] = "Successfully added to cart!";
 			$r["status"] = 200;
 		} catch (PDOException $e) {
@@ -20,7 +24,6 @@ if(is_logged_in())
 	}
 
 	echo json_encode($r);
-}
-else {
+} else {
 	die(header("Location: /../.././login.php"));
 }
