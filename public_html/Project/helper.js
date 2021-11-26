@@ -49,7 +49,7 @@ function change_cart_counter(message)
 function add_to_cart(e)
 {
     const product_id = e.id
-    $.post("./products/add_to_cart.php", {
+    $.post("./cart/add_to_cart.php", {
         product_id: product_id
     }, (res) =>
     {
