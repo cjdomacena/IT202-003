@@ -15,7 +15,6 @@
 </div>
 </div>
 
-<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
 
 
 
@@ -38,3 +37,5 @@
         }
     }
 </script>
+
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
