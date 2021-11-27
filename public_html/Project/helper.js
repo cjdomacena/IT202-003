@@ -95,8 +95,19 @@ function update_qty(cart_id)
     $.post('./cart/view_cart.php', {
         quantity: new_qty,
         cart: cartID
-    }, (data) =>
+    }, () =>
     {
        location.reload();
+    })
+}
+
+function remove_item(cart_id){
+    const cartID = cart_id;
+    $.post('./cart/view_cart.php', {
+        cart: cartID,
+        type: 'delete',
+    }, (data) =>
+    {
+        location.reload();
     })
 }

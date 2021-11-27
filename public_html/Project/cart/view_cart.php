@@ -5,7 +5,7 @@ session_start();
 if (!is_logged_in()) {
 	die(header("Location: " . get_url('index.php')));
 }
-if (isset($_POST["quantity"]) && isset($_POST["cart"])) {
+if (isset($_POST["quantity"]) && isset($_POST["cart"]) && !isset($_POST["type"])) {
 	$id = get_user_id();
 	$db = getDB();
 	$qty = $_POST["quantity"];
@@ -18,8 +18,6 @@ if (isset($_POST["quantity"]) && isset($_POST["cart"])) {
 	} catch (PDOException $e) {
 		flash("Something Went wrong...", "bg-red-200", 1000, "fade");
 	}
-	$id = get_user_id();
-	$db = getDB();
 	$stmt = $db->prepare('SELECT Cart.id as cart_id, Products.name, Products.description, Products.image, Products.cost,Products.id, Cart.quantity FROM((Products INNER JOIN Cart ON Products.id = Cart.product_id) INNER JOIN Users ON Users.id = :id)');
 	try {
 		$stmt->execute([":id" => $id]);
@@ -28,7 +26,27 @@ if (isset($_POST["quantity"]) && isset($_POST["cart"])) {
 	} catch (PDOException $e) {
 		flash("Something went wrong...", "bg-red-200");
 	}
-} else {
+} 
+else if(isset($_POST["cart"]) && isset($_POST["type"])){
+	$db = getDB();
+	$cartID = $_POST["cart"];
+	$stmt = $db->prepare('DELETE FROM Cart WHERE id = :cart_id');
+	try{
+		$stmt->execute([":cart_id" => $cartID]);
+		flash("Successfully Removed from cart", "bg-red-200");
+	}catch(PDOException $e){
+		flash("Something Went wrong...", "bg-red-200");
+	}
+	$stmt = $db->prepare('SELECT Cart.id as cart_id, Products.name, Products.description, Products.image, Products.cost,Products.id, Cart.quantity FROM((Products INNER JOIN Cart ON Products.id = Cart.product_id) INNER JOIN Users ON Users.id = :id)');
+	try {
+		$stmt->execute([":id" => $id]);
+		$r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		json_encode($r);
+	} catch (PDOException $e) {
+		flash("Something went wrong...", "bg-red-200");
+	}
+}
+else {
 	$id = get_user_id();
 	$db = getDB();
 	$stmt = $db->prepare('SELECT Cart.id as cart_id, Products.name, Products.description, Products.image, Products.cost,Products.id, Cart.quantity FROM((Products INNER JOIN Cart ON Products.id = Cart.product_id) INNER JOIN Users ON Users.id = :id)');
