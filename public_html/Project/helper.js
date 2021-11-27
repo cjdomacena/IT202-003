@@ -86,3 +86,17 @@ function get_cart_count()
 
     })
 }
+
+function update_qty(cart_id)
+{
+    // Get cart ID form
+    const cartID = cart_id;
+    const new_qty = $("#quantity").val();
+    $.post('./cart/view_cart.php', {
+        quantity: new_qty,
+        cart: cartID
+    }, (data) =>
+    {
+       location.reload();
+    })
+}
