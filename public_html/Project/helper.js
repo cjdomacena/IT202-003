@@ -97,11 +97,13 @@ function update_qty(cart_id)
         cart: cartID
     }, () =>
     {
-       location.reload();
+        location.reload();
     })
+
 }
 
-function remove_item(cart_id){
+function remove_item(cart_id)
+{
     const cartID = cart_id;
     $.post('./cart/view_cart.php', {
         cart: cartID,
