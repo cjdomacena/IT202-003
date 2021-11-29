@@ -5,7 +5,7 @@ $product = [];
 if(isset($_GET["id"]))
 {
 	$id = se($_GET,"id", -1, false);
-	if($id !=1)
+	if($id != -1)
 	{
 		$db = getDB();
 		$stmt = $db->prepare('SELECT * FROM Products WHERE id = :id');
@@ -15,7 +15,7 @@ if(isset($_GET["id"]))
 
 }
 
-echo '<pre>' . var_export($product, true) . '</pre>';
+echo '<pre>' . var_export($product) . '</pre>';
 ?>
 
 
