@@ -30,6 +30,11 @@ require_once(__DIR__ . "/../lib/functions.php");
 <script src="<?php echo get_url("utils/index.js") ?>" defer></script>
 <script src="<?php echo get_url('helper.js'); ?>"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+<!-- Include the storage api -->
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+<script src="<?php echo get_url('firebase.js'); ?>"></script>
 <header class="w-full">
     <nav class="container-2xl bg-indigo-600 p-4 flex justify-between px-8 shadow">
         <div id="logo" class="h-8">
