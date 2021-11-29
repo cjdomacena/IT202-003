@@ -123,6 +123,7 @@ function remove_all_items()
 }
 function add_new_product(event)
 {
+    event.preventDefault();
     const spinner = document.getElementById("spinner");
     const name = document.getElementById("product_name").value;
     const desc = document.getElementById("product_description").value;
@@ -131,6 +132,7 @@ function add_new_product(event)
     const category = get_category();
     const visibility = get_visibility();
     let imageURL = upload_image(event);
+    console.log(visibility);
     imageURL = imageURL.then(res =>
     {
         res.ref.getDownloadURL().then((downloadURL) =>
@@ -142,7 +144,7 @@ function add_new_product(event)
                 cost: cost,
                 stock: stock,
                 category: category,
-                visiblity: visibility,
+                visibility: visibility,
                 imageURL: downloadURL
             }, (data, status) =>        
             {

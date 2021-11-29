@@ -14,14 +14,18 @@ if (isset($_POST["name"])) {
 	$cost = se($_POST, "cost", -1, false);
 	$stock = se($_POST, "stock", -1, false);
 	$category = se($_POST, "category", -1, false);
-	$visibility = se($_POST, "visibility", 0, false);
-	if ($visibility == false) {
-		$visibility = 0;
-	} else {
-		$visibility = 1;
-	}
+	$isVisible = se($_POST, "visibility", 0, false);
 	$imageURL = se($_POST, "imageURL", "", false);
 	$uid = get_user_id();
+	$visibility = 0;
+	if($isVisible == false)
+	{
+		$visibility = 0;
+	}
+	else if($isVisible == true){
+		$visibility = 1;
+	}
+
 
 	if ($cost == -1 || $stock == -1 || $category == -1) {
 		flash("Something went wrong...", "bg-red-200");
