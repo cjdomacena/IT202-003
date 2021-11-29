@@ -14,13 +14,13 @@
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);
 			$r["status"] = 200;
 			$r["message"] = $result;
-			$r["logged_id"] = true;
+			$r["logged_in"] = true;
 		}catch(PDOException $e){
 			echo json_encode($r["message"] = $e);
 		}
 	} else if(!is_logged_in()){
 		$r["message"] = "User must be logged in";
-		$r["logged_id"] = false;
+		$r["logged_in"] = false;
 	}
 
 	echo json_encode($r);

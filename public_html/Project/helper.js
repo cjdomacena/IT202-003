@@ -7,7 +7,7 @@ function flash(message = "", color = "info", speed = 1000, type = "")
     let innerDiv = document.createElement("div");
 
     //apply the CSS (these are bootstrap classes which we'll learn later)
-    innerDiv.className = `alert alert-${color}`;
+    innerDiv.className = `alert alert-${ color }`;
     //set the content
     innerDiv.innerText = message;
 
@@ -40,22 +40,26 @@ function fadeOut(element, speed)
     }, 2000)
 }
 
-function change_cart_counter(message){
+function change_cart_counter(message)
+{
     const cart = document.getElementById("cart-count");
     cart.innerText = message.count
+    console.log(message)
 }
 function add_to_cart(e)
 {
     const product_id = e.id
-    $.post("./products/add_to_cart.php", {
+    $.post("./cart/add_to_cart.php", {
         product_id: product_id
-    }, (res) => {
+    }, (res) =>
+    {
         const data = JSON.parse(res);
         const { message, status } = data
-        if(status === 200){
+        if (status === 200)
+        {
             get_cart_count();
-            window.scrollTo(0,0);
-            flash(message,"bg-green-200", 1000, "fade");
+            window.scrollTo(0, 0);
+            flash(message, "bg-green-200", 1000, "fade");
         }
     })
 }
@@ -66,16 +70,55 @@ function get_cart_count()
     {
         let data = JSON.parse(res);
         const { message, status, logged_in } = data
-        if(logged_in){
+        console.log(logged_in)
+        if (logged_in)
+        {
             if (status === 200)
             {
                 change_cart_counter(message);
             }
             else
             {
-                flash(message, "bg-red-200", 1000, "fade")
+                flash(message, "bg-red-200", 1000, "fade");
             }
         }
-       
     })
+}
+
+function update_qty(cart_id)
+{
+    // Get cart ID form
+    const cartID = cart_id;
+    const new_qty = $("#quantity").val();
+    $.post('./cart/view_cart.php', {
+        type: "update_qty",
+        quantity: new_qty,
+        cart: cartID
+    }, () =>
+    {
+        location.reload();
+    })
+
+}
+
+function remove_item(cart_id)
+{
+    const cartID = cart_id;
+    $.post('./cart/view_cart.php', {
+        cart: cartID,
+        type: 'delete_item',
+    }, (data) =>
+    {
+        location.reload();
+    })
+}
+
+function remove_all_items()
+{
+    $.post('./cart/view_cart.php', {
+        type: 'delete_all'
+    }, (data) => {
+        location.reload();
+    })
+ 
 }

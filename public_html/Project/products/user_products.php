@@ -52,19 +52,17 @@
  					</p>
  				</div>
  				<div class="flex pt-4 justify-between">
- 					<button class="text-indigo-800 font-medium text-sm text-center inline-flex items-center " id="<?php echo $product["id"]; ?>" onclick="add_to_cart(this)">
- 						Add to Cart
- 					</button>
  					<div class="space-x-4">
  						<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-indigo-800 font-medium text-sm  text-center justify-self-end">
  							View Product
  						</a>
- 						<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-red-800 font-medium text-sm text-center justify-self-end">
+ 						<a href="<?php echo get_url('./products/edit_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-red-800 font-medium text-sm text-center justify-self-end">
  							Edit Product
  						</a>
  					</div>
  				</div>
  			</div>
  		</div>
+
  	<?php endforeach ?>
  </div>
