@@ -92,6 +92,7 @@ if (isset($_POST["type"])) {
 		<?php if (count($r) < 1) : ?>
 			<div class="p-4 bg-gray-100 rounded">
 				<h2 class="text-center py-4">Cart is currently empty.</h2>
+
 			</div>
 		<?php endif; ?>
 		<div class=" grid-cols-1 divide-solid divide-y-2 my-4">
@@ -112,6 +113,9 @@ if (isset($_POST["type"])) {
 						</div>
 					</div>
 					<div class="flex space-x-4 mt-4">
+						<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php se($item, 'id', -1, true); ?>" class="text-indigo-800">
+							View Product
+						</a>
 						<button class="text-indigo-800" onclick="update_qty(<?php echo $item['cart_id'] ?>)">Update</button>
 						<button class="text-red-600" onclick="remove_item(<?php echo $item['cart_id'] ?>)">Remove</button>
 					</div>
