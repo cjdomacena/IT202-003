@@ -12,15 +12,26 @@ if (isset($_POST["type"])) {
 	$type = se($_POST, "type", "", false);
 	switch ($type) {
 		case "update_qty":
-			$qty = $_POST["quantity"];
-			$cartID = $_POST["cart"];
-			$stmt = $db->prepare("UPDATE Cart SET quantity = :q WHERE id = :cart_id");
-			try {
-				$stmt->execute([":q" => $qty, ":cart_id" => $cartID]);
-				flash("Cart Successfully Updated", "bg-green-200", 1000, "fade");
-			} catch (PDOException $e) {
-				flash("Something Went wrong...", "bg-red-200", 1000, "fade");
+			$qty = se($_POST, "quantity", "", false);
+			$cartID = se($_POST, "cart", "", false);
+			if ($qty == 0) {
+				$stmt = $db->prepare("DELETE FROM Cart WHERE id = :cart_id");
+				try {
+					$stmt->execute([":cart_id" => $cartID]);
+					flash("Cart Successfully Updated", "bg-green-200", 1000, "fade");
+				} catch (PDOException $e) {
+					flash($e, "bg-red-200", 1000, "fade");
+				}
+			} else {
+				$stmt = $db->prepare("UPDATE Cart SET quantity = :q WHERE id = :cart_id");
+				try {
+					$stmt->execute([":q" => $qty, ":cart_id" => $cartID]);
+					flash("Cart Successfully Updated", "bg-green-200", 1000, "fade");
+				} catch (PDOException $e) {
+					flash(var_export($e), "bg-red-200", 1000, "fade");
+				}
 			}
+
 			break;
 		case "delete_item":
 			$cartID = se($_POST, "cart", -1, false);
@@ -111,7 +122,7 @@ if (isset($_POST["type"])) {
 		<div class="rounded border-top flex justify-between">
 			<div class="p-4">
 				<h3>Total: $<?php echo $total ?></h3>
-				<p> Product Count: <?php echo count($r)?> </p>
+				<p> Product Count: <?php echo count($r) ?> </p>
 			</div>
 			<!-- Modal toggle -->
 			<button class="block text-red-500 bg-red-100 hover:bg-red-400 focus:ring-4 focus:ring-red-200 font-medium rounded-lg text-sm px-5 text-center" type="button" data-modal-toggle="popup-modal">
