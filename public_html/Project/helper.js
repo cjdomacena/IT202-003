@@ -122,3 +122,4 @@ function remove_all_items()
     })
  
 }
+
