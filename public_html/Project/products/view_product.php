@@ -8,14 +8,24 @@ if(isset($_GET["id"]))
 	if($id != -1)
 	{
 		$db = getDB();
+		$product = "";
 		$stmt = $db->prepare('SELECT * FROM Products WHERE id = :id');
-		$stmt->execute([':id' => $id]);
-		$product = $stmt->fetch(PDO::FETCH_ASSOC);
+		try{
+			$stmt->execute([':id' => $id]);
+			$product = $stmt->fetch(PDO::FETCH_ASSOC);
+		}catch(PDOException $e){
+			flash("Something went wrong...", "bg-red-200");
+		}
+		
 	}
 
 }
-
-echo '<pre>' . var_export($product) . '</pre>';
+// id, user_id, name, description, stock, cost, image
 ?>
 
 
+
+<div class="container mx-auto my-4 px-4">
+<?php echo '<pre>' . var_export($product) . '</pre>';?>
+
+</div>

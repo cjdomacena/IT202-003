@@ -36,7 +36,7 @@
  					<h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2"><?php echo $product['name'] ?></h5>
  				</a>
  				<div>
- 					<p class="font-normal text-gray-700 mb-3"><?php echo $product['description'] ?>
+ 					<p class="font-normal text-gray-700 mb-3 truncate"><?php echo $product['description'] ?>
  					</p>
  					<p class="text-indigo-800 font-medium text-sm text-center inline-flex items-center">
  						<?php

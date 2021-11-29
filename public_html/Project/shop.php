@@ -6,7 +6,7 @@ require(__DIR__ . "/../../partials/nav.php");
 //     echo "<script>get_cart_count();</script>";
 // }
 // 
-if(!is_logged_in()){
+if (!is_logged_in()) {
     die(header("Location: index.php"));
 }
 ?>
@@ -24,9 +24,10 @@ if(!is_logged_in()){
     <div id="userItems">
 
     </div>
-
 </div>
-
+<div class="my-4 container mx-auto">
+    <a href="./products/add_product.php" class="p-4 bg-indigo-400 rounded hover:bg-indigo-200">Add New Product</a>
+</div>
 <script>
     get_cart_count();
     $(document).ready(

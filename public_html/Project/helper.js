@@ -44,7 +44,6 @@ function change_cart_counter(message)
 {
     const cart = document.getElementById("cart-count");
     cart.innerText = message.count
-    console.log(message)
 }
 function add_to_cart(e)
 {
@@ -70,7 +69,6 @@ function get_cart_count()
     {
         let data = JSON.parse(res);
         const { message, status, logged_in } = data
-        console.log(logged_in)
         if (logged_in)
         {
             if (status === 200)
@@ -117,8 +115,76 @@ function remove_all_items()
 {
     $.post('./cart/view_cart.php', {
         type: 'delete_all'
-    }, (data) => {
+    }, (data) =>
+    {
         location.reload();
     })
- 
+
 }
+function add_new_product(event)
+{
+    event.preventDefault();
+    const spinner = document.getElementById("spinner");
+    const name = document.getElementById("product_name").value;
+    const desc = document.getElementById("product_description").value;
+    const cost = document.getElementById("product_cost").value;
+    const stock = document.getElementById("product_stock").value;
+    const category = get_category();
+    const visibility = get_visibility();
+    let imageURL = upload_image(event);
+    console.log(visibility);
+    imageURL = imageURL.then(res =>
+    {
+        res.ref.getDownloadURL().then((downloadURL) =>
+        {
+            spinner.classList.remove('invisible');
+            $.post('./../api/add_product.php', {
+                name: name,
+                desc: desc,
+                cost: cost,
+                stock: stock,
+                category: category,
+                visibility: visibility,
+                imageURL: downloadURL
+            }, (data, status) =>        
+            {
+                location.reload();
+            })
+        })
+    })
+
+   
+}
+
+function get_visibility()
+{
+    let visibility = document.getElementById("product_visiblity").checked;
+    return visibility;
+}
+
+function get_category()
+{
+    const category = document.getElementById("product_category");
+    return category.value;
+}
+
+
+function upload_image(e)
+{
+    let files = e.target.product_image.files;
+
+    if (files.length > 0)
+    {
+        let file = files[0];
+        let task = storage.ref().child("images/" + file.name).put(file);
+        return task;
+    }
+
+}
+
+
+
+
+
+
+

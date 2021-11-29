@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS Products(
   stock int DEFAULT 0,
   cost int DEFAULT 99999,
   image text,
+  category text NULL,
+  visibility BOOLEAN DEFAULT false,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY(id),
