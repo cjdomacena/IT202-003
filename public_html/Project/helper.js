@@ -82,8 +82,6 @@ function get_cart_count()
                 flash(message, "bg-red-200", 1000, "fade");
             }
         }
-
-
     })
 }
 
@@ -93,6 +91,7 @@ function update_qty(cart_id)
     const cartID = cart_id;
     const new_qty = $("#quantity").val();
     $.post('./cart/view_cart.php', {
+        type: "update_qty",
         quantity: new_qty,
         cart: cartID
     }, () =>
@@ -107,9 +106,19 @@ function remove_item(cart_id)
     const cartID = cart_id;
     $.post('./cart/view_cart.php', {
         cart: cartID,
-        type: 'delete',
+        type: 'delete_item',
     }, (data) =>
     {
         location.reload();
     })
+}
+
+function remove_all_items()
+{
+    $.post('./cart/view_cart.php', {
+        type: 'delete_all'
+    }, (data) => {
+        location.reload();
+    })
+ 
 }
