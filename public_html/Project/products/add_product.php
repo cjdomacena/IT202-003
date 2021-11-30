@@ -73,7 +73,7 @@ if (!is_logged_in() || has_role("default")) {
 			<div class="w-64">
 				<p class="text-sm font-md mb-3">Product Visbility</p>
 				<label for="product_visiblity" class="flex items-center cursor-pointer relative mb-4">
-					<input type="checkbox" id="product_visiblity" class="sr-only" name="product_visiblity" onclick="get_visibility()">
+					<input type="checkbox" id="product_visiblity" class="sr-only" name="product_visiblity" onclick="get_visibility()" unchecked>
 					<div class="toggle-bg bg-gray-200 border border-gray-200 h-6 w-11 rounded-full dark:bg-gray-700 dark:border-gray-600"></div>
 					<span class="ml-3 text-gray-900 text-sm font-medium dark:text-gray-300"></span>
 				</label>
