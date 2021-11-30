@@ -535,124 +535,65 @@
   
 <details open>
 <summary><strong>Milestone 2</strong></summary>
+<table><tr><td>Milestone 2</td></tr><tr><td><table><tr><td>F1 - User with an admin role or shop owner role will be able to add products to inventory</td></tr><tr><td>Links:<p>
 
-- [ ] \(mm/dd/yyyy of completion) User with an admin role or shop owner role will be able to add products to inventory
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Any user will be able to see products with visibility = true on the Shop page
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/api/add_product.php ](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/api/add_product.php )</p><p>
 
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/add_product.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/add_product.php)</p></td></tr><tr><td>PRs:<p>
 
-- [ ] \(mm/dd/yyyy of completion) Admin/Shop owner will be able to see products with any visibility
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Admin/Shop owner will be able to see products with any visibility
+ [https://github.com/cjdomacena/IT202-003/pull/97](https://github.com/cjdomacena/IT202-003/pull/97)</p></td></tr><tr><td><table><tr><td>F1 -  Table should be called Products (id, name, description, category, stock, created, modified, unit_price, visibility [true, false])<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="![image](https://user-images.githubusercontent.com/67976753/143986006-1b8012a0-a985-4845-ad19-49fb1182a26d.png"><p>Base form for adding products. The current user that I'm using is an admin based on the navigation bar.</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143986216-7524f00c-0158-4403-9d6e-861f0a25048c.png"><p>Successfully added new product. Image is uploaded to firebase</td></tr></td></tr></table></td></tr><table><tr><td>F2 - Any user will be able to see products with visibility = true on the Shop page</td></tr><tr><td>Links:<p>
 
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/shop.php (Shop page - Nav title is "My Shop") This is the page where it displays all the products that the current user has on his/her inventory.](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/shop.php (Shop page - Nav title is "My Shop") This is the page where it displays all the products that the current user has on his/her inventory.)</p><p>
 
-- [ ] \(mm/dd/yyyy of completion) Admin/Shop owner will be able to edit any product
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/index.php - Landing page](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/index.php - Landing page)</p></td></tr><tr><td>PRs:<p>
 
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
+ [https://github.com/cjdomacena/IT202-003/pull/85](https://github.com/cjdomacena/IT202-003/pull/85)</p><p>
 
-- [ ] \(mm/dd/yyyy of completion) User will be able to click an item from a list and view a full page with more info about the item (Product Details Page)
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) User must be logged in for any Cart related activity below
+ [https://github.com/cjdomacena/IT202-003/pull/88](https://github.com/cjdomacena/IT202-003/pull/88)</p><p>
 
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
+ [https://github.com/cjdomacena/IT202-003/pull/99 - This is the latest PR with updated filters](https://github.com/cjdomacena/IT202-003/pull/99 - This is the latest PR with updated filters)</p></td></tr><tr><td><table><tr><td>F2 - Product list page will be public (i.e. doesn’t require login)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143986643-55d43ff9-92ea-447c-939a-d2748a646f19.png"><p>Displays all the products on the landing page, but only with visibility of true.</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - User will be able to filter results by category, User will be able to filter results by partial matches on the name, User will be able to sort results by price<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143986753-98f524e1-0532-4c4c-8948-5749ceb7aa76.png"><p>The filter works both on the homepage and the shop page ("My shop") for logged in users with roles of admin and seller.</td></tr></td></tr></table></td></tr><table><tr><td>F3 - Admin/Shop owner will be able to see products with any visibility</td></tr><tr><td>Links:<p>
 
-- [ ] \(mm/dd/yyyy of completion) User will be able to add items to Cart
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) User will be able to see their cart
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/shop.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/shop.php)</p></td></tr><tr><td>PRs:<p>
 
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
+ [https://github.com/cjdomacena/IT202-003/pull/85](https://github.com/cjdomacena/IT202-003/pull/85)</p></td></tr><tr><td><table><tr><td>F3 - This page should only be accessible to the appropriate role(s)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143987064-5c21ad15-a278-4f8e-a863-182fdd28d6ca.png"><p>I'm quite unsure about this sub item. I think I misunderstood. What I did is the ("My Shop") page displays all items related to the user.</td></tr></td></tr></table></td></tr><table><tr><td>F4 - Admin/Shop owner will be able to edit any product</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F4 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="100%" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F5 - User will be able to click an item from a list and view a full page with more info about the item (Product Details Page)</td></tr><tr><td>Links:<p>
 
-- [ ] \(mm/dd/yyyy of completion) User will be able to change quantity of items in their cart
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) User will be able to remove a single item from their cart via button click
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) User will be able to clear their entire cart via a button click
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/view_product.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/view_product.php)</p></td></tr><tr><td>PRs:<p>
 
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary) - Screenshot #1 description explaining what you're trying to show
+ [https://github.com/cjdomacena/IT202-003/issues/75](https://github.com/cjdomacena/IT202-003/issues/75)</p></td></tr><tr><td><table><tr><td>F5 - Add to Cart<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143987335-0b88185d-83c6-4bce-8aad-6095302f0fda.png"><p>Added qty and add to cart button for this page.</td></tr></td></tr></table></td></tr><table><tr><td>F6 - User must be logged in for any Cart related activity below</td></tr><tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/cart/view_cart.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/cart/view_cart.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/93](https://github.com/cjdomacena/IT202-003/pull/93)</p></td></tr><tr><td><table><tr><td>F6 - None<tr><td>Status: completed</td></tr><tr><td><img width="100%" src=""><p>Will add evidence on following features since they're related</td></tr></td></tr></table></td></tr><table><tr><td>F7 - User will be able to add items to Cart</td></tr><tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/index.php](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/index.php)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/products/view_product.php](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/products/view_product.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/91](https://github.com/cjdomacena/IT202-003/pull/91)</p></td></tr><tr><td><table><tr><td>F7 - Cart will be table-based (id, product_id, user_id, desired_quantity, unit_cost, created, modified)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143987681-cd357698-d809-4dee-ade9-b4a02802afb8.png"><p>DB for cart</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F7 - Adding items to Cart will not affect the Product's quantity in the Products table<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143987899-24d05ec8-e629-4bbc-96ee-62ac1cc60e21.png"><p>Cart does does not affect stock count for products </td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988048-62d73483-61cd-4477-b523-45dc167c7536.png"><p>Flash message after successful product addition to cart.</td></tr></td></tr></table></td></tr><table><tr><td>F8 - User will be able to see their cart</td></tr><tr><td>Links:</td></tr><tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/94](https://github.com/cjdomacena/IT202-003/pull/94)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/93](https://github.com/cjdomacena/IT202-003/pull/93)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/92](https://github.com/cjdomacena/IT202-003/pull/92)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/96](https://github.com/cjdomacena/IT202-003/pull/96)</p></td></tr><tr><td><table><tr><td>F8 -  List all the items, Show subtotals based on desired qty * unit cost, show total cart value,<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988231-3773349a-7dfa-449e-887f-1310b786fbe0.png"><p>Displays subtotal, total, unit cost * qty. And links to product page</td></tr></td></tr></table></td></tr><table><tr><td>F9 - User will be able to change quantity of items in their cart</td></tr><tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/cart/view_cart.php](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/cart/view_cart.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/95](https://github.com/cjdomacena/IT202-003/pull/95)</p></td></tr><tr><td><table><tr><td>F9 - Quantity of 0 should also remove from cart<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988564-cd0fa9f7-28d6-46f6-a43a-460b0d54c669.png"><p>Before pressing update</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988597-3c5b7db5-8003-44e8-a71c-c76d267f5c61.png"><p>After update. Flash message shows successful update</td></tr></td></tr></table></td></tr><table><tr><td>F10 - User will be able to remove a single item from their cart via button click</td></tr><tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/cart/view_cart.php](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/cart/view_cart.php)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/helper.js](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/helper.js)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/94](https://github.com/cjdomacena/IT202-003/pull/94)</p></td></tr><tr><td><table><tr><td>F10 - Remove a single item from their cart via button click<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988767-b493d380-ded5-4017-91be-ba5dfbafbfd2.png"><p>Remove item with flash message after successful attempt</td></tr></td></tr></table></td></tr><table><tr><td>F11 - User will be able to clear their entire cart via a button click</td></tr><tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/cart/view_cart.php](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/cart/view_cart.php)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/helper.js](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/helper.js)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/94](https://github.com/cjdomacena/IT202-003/pull/94)</p></td></tr><tr><td><table><tr><td>F11 - Clear Cart<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988904-dc4abf31-f281-452b-b345-0f199a25e1d0.png"><p>Modal appears to confirm choice to remove all items on cart</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988936-d4415059-9b19-483b-8a5d-3b804bf6dd8b.png"><p>Cart is cleared</td></tr></td></tr></table></td></tr></td></tr></table>
   </details>
 
 - Milestone 3
