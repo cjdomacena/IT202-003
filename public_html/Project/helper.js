@@ -83,6 +83,7 @@ function get_cart_count()
     })
 }
 
+
 function update_qty(cart_id)
 {
     // Get cart ID form

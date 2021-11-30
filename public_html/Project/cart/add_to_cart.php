@@ -3,10 +3,10 @@ require_once("./../../../lib/functions.php");
 session_start();
 if (is_logged_in()) {
 	$r = ["message" => "Something went wrong...", "status" => 400];
-	if (isset($_POST["product_id"])) {
+	if (isset($_POST["product_id"]) || isset($_POST["quantity"])) {
 		$uid = get_user_id();
 		$pid = (int)$_POST["product_id"];
-		$quantity = 1;
+		$quantity = se($_POST,"quantity", 1, false);
 		$db = getDB();
 		$stmt = $db->prepare("INSERT INTO Cart (product_id, user_id, quantity) VALUES (:pid,:uid, :q) ON DUPLICATE KEY UPDATE quantity = quantity + :q");
 		try {
