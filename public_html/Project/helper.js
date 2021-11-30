@@ -133,7 +133,7 @@ function add_new_product(event)
     const category = get_category();
     const visibility = get_visibility();
     let imageURL = upload_image(event);
-    console.log(visibility);
+
     imageURL = imageURL.then(res =>
     {
         res.ref.getDownloadURL().then((downloadURL) =>
@@ -160,6 +160,7 @@ function add_new_product(event)
 function get_visibility()
 {
     let visibility = document.getElementById("product_visiblity").checked;
+    console.log(visibility);
     return visibility;
 }
 

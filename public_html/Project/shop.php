@@ -28,27 +28,28 @@ if (!is_logged_in()) {
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <input type="text" id="shop_search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." name="shop_search">
+                <input type="text" id="shop_search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." name="shop_search" onchange="home_filter()">
             </div>
-            <select class="rounded" id="shop_sort" name="shop_sort">
+            <select class="rounded" id="shop_sort" name="shop_sort" onchange="home_filter()">
                 <option value="">Sort</option>
                 <option value="filter_by_name">Name (A-Z)</option>
                 <option value="filter_by_price_asc">Price (Low to High)</option>
                 <option value="filter_by_price_desc">Price (High to Low)</option>
             </select>
-            <select class="rounded" id="shop_category" name="shop_category">
+            <select class="rounded" id="shop_category" name="shop_category" onchange="home_filter()">
                 <option value="">Category</option>
                 <?php foreach ($categories as $category) : ?>
                     <option value="filter_by_<?php echo strtolower(se($category, "category", "", false)) ?>"><?php se($category, "category", "", true) ?></option>
                 <?php endforeach; ?>
             </select>
-            <button type="submit" class="bg-gray-100 px-4 py-2 rounded text-sm" onclick="shop_filter()"> Apply </button>
+            <!-- <button type="submit" class="bg-gray-100 px-4 py-2 rounded text-sm"> Apply </button> -->
         </div>
     </div>
     <div id="userItems">
 
     </div>
 </div>
+
 <div class="my-4 container mx-auto">
     <a href="./products/add_product.php" class="p-4 bg-indigo-400 rounded hover:bg-indigo-200">Add New Product</a>
 </div>
@@ -67,7 +68,7 @@ if (!is_logged_in()) {
         })
     )
 
-    function shop_filter() {
+    function home_filter() {
         const sort = document.getElementById("shop_sort").value;
         const category = document.getElementById("shop_category").value;
         const q = document.getElementById("shop_search").value;

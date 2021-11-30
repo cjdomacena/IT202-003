@@ -3,74 +3,70 @@
 	require_once(__DIR__ . "../../../../lib/db.php");
 	session_start();
 
-	if (is_logged_in()) {
-		$products = [];
-		$db = getDB();
-		$sort = se($_GET, "sort", "", false);
-		$category = se($_GET, "category", "", false);
+
+	$products = [];
+	$db = getDB();
+	$sort = se($_GET, "sort", "", false);
+	$category = se($_GET, "category", "", false);
+	$dir = "ASC";
+	$search = se($_GET, "search", "", false);
+	$params = [];
+	$q = "SELECT * FROM Products WHERE user_id =:uid AND 1 = 1";
+	$params[":uid"] = get_user_id();
+
+	if ($sort == "filter_by_name") {
+		$sort = "name";
 		$dir = "ASC";
-		$search = se($_GET, "search", "", false);
-		$params = [];
-		$q = "SELECT * FROM Products WHERE 1 = 1";
+	} else if ($sort == "filter_by_price_desc") {
+		$sort = "cost";
+		$dir = "DESC";
+	} else if ($sort == "filter_by_price_asc") {
+		$sort = "cost";
+		$dir = "ASC";
+	} else {
+		$sort = "name";
+		$dir = "ASC";
+	};
 
-		if ($sort == "filter_by_name") {
-			$sort = "name";
-			$dir = "ASC";
-		} else if ($sort == "filter_by_price_desc") {
-			$sort = "cost";
-			$dir = "DESC";
-		} else if ($sort == "filter_by_price_asc") {
-			$sort = "cost";
-			$dir = "ASC";
-		} else {
-			$sort = "name";
-			$dir = "ASC";
-		};
-		
-		if($category == "filter_by_accessories"){
-			$category = "Accessories";
-		}
-		else if($category == "filter_by_pants"){
-			$category = "Pants";
-		}
-		else if($category == "filter_by_shoes"){
-			$category = "Shoes";
-		}
-		else if($category == "filter_by_shirts"){
-			$category = "Shirts";
-		}
-		else {
-			$category = "";
-		}
-
-		if(!empty($search)){
-			$q .=" AND name like :name";
-			$params[":name"] = "%$search%";
-		}
-		if(!empty($category)){
-			$q .=" AND category = :cat";
-			$params[":cat"] = $category;
-		}
-		if(!empty($sort)){
-			$q .=" ORDER BY $sort $dir";
-		}
-
-		$stmt = $db->prepare($q);
-		try{
-			if(count($params) < 1){
-				$stmt->execute();
-				$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				// echo json_encode($products);
-			}else {
-				$stmt->execute($params);
-				$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				// echo json_encode($products);
-			}
-		}catch(PDOException $e){
-			flash("<pre>" . $e . "</pre>", "bg-red-200");
-		}
-
+	if ($category == "filter_by_accessories") {
+		$category = "Accessories";
+	} else if ($category == "filter_by_pants") {
+		$category = "Pants";
+	} else if ($category == "filter_by_shoes") {
+		$category = "Shoes";
+	} else if ($category == "filter_by_shirts") {
+		$category = "Shirts";
+	} else {
+		$category = "";
 	}
+
+	if (!empty($search)) {
+		$q .= " AND name like :name";
+		$params[":name"] = "%$search%";
+	}
+	if (!empty($category)) {
+		$q .= " AND category = :cat";
+		$params[":cat"] = $category;
+	}
+	if (!empty($sort)) {
+		$q .= " ORDER BY $sort $dir";
+	}
+
+
+
+	$stmt = $db->prepare($q);
+	try {
+		if (count($params) < 1) {
+			$stmt->execute();
+			$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		} else {
+			$stmt->execute($params);
+			$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		}
+	} catch (PDOException $e) {
+		flash("<pre>" . $e . "</pre>", "bg-red-200");
+	}
+
 
 	?>
 
