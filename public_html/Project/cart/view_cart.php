@@ -99,16 +99,16 @@ if (isset($_POST["type"])) {
 			<?php foreach ($r as $index => $item) : ?>
 				<?php $total += $item["cost"] * $item["quantity"] ?>
 				<div class="hover:bg-gray-100 p-4">
-					<div class="flex justify-between">
+					<div class="flex justify-between xl:flex-nowrap lg:flex-nowrap md:flex-wrap flex-wrap">
 						<div class="flex mb-4">
 							<img class="w-24 h-24 object-fill rounded mr-4" src="<?php echo $item["image"] ?>" />
 							<div>
 								<h1 class="text-xl font-bold"><?php echo $item['name'] ?></h1>
-								<p class="truncate"><?php echo $item['description'] ?></p>
+								<p class="md:overflow-ellipsis sm:overflow-ellipsis xs:overflow-ellipsis mr-2 text-sm"><?php echo $item['description'] ?></p>
 							</div>
 						</div>
 						<div>
-							<p>Total: $<?php echo $item["cost"] * $item["quantity"] ?></p>
+							<p>Subtotal: $<?php echo $item["cost"] * $item["quantity"] ?></p>
 							<input type="number" min=0 max=99 value="<?php echo $item["quantity"]; ?>" name="quantity" id="quantity" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 my-4 w-24" />
 						</div>
 					</div>
