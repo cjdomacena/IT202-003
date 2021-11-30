@@ -34,9 +34,11 @@ if (!is_logged_in()) {
         $.ajax({
             type: "GET",
             url: "./products/user_products.php",
-            data: "filter=" + 'all_products',
+            data: {
+                filter: "all_products"
+            },
             success: (data) => {
-                let selected = $("select").val();
+                let selected = $("filter").val();
                 $("#userItems").html(data)
                 let fitler_title = document.getElementById("filter_title");
                 selected = selected.split("_").join(" ");
@@ -51,7 +53,9 @@ if (!is_logged_in()) {
         $.ajax({
             type: "GET",
             url: "./products/user_products.php",
-            data: "filter=" + selected,
+            data: {
+                filter: selected
+            },
             success: (data) => {
                 $("#userItems").html(data);
                 const fitler_title = document.getElementById("filter_title");
