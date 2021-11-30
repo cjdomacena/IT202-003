@@ -10,10 +10,9 @@
 	$category = se($_GET, "category", "", false);
 	$dir = "ASC";
 	$search = se($_GET, "search", "", false);
-
 	$params = [];
-	$q = "SELECT * FROM Products WHERE 1=1";
-
+	$q = "SELECT * FROM Products WHERE user_id =:uid AND 1 = 1";
+	$params[":uid"] = get_user_id();
 
 	if ($sort == "filter_by_name") {
 		$sort = "name";
@@ -98,9 +97,9 @@
  						<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-indigo-800 font-medium text-sm  text-center justify-self-end">
  							View Product
  						</a>
- 						<button class="text-indigo-800 font-medium text-sm py-2 text-center inline-flex items-center mt-4" id="<?php echo $product["id"]; ?>" onclick="add_to_cart(this)">
- 							Add to Cart
- 						</button>
+ 						<a href="<?php echo get_url('./products/edit_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-red-800 font-medium text-sm text-center justify-self-end">
+ 							Edit Product
+ 						</a>
  					</div>
  				</div>
  			</div>

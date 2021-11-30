@@ -15,7 +15,6 @@
 </div>
 </div>
 
-<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
 
 
 
@@ -33,8 +32,10 @@
 
 
     function check() {
-            if ("<?php echo is_logged_in() ?>") {
-                flash("Welcome! <?php echo get_username()?>", "bg-green-200", 1000, "fade");
-            }
+        if ("<?php echo is_logged_in() ?>") {
+            flash("Welcome! <?php echo get_username() ?>", "bg-green-200", 1000, "fade");
+        }
     }
 </script>
+
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
