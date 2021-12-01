@@ -42,7 +42,6 @@ if (!is_logged_in()) {
                     <option value="filter_by_<?php echo strtolower(se($category, "category", "", false)) ?>"><?php se($category, "category", "", true) ?></option>
                 <?php endforeach; ?>
             </select>
-            <!-- <button type="submit" class="bg-gray-100 px-4 py-2 rounded text-sm"> Apply </button> -->
         </div>
     </div>
     <div id="userItems">

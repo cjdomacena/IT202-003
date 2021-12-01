@@ -4,24 +4,6 @@ if (!is_logged_in() || has_role("default")) {
 	die(header("Location: " . get_url("index.php")));
 }
 ?>
-<script>
-	let product_image = "";
-
-	function storeImageURL(event) {
-		let files = event.target.fileToUpload.files;
-		if (files.length > 0) {
-			let file = files[0];
-			storage.ref().child("images/" + file.name).put(file).then(res => {
-				res.ref.getDownloadURL().then((downloadURL) => {
-					//this is the url you'd save in the database
-					product_image = downloadURL;
-				});
-			}).catch(err => {
-				flash(err, "bg-red-200", 1000, "fade");
-			})
-		}
-	}
-</script>
 <div class="container mx-auto my-8" id="form-container">
 
 	<div class="w-1/2 mx-auto space-y-8 border p-4 rounded shadow">
@@ -36,7 +18,7 @@ if (!is_logged_in() || has_role("default")) {
 				Processing
 			</span>
 		</div>
-		<form method="POST" onsubmit="add_new_product(event); return false;" enctype="multipart/form-data" class="space-y-8">
+		<form method="POST" onsubmit="add_new_product(event,'add_product'); return false;" enctype="multipart/form-data" class="space-y-8">
 			<!-- Product Name  -->
 			<div>
 				<label for="product_name" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Product Name</label>
