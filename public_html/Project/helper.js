@@ -201,10 +201,10 @@ function upload_image(e)
 }
 
 
-function delete_product(id = "")
+function delete_product(path, id = "")
 {
     let product_id = -1;
-    if (!id)
+    if (id)
     {
         product_id = id;
     } else
@@ -212,15 +212,13 @@ function delete_product(id = "")
         product_id = document.getElementById("product_id").value;
     }
 
-    $.post(`./../api/delete_product.php`, {
+
+
+    $.post(`${ path }`, {
         product_id: product_id
     }, (data, status) =>        
     {
-        setTimeout(() =>
-        {
-            location.assign(`${ location.origin }/Project/shop.php`);
-        }, 1500)
-        window.scrollTo(0, 0)
+        location.assign(`${ location.origin }/Project/shop.php`);
     })
 }
 
