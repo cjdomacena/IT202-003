@@ -122,7 +122,7 @@ function remove_all_items()
     })
 
 }
-function add_new_product(event)
+function add_new_product(event, type)
 {
     event.preventDefault();
     const spinner = document.getElementById("spinner");
@@ -132,29 +132,44 @@ function add_new_product(event)
     const stock = document.getElementById("product_stock").value;
     const category = get_category();
     const visibility = get_visibility();
-    let imageURL = upload_image(event);
-
-    imageURL = imageURL.then(res =>
+    const product_id = document.getElementById("product_id").value;
+    if (!type == "edit_product")
     {
-        res.ref.getDownloadURL().then((downloadURL) =>
+        let imageURL = upload_image(event);
+        imageURL = imageURL.then(res =>
         {
-            spinner.classList.remove('invisible');
-            $.post('./../api/add_product.php', {
-                name: name,
-                desc: desc,
-                cost: cost,
-                stock: stock,
-                category: category,
-                visibility: visibility,
-                imageURL: downloadURL
-            }, (data, status) =>        
+            res.ref.getDownloadURL().then((downloadURL) =>
             {
-                location.reload();
+                spinner.classList.remove('invisible');
+                $.post(`./../api/${ type }.php`, {
+                    name: name,
+                    desc: desc,
+                    cost: cost,
+                    stock: stock,
+                    category: category,
+                    visibility: visibility,
+                    imageURL: downloadURL
+                }, (data, status) =>        
+                {
+                    location.reload();
+                })
             })
         })
-    })
-
-   
+    }else{
+        
+        $.post(`./../api/${ type }.php`, {
+            name: name,
+            desc: desc,
+            cost: cost,
+            stock: stock,
+            category: category,
+            visibility: visibility,
+            product_id: product_id
+        }, (data, status) =>        
+        {
+            location.reload();
+        })
+    }
 }
 
 function get_visibility()
