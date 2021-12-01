@@ -155,8 +155,9 @@ function add_new_product(event, type)
                 })
             })
         })
-    }else{
-        
+    } else
+    {
+
         $.post(`./../api/${ type }.php`, {
             name: name,
             desc: desc,
@@ -200,7 +201,26 @@ function upload_image(e)
 }
 
 
+function delete_product(path, id = "")
+{
+    let product_id = -1;
+    if (id)
+    {
+        product_id = id;
+    } else
+    {
+        product_id = document.getElementById("product_id").value;
+    }
 
+
+
+    $.post(`${ path }`, {
+        product_id: product_id
+    }, (data, status) =>        
+    {
+        location.assign(`${ location.origin }/Project/shop.php`);
+    })
+}
 
 
 

@@ -28,6 +28,9 @@ if (isset($_GET["id"])) {
 		</div>
 		<div class="w-2/5">
 			<h1 class="text-4xl font-medium"><?php echo $product["name"] ?></h1>
+			<div class="mt-2">
+				<span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><?php se($product, 'category') ?></span>
+			</div>
 			<p class="my-4 text-sm"><?php echo $product["description"] ?></p>
 			<p class="my-4 text-sm">Available Stock: <?php echo $product["stock"] ?></p>
 			<p class="my-4 text-lg font-medium">USD $<?php echo $product["cost"] ?></p>
