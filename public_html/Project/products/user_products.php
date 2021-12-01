@@ -73,12 +73,12 @@
 
  <div class="grid xl:grid-cols-4 lg:grid-cols:4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mx-auto gap-4 m-4 w-full" id="card-container">
  	<?php foreach ($products as $index => $product) : ?>
- 		<div class="bg-white shadow-md border border-gray-200 rounded-lg w-full">
- 			<a href="#">
+ 		<div class="bg-white shadow-md border border-gray-200 rounded-lg transform w-full">
+ 			<a href="<?php echo get_url('./products/edit_product.php') ?>?id=<?php echo se($product, 'id'); ?>">
  				<img class="rounded-t-lg object-cover h-64 w-full" src="<?php echo $product['image'] ?>" alt="" />
  			</a>
  			<div class="p-5 flex flex-col space-y-4">
- 				<a href="#">
+ 				<a href="<?php echo get_url('./products/edit_product.php') ?>?id=<?php echo se($product, 'id'); ?>">
  					<h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2"><?php echo $product['name'] ?></h5>
  				</a>
  				<div>
