@@ -12,7 +12,7 @@
 	$search = se($_GET, "search", "", false);
 
 	$params = [];
-	$q = "SELECT * FROM Products WHERE 1=1";
+	$q = "SELECT * FROM Products WHERE visibility = 1 AND 1=1";
 
 
 	if ($sort == "filter_by_name") {

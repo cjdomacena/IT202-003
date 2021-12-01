@@ -90,6 +90,16 @@ require(__DIR__ . "/../../partials/flash.php");
 		const q = document.getElementById("shop_search");
 		sort.value = "";
 		category.value = ""
-		q.value =""
+		q.value = ""
+		$.ajax({
+			type: "GET",
+			url: "./products/all_products.php",
+			data: {
+				sort: "all_products",
+			},
+			success: (data) => {
+				$("#userItems").html(data);
+			}
+		})
 	}
 </script>
