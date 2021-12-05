@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS OrderItems(
 	id int AUTO_INCREMENT NOT NULL,
-	order_id int not NULL UNIQUE,
+	order_id int not NULL,
 	product_id int not NULL,
 	quantity int DEFAULT 1,
 	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

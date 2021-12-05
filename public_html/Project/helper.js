@@ -222,6 +222,67 @@ function delete_product(path, id = "")
     })
 }
 
+function checkout()
+{
+    const fName = document.getElementById("fName").value;
+    const lName = document.getElementById("lName").value;
+    const address = document.getElementById("address").value;
+    const total = document.getElementById("total").value;
+    const paymentMethod = getPaymentMethod();
+    const zipcode = document.getElementById("zipcode").value;
+    const state = getState();
+    const isValid = validateCheckout(fName, lName, zipcode);
+    if (isValid.length <= 0)
+    {
+        console.log("Success");
+        // $.post("./cart/checkout.php", {
+        //     type: "checkout",
+        //     fName: fName,
+        //     lName: lName,
+        //     address: address,
+        //     total: total,
+        //     paymentMethod: paymentMethod,
+        //     state: state,
+        //     zipcode: zipcode
+        // }, (data) =>
+        // {
+        //     location.reload();
+        // })
+    } else
+    {
+        isValid.map((error) =>
+        {
+            flash(error, "bg-red-200", 1000, "fade");
+        })
+    }
 
+}
 
+function getPaymentMethod()
+{
+    const category = document.getElementById("payment_method");
+    return category.value;
+}
 
+function getState()
+{
+    const val = document.getElementById("state")
+    console.log(val.value)
+    return val.value;
+}
+
+function validateCheckout(fName, lName, zip)
+{
+    const regex = new RegExp('[0-9]+');
+    const zipRegex = new RegExp("[0-9]{5}");
+    let errors = [];
+    if (regex.test(fName) || regex.test(lName))
+    {
+        errors.push("Name should not contain any number")
+    }
+    if (!zipRegex.test(zip) || zip.length > 5)
+    {
+        errors.push("Invalid Zip. (e.g 54321)");
+    }
+    return errors;
+}
