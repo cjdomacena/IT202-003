@@ -20,7 +20,7 @@
 
 <script>
     //used to pretend the flash messages are below the first nav element
-    get_cart_count();
+
 
     function moveMeUp(ele) {
         let target = document.getElementsByTagName("nav")[0];
