@@ -21,6 +21,7 @@
 <script>
     //used to pretend the flash messages are below the first nav element
 
+
     function moveMeUp(ele) {
         let target = document.getElementsByTagName("nav")[0];
         if (target) {

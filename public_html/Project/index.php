@@ -64,6 +64,7 @@ require(__DIR__ . "/../../partials/flash.php");
 				$("#userItems").html(data);
 			}
 		})
+
 	)
 
 	function home_filter() {
