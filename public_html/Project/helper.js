@@ -132,9 +132,10 @@ function add_new_product(event, type)
     const stock = document.getElementById("product_stock").value;
     const category = get_category();
     const visibility = get_visibility();
-    const product_id = document.getElementById("product_id").value;
-    if (!type == "edit_product")
+
+    if (type == "add_product")
     {
+        
         let imageURL = upload_image(event);
         imageURL = imageURL.then(res =>
         {
@@ -155,9 +156,9 @@ function add_new_product(event, type)
                 })
             })
         })
-    } else
+    } else if (type == "edit_product")
     {
-
+        const product_id = document.getElementById("product_id").value;
         $.post(`./../api/${ type }.php`, {
             name: name,
             desc: desc,
