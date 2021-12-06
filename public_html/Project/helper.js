@@ -135,7 +135,7 @@ function add_new_product(event, type)
 
     if (type == "add_product")
     {
-        
+
         let imageURL = upload_image(event);
         imageURL = imageURL.then(res =>
         {
@@ -235,7 +235,26 @@ function checkout()
     const isValid = validateCheckout(fName, lName, zipcode);
     if (isValid.length <= 0)
     {
-        console.log("Success");
+        $.ajax({
+            type: "POST",
+            url: "../api/checkout.php",
+            data: {
+                type: "checkout",
+                fName: fName,
+                lName: lName,
+                address: address,
+                total: total,
+                paymentMethod: paymentMethod,
+                state: state,
+                zipcode: zipcode
+            }
+        }).done((jsonRes) => {
+            document.getElementById("fName").value = ""
+            document.getElementById("lName").value = ""
+            document.getElementById("address").value = ""
+            const order_id = JSON.parse(jsonRes).order_id;
+            location.assign(`../cart/order_confirmation.php?order_id=${order_id}`)
+        })
         // $.post("./cart/checkout.php", {
         //     type: "checkout",
         //     fName: fName,
@@ -245,9 +264,9 @@ function checkout()
         //     paymentMethod: paymentMethod,
         //     state: state,
         //     zipcode: zipcode
-        // }, (data) =>
-        // {
-        //     location.reload();
+        // }, (data) => {
+        //     // location.assign(`./cart/order_confirmation.php?order_id=${data[0]}`);
+        //     console.log(data);
         // })
     } else
     {

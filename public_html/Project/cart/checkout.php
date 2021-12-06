@@ -1,85 +1,30 @@
 <?php
-require_once(__DIR__ . "../../../../lib/functions.php");
-require_once(__DIR__ . "../../../../lib/db.php");
-session_start();
+require_once(__DIR__ . "../../../../partials/nav.php");
+if (!is_logged_in() || has_role("default")) {
+	die(header("Location: " . get_url("index.php")));
+}
 $total = 0;
-if (!is_logged_in()) {
-	die(header("Location: " . get_url('index.php')));
+// First load
+$db = getDB();
+$id = get_user_id();
+$stmt = $db->prepare('SELECT Cart.id as cart_id, Products.name, Products.description, Products.image, Products.cost,Products.id, Cart.quantity FROM((Products INNER JOIN Cart ON Products.id = Cart.product_id) INNER JOIN Users ON Users.id = :id)');
+try {
+	$stmt->execute([":id" => $id]);
+	$r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+	flash("Something went wrong...", "bg-red-200");
 }
-if (isset($_POST["type"])) {
-	$db = getDB();
-	$id = get_user_id();
-	$r = [];
-
-	$stmt = $db->prepare('SELECT Cart.id as cart_id, Products.name, Products.description, Products.image, Products.cost,Products.id, Cart.quantity FROM((Products INNER JOIN Cart ON Products.id = Cart.product_id) INNER JOIN Users ON Users.id = :id)');
-	try {
-		$stmt->execute([":id" => $id]);
-		$r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		json_encode($r);
-	} catch (PDOException $e) {
-		flash("Something went wrong...", "bg-red-200");
-	}
-	if ($r) {
-		foreach ($r as $index => $item) {
-			$total += $item["cost"] * $item["quantity"];
-		}
-	}
-	$type = se($_POST, "type", "", false);
-	if ($type == "checkout") {
-
-		$fName = se($_POST, "fName", "", false);
-		$lName = se($_POST, "lName", "", false);
-		$address = se($_POST, "address", "", false);
-		$total = se($_POST, "total", -1, false);
-		$paymentMethod = se($_POST, "paymentMethod", "", false);
-		$stmt = $db->prepare('INSERT INTO Orders(user_id,fName,lName,total_price,address,payment_method) VALUES(:user_id,:fName,:lName,:total_price,:address,:paymentMethod)');
-		try {
-			$stmt->execute([":user_id" => $id, ":fName" => $fName, ":lName" => $lName, ":total_price" => $total, ":address" => $address, ":paymentMethod" => $paymentMethod]);
-			$order_id = $db->lastInsertId();
-		} catch (PDOException $e) {
-			flash("<pre>" . $e . "</pre>", "bg-red-200");
-		}
-		$hasError = 0;
-		$errors = [];
-		foreach ($r as $index => $item) {
-			// cost, quantity, image, description, cart_id, id (product_id)
-			$stmt = $db->prepare("INSERT INTO OrderItems (order_id,product_id, quantity) VALUES(:order_id,:product_id, :quantity)");
-			try {
-				$stmt->execute([":order_id" => $order_id, ":product_id" => $item['id'], ":quantity" => $item['quantity']]);
-			} catch (PDOException $e) {
-				$hasError++;
-				array_push($errors, $e);
-			}
-		}
-		if ($hasError > 0) {
-			foreach ($errors as $error) {
-				flash($error, "bg-red-200");
-			}
-		} else {
-			flash("Purchase Successful!", "bg-red-200");
-		}
-	}
-} else { // First load
-	$db = getDB();
-	$id = get_user_id();
-	$stmt = $db->prepare('SELECT Cart.id as cart_id, Products.name, Products.description, Products.image, Products.cost,Products.id, Cart.quantity FROM((Products INNER JOIN Cart ON Products.id = Cart.product_id) INNER JOIN Users ON Users.id = :id)');
-	try {
-		$stmt->execute([":id" => $id]);
-		$r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	} catch (PDOException $e) {
-		flash("Something went wrong...", "bg-red-200");
-	}
-	if ($r) {
-		foreach ($r as $index => $item) {
-			$total += $item["cost"] * $item["quantity"];
-		}
+if ($r) {
+	foreach ($r as $index => $item) {
+		$total += $item["cost"] * $item["quantity"];
 	}
 }
+
 
 ?>
 <script>
 	const states = async () => {
-		let res = await fetch("utils/us_states.json");
+		let res = await fetch("../utils/us_states.json");
 		res = await res.json();
 		const selectInput = document.getElementById("state");
 		await res.map((state) => {
@@ -88,10 +33,10 @@ if (isset($_POST["type"])) {
 			option.innerHTML = state.name;
 			selectInput.appendChild(option);
 		})
-		console.log(res);
 	}
 	states();
 </script>
+
 <div class="flex space-x-4 justify-between">
 	<div class="w-8/12 mx-auto">
 		<div class="my-8 py-4 rounded border">
