@@ -231,8 +231,11 @@ function checkout()
     const total = document.getElementById("total").value;
     const paymentMethod = getPaymentMethod();
     const zipcode = document.getElementById("zipcode").value;
+    const payment = document.getElementById("payment").value
+    const apt = document.getElementById("apt").value
     const state = getState();
-    const isValid = validateCheckout(fName, lName, zipcode);
+    const isValid = validateCheckout(fName, lName, zipcode, payment, total, apt, address);
+    
     if (isValid.length <= 0)
     {
         $.ajax({
@@ -248,30 +251,21 @@ function checkout()
                 state: state,
                 zipcode: zipcode
             }
-        }).done((jsonRes) => {
+        }).done((jsonRes) =>
+        {
             document.getElementById("fName").value = ""
             document.getElementById("lName").value = ""
             document.getElementById("address").value = ""
             const order_id = JSON.parse(jsonRes).order_id;
-            location.assign(`../cart/order_confirmation.php?order_id=${order_id}`)
+            location.assign(`../cart/order_confirmation.php?order_id=${ order_id }`)
         })
-        // $.post("./cart/checkout.php", {
-        //     type: "checkout",
-        //     fName: fName,
-        //     lName: lName,
-        //     address: address,
-        //     total: total,
-        //     paymentMethod: paymentMethod,
-        //     state: state,
-        //     zipcode: zipcode
-        // }, (data) => {
-        //     // location.assign(`./cart/order_confirmation.php?order_id=${data[0]}`);
-        //     console.log(data);
-        // })
     } else
     {
         isValid.map((error) =>
         {
+            document.getElementById("fName").value = ""
+            document.getElementById("lName").value = ""
+            document.getElementById("address").value = ""
             flash(error, "bg-red-200", 1000, "fade");
         })
     }
@@ -287,11 +281,10 @@ function getPaymentMethod()
 function getState()
 {
     const val = document.getElementById("state")
-    console.log(val.value)
     return val.value;
 }
 
-function validateCheckout(fName, lName, zip)
+function validateCheckout(fName, lName, zip, payment, total, apt, address)
 {
     const regex = new RegExp('[0-9]+');
     const zipRegex = new RegExp("[0-9]{5}");
@@ -304,5 +297,17 @@ function validateCheckout(fName, lName, zip)
     {
         errors.push("Invalid Zip. (e.g 54321)");
     }
+    if (payment !== total)
+    {
+        errors.push("Payment amount not does not match total: ", total);
+    }
+    // if (regex.test(apt))
+    // {
+    //     errors.push("Building information is not valid. (Must contain building no. or Suite no.)");
+    // }
+    // if (regex.test(address))
+    // {
+    //     errors.push("Address is not valid. (Must contain streen no.)");
+    // }
     return errors;
 }
