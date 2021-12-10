@@ -5,6 +5,17 @@ session_start();
 $total = 0;
 if (!is_logged_in()) {
 	die(header("Location: " . get_url('index.php')));
+} else {
+	$db = getDB();
+	$id = get_user_id();
+	$stmt = $db->prepare('SELECT Cart.id as cart_id, Products.name, Products.description, Products.image, Products.cost, Products.stock, Products.id, Cart.quantity FROM((Products INNER JOIN Cart ON Products.id = Cart.product_id) INNER JOIN Users ON Users.id = :id)');
+	try {
+		$stmt->execute([":id" => $id]);
+		$r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		json_encode($r);
+	} catch (PDOException $e) {
+		flash("Something went wrong...", "bg-red-200");
+	}
 }
 if (isset($_POST["type"])) {
 	$db = getDB();
@@ -14,6 +25,7 @@ if (isset($_POST["type"])) {
 		case "update_qty":
 			$qty = se($_POST, "quantity", "", false);
 			$cartID = se($_POST, "cart", "", false);
+			$product_stock = se($_POST, "stock", -1, false);
 			if ($qty == 0) {
 				$stmt = $db->prepare("DELETE FROM Cart WHERE id = :cart_id");
 				try {
@@ -22,7 +34,10 @@ if (isset($_POST["type"])) {
 				} catch (PDOException $e) {
 					flash($e, "bg-red-200", 1000, "fade");
 				}
-			} else {
+			} else if($qty > $product_stock){
+				flash("Failed to update cart. Item exceeds current product stock: " . $product_stock . " | Please update cart." , "bg-red-200", 1000, "fade");
+			}
+			else {
 				$stmt = $db->prepare("UPDATE Cart SET quantity = :q WHERE id = :cart_id");
 				try {
 					$stmt->execute([":q" => $qty, ":cart_id" => $cartID]);
@@ -67,19 +82,7 @@ if (isset($_POST["type"])) {
 	} catch (PDOException $e) {
 		flash("Something went wrong...", "bg-red-200");
 	}
-} else { // First load
-	$db = getDB();
-	$id = get_user_id();
-	$stmt = $db->prepare('SELECT Cart.id as cart_id, Products.name, Products.description, Products.image, Products.cost,Products.id, Cart.quantity FROM((Products INNER JOIN Cart ON Products.id = Cart.product_id) INNER JOIN Users ON Users.id = :id)');
-	try {
-		$stmt->execute([":id" => $id]);
-		$r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		json_encode($r);
-	} catch (PDOException $e) {
-		flash("Something went wrong...", "bg-red-200");
-	}
 }
-
 
 
 ?>
@@ -92,7 +95,6 @@ if (isset($_POST["type"])) {
 		<?php if (count($r) < 1) : ?>
 			<div class="p-4 bg-gray-100 rounded">
 				<h2 class="text-center py-4">Cart is currently empty.</h2>
-
 			</div>
 		<?php endif; ?>
 		<div class=" grid-cols-1 divide-solid divide-y-2 my-4">
@@ -116,7 +118,7 @@ if (isset($_POST["type"])) {
 						<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php se($item, 'id', -1, true); ?>" class="text-indigo-800">
 							View Product
 						</a>
-						<button class="text-indigo-800" onclick="update_qty(<?php echo $item['cart_id'] ?>)">Update</button>
+						<button class="text-indigo-800" onclick="update_qty(<?php echo $item['cart_id'] ?>, <?php echo $item['stock']?>)">Update</button>
 						<button class="text-red-600" onclick="remove_item(<?php echo $item['cart_id'] ?>)">Remove</button>
 					</div>
 				</div>
@@ -128,11 +130,16 @@ if (isset($_POST["type"])) {
 				<h3>Total: $<?php echo $total ?></h3>
 				<p> Product Count: <?php echo count($r) ?> </p>
 			</div>
-			<!-- Modal toggle -->
-			<button class="block text-red-500 bg-red-100 hover:bg-red-400 focus:ring-4 focus:ring-red-200 font-medium rounded-lg text-sm px-5 text-center" type="button" data-modal-toggle="popup-modal">
-				Clear Cart
-			</button>
 
+			<!-- Modal toggle -->
+			<div class="flex space-x-4">
+				<a href="<?php echo get_url('cart/checkout.php'); ?>" class="block text-indigo-500 bg-indigo-100 hover:bg-indigo-400 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm px-5 text-center grid place-items-center">
+					Checkout
+				</a>
+				<button class="block text-red-500 bg-red-100 hover:bg-red-400 focus:ring-4 focus:ring-red-200 font-medium rounded-lg text-sm px-5 text-center" type="button" data-modal-toggle="popup-modal">
+					Clear Cart
+				</button>
+			</div>
 			<!-- Delete Product Modal -->
 			<div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full" id="popup-modal">
 				<div class="relative w-full max-w-md px-4 h-full md:h-auto">
@@ -166,3 +173,6 @@ if (isset($_POST["type"])) {
 </div>
 
 <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+
+<script>
+</script>

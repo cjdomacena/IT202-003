@@ -84,7 +84,7 @@ function get_cart_count()
 }
 
 
-function update_qty(cart_id)
+function update_qty(cart_id, stock)
 {
     // Get cart ID form
     const cartID = cart_id;
@@ -92,7 +92,8 @@ function update_qty(cart_id)
     $.post('./cart/view_cart.php', {
         type: "update_qty",
         quantity: new_qty,
-        cart: cartID
+        cart: cartID,
+        stock: stock
     }, () =>
     {
         location.reload();
@@ -245,7 +246,7 @@ function checkout()
                 type: "checkout",
                 fName: fName,
                 lName: lName,
-                address: address,
+                address: `${address}, ${apt}`,
                 total: total,
                 paymentMethod: paymentMethod,
                 state: state,

@@ -25,11 +25,11 @@ if ($cart) {
 if (!empty($cart)) {
 	$i = 0;
 	while ($i < count($cart)) {
-		$stmt = $db->prepare('SELECT cost FROM Products WHERE id = :product_id');
+		$stmt = $db->prepare('SELECT cost, stock FROM Products WHERE id = :product_id');
 		try {
 			$stmt->execute([":product_id" => $cart[$i]["id"]]);
 			$product = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			array_push($products, $product[0]["cost"]);
+			array_push($products, $product);
 		} catch (PDOException $e) {
 			flash($e, "bg-red-200");
 		}
@@ -138,10 +138,13 @@ if (!empty($cart)) {
 					<div class="flex justify-between">
 						<div>
 							<h1 class="font-semibold"><?php echo $cart[$i]["name"] ?> </h1>
-							<p class="text-sm">Original Price: $<?php echo $products[$i] ?></p>
-
+							<p class="text-sm">Original Price: $<?php echo $products[$i][0]["cost"] ?></p>
+							<p class="text-sm">Available Stock: <?php echo ($products[$i][0]["stock"]) ?></p>
 						</div>
-						<p> Subtotal: $<?php echo $cart[$i]["cost"] ?></p>
+						<div class="flex flex-col justify-evenly">
+							<p> Subtotal: $<?php echo $cart[$i]["cost"] ?></p>
+							<p class="text-sm"> x <?php echo $cart[$i]["quantity"] ?></p>
+						</div>
 					</div>
 
 				<?php endfor; ?>
