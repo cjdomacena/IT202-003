@@ -236,7 +236,7 @@ function checkout()
     const apt = document.getElementById("apt").value
     const state = getState();
     const isValid = validateCheckout(fName, lName, zipcode, payment, total, apt, address);
-    
+
     if (isValid.length <= 0)
     {
         $.ajax({
@@ -246,19 +246,37 @@ function checkout()
                 type: "checkout",
                 fName: fName,
                 lName: lName,
-                address: `${address}, ${apt}`,
+                address: `${ address }, ${ apt }`,
                 total: total,
                 paymentMethod: paymentMethod,
                 state: state,
                 zipcode: zipcode
+            },
+            beforeSend: () => {
+               const loading =  document.getElementById("loading");
+               loading.classList.remove("hidden");
             }
         }).done((jsonRes) =>
         {
+            const loading = document.getElementById("loading");
+            loading.classList.add("hidden");
             document.getElementById("fName").value = ""
             document.getElementById("lName").value = ""
             document.getElementById("address").value = ""
-            const order_id = JSON.parse(jsonRes).order_id;
-            location.assign(`../cart/order_confirmation.php?order_id=${ order_id }`)
+            const message = JSON.parse(jsonRes);
+            if (message.order_id < 0)
+            {
+                for (let i = 0; i < (message.message).length; i++)
+                {
+                    flash(message.message[i], "bg-red-200", 1000, "");
+                }
+                document.getElementById("fName").value = ""
+                document.getElementById("lName").value = ""
+                document.getElementById("address").value = ""
+            } else
+            {
+                location.assign(`../cart/order_confirmation.php?order_id=${ message.order_id }`)
+            }
         })
     } else
     {

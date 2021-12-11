@@ -102,7 +102,7 @@ require_once(__DIR__ . "/../lib/functions.php");
                     </svg>
                     <span class="text-sm font-medium inline-flex items-center p-1 rounded-full mr-2 w-4 h-4 text-center align-middle">
                         <?php if (is_logged_in()) : ?>
-                            <p class="text-center mx-auto" id="cart-count"></p>
+                            <p class="text-center mx-auto" id="cart-count" onload="get_cart_count()"></p>
                         <?php endif; ?>
                     </span>
                 </a>
