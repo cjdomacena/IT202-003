@@ -3,7 +3,6 @@
 	require_once(__DIR__ . "../../../../lib/db.php");
 	session_start();
 
-
 	$products = [];
 	$db = getDB();
 	$sort = se($_GET, "sort", "", false);

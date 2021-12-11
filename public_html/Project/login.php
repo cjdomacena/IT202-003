@@ -75,7 +75,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         } else {
                             $_SESSION["user"]["roles"] = []; //no roles
                         }
-                        die(header("Location: index.php"));
+                
+                        redirect("index.php");
                     } else {
                         //echo "Invalid password";
                         flash("Invalid password", "bg-red-200");

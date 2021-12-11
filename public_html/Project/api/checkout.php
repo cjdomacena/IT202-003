@@ -59,10 +59,11 @@ if (isset($_POST["type"])) {
 
 				$i = 0;
 				while ($i < count($user_cart)) {
-					// cost, quantity, image, description, cart_id, id (product_id)
-					$stmt = $db->prepare("INSERT INTO OrderItems (order_id,product_id, quantity) VALUES(:order_id,:product_id, :quantity)");
+			
+					$stmt = $db->prepare("INSERT INTO OrderItems (order_id,product_id, quantity, cost_on_purchase) VALUES(:order_id,:product_id, :quantity, :cost)");
+					$purchase_cost = (int)$user_cart[$i]["cost"];
 					try {
-						$stmt->execute([":order_id" => $order_id, ":product_id" => $user_cart[$i]['product_id'], ":quantity" => $user_cart[$i]['quantity']]);
+						$stmt->execute([":order_id" => $order_id, ":product_id" => $user_cart[$i]['product_id'], ":quantity" => $user_cart[$i]['quantity'], ":cost" => $purchase_cost]);
 					} catch (PDOException $e) {
 						$hasError++;
 						array_push($errors, $e);
