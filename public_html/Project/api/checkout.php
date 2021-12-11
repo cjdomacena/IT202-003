@@ -77,6 +77,14 @@ if (isset($_POST["type"])) {
 						$hasError++;
 						array_push($errors, $e);
 					}
+
+					$stmt = $db->prepare("DELETE FROM Cart WHERE id = :cart_id");
+					try {
+						$stmt->execute([":cart_id" => $user_cart[$i]["cart_id"]]);
+					} catch (PDOException $e) {
+						$hasError++;
+						array_push($errors, $e);
+					}
 					$i++;
 				}
 				if ($hasError > 0) {
