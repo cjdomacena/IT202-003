@@ -3,7 +3,6 @@
 	require_once(__DIR__ . "../../../../lib/db.php");
 	session_start();
 
-
 	$products = [];
 	$db = getDB();
 	$sort = se($_GET, "sort", "", false);
@@ -86,14 +85,19 @@
  					</p>
  					<p class="text-indigo-800 font-medium text-sm text-center inline-flex items-center">
  						<?php
-
 							$cost = doubleval(se($product, 'cost', "", false));
 							echo "$" . $cost;
 							?>
  					</p>
  				</div>
- 				<div class="mt-2">
+ 				<div class="mt-2 flex justify-between">
  					<span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><?php se($product, 'category') ?></span>
+ 					<?php if (se($product, 'stock', -1, false) <= 0) : ?>
+ 						<span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Out of stock</span>
+ 					<?php endif; ?>
+ 					<?php if (se($product, 'stock', -1, false) > 0) : ?>
+ 						<span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Available stock: <?php se($product, 'stock', -1, true) ?></span>
+ 					<?php endif; ?>
  				</div>
  				<div class="flex pt-4 space-x-4">
  					<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-indigo-800 font-medium text-sm  text-center justify-self-end">

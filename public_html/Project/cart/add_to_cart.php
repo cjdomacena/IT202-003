@@ -1,5 +1,6 @@
 <?php
-require_once("./../../../lib/functions.php");
+require_once(__DIR__ . "../../../../lib/functions.php");
+require_once(__DIR__ . "../../../../lib/db.php");
 session_start();
 if (is_logged_in()) {
 	$r = ["message" => "Something went wrong...", "status" => 400];

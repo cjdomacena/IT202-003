@@ -7,8 +7,10 @@ require(__DIR__ . "/../../partials/nav.php");
 // }
 // 
 $categories = null;
-if (!is_logged_in()) {
-    die(header("Location: index.php"));
+$roles = get_role();
+
+if (!is_logged_in() || !has_role("admin") || !has_role("seller")) {
+   redirect("index.php");
 } else {
     $db = getDB();
     $stmt = $db->prepare("SELECT DISTINCT category FROM Products");
