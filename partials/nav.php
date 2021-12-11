@@ -49,9 +49,9 @@ require_once(__DIR__ . "/../lib/functions.php");
                 <li class="hover:text-indigo-200"><a href="<?php echo get_url('index.php'); ?>">Home</a></li>
                 <li>
                     <?php if (has_role("seller") || has_role("admin")) : ?>
-                        <li class="hover:text-indigo-200"><a href="<?php echo get_url('shop.php'); ?>">My Shop</a>
-                        </li>
-                    <?php endif; ?>
+                <li class="hover:text-indigo-200"><a href="<?php echo get_url('shop.php'); ?>">My Shop</a>
+                </li>
+            <?php endif; ?>
             <li>
                 <button id="dropdownButton" data-dropdown-toggle="dropdown" class="text-white hover:text-indigo-200 font-medium rounded-lg px-2 py-2.5 text-center inline-flex items-center" type="button">Account<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -65,13 +65,20 @@ require_once(__DIR__ . "/../lib/functions.php");
                         <li>
                             <a href="<?php echo get_url('profile.php'); ?>" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Edit Profile</a>
                         </li>
+                        <?php if (has_role('shopper') || has_role('default')) : ?>
+                            <li class="hover:text-indigo-200">
+                                <a class="text-sm hover:bg-gray-100 block px-4 py-2 text-gray-700" href="<?php echo get_url('account/purchase_history.php') ?>">Purchase History</a>
+                            </li>
+                        <?php endif ?>
                         <li>
                             <a href="<?php echo get_url('account/reset_password.php'); ?>" class="text-sm hover:bg-gray-100 text-red-400 block px-4 py-2">Reset Password</a>
                         </li>
+
                     </ul>
                 </div>
             </li>
         <?php endif; ?>
+
         <?php if (!is_logged_in()) : ?>
             <li class="hover:text-indigo-200"><a href="<?php echo get_url('index.php'); ?>">Home</a></li>
             <li>
@@ -92,6 +99,7 @@ require_once(__DIR__ . "/../lib/functions.php");
                 </div>
             </li>
         <?php endif; ?>
+
         <?php if (is_logged_in()) : ?>
             <li class="hover:text-indigo-200 text-red-500"><a href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
         <?php endif; ?>
