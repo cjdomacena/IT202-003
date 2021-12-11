@@ -533,8 +533,8 @@
 
 </details>
   
-<details open>
-<summary><strong>Milestone 2</strong></summary>
+
+Milestone 2
 <table><tr><td>Milestone 2</td></tr><tr><td><table><tr><td>F1 - User with an admin role or shop owner role will be able to add products to inventory</td></tr><tr><td>Links:<p>
 
  [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/api/add_product.php ](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/api/add_product.php )</p><p>
@@ -594,7 +594,6 @@
  [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/helper.js](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/helper.js)</p></td></tr><tr><td>PRs:<p>
 
  [https://github.com/cjdomacena/IT202-003/pull/94](https://github.com/cjdomacena/IT202-003/pull/94)</p></td></tr><tr><td><table><tr><td>F11 - Clear Cart<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988904-dc4abf31-f281-452b-b345-0f199a25e1d0.png"><p>Modal appears to confirm choice to remove all items on cart</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988936-d4415059-9b19-483b-8a5d-3b804bf6dd8b.png"><p>Cart is cleared</td></tr></td></tr></table></td></tr></td></tr></table>
-  </details>
 
 - Milestone 3
 
