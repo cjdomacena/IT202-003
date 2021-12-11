@@ -9,7 +9,7 @@ require(__DIR__ . "/../../partials/nav.php");
 $categories = null;
 $roles = get_role();
 
-if (!is_logged_in() || !has_role($roles)) {
+if (!is_logged_in() || !has_role("admin") || !has_role("seller")) {
    redirect("index.php");
 } else {
     $db = getDB();

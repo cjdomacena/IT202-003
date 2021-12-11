@@ -5,6 +5,10 @@ if (!is_logged_in()) {
 }
 
 if (isset($_GET["order_id"])) {
+	$isHistory = false;
+	if (isset($_GET["type"])) {
+		$isHistory = true;
+	}
 	$order_id = se($_GET, "order_id", "", false);
 	$db = getDB();
 	$orders;
@@ -24,8 +28,7 @@ if (isset($_GET["order_id"])) {
 	} catch (PDOException $e) {
 		flash($e, "bg-red-200");
 	}
-}
-else {
+} else {
 	redirect(get_url('index.php'));
 }
 
@@ -35,8 +38,14 @@ else {
 
 	<div>
 		<div class="w-full p-4 bg-indigo-200 rounded">
-			<h1>Order Confirmation #<?php echo $order_id ?></h1>
-			<h2 class="text-lg font-semibold text-gray-900">Thank you for your purchase!</h2>
+
+			<?php if ($isHistory) : ?>
+				<h1>Purchase History</h1>
+				<h2>Order #<?php echo $order_id ?></h2>
+			<?php else: ?>
+				<h1>Order Confirmation #<?php echo $order_id ?></h1>
+				<h2 class="text-lg font-semibold text-gray-900">Thank you for your purchase!</h2>
+			<?php endif ?>
 		</div>
 		<div class="my-2">
 			<div class="space-y-2 mt-4">
@@ -75,7 +84,7 @@ else {
 
 	</div>
 	<div class="h-auto pt-8">
-		<a href="<?php echo get_url('index.php')?>" class="bg-indigo-200 rounded px-6 py-2 text-indigo-900 hover:bg-indigo-300">Go to home</a>
+		<a href="<?php echo get_url('index.php') ?>" class="bg-indigo-200 rounded px-6 py-2 text-indigo-900 hover:bg-indigo-300">Go to home</a>
 	</div>
 
 </div>
