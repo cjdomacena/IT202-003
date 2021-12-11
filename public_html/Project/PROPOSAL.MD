@@ -595,7 +595,6 @@ Milestone 2
 
  [https://github.com/cjdomacena/IT202-003/pull/94](https://github.com/cjdomacena/IT202-003/pull/94)</p></td></tr><tr><td><table><tr><td>F11 - Clear Cart<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988904-dc4abf31-f281-452b-b345-0f199a25e1d0.png"><p>Modal appears to confirm choice to remove all items on cart</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988936-d4415059-9b19-483b-8a5d-3b804bf6dd8b.png"><p>Cart is cleared</td></tr></td></tr></table></td></tr></td></tr></table>
 
-- Milestone 3
 
 <table>
 <tr><td>Milestone 3</td></tr><tr><td>
@@ -658,7 +657,7 @@ Milestone 2
 <table>
 <tr><td>F1 - Create an OrderItems table (id, order_id, product_id, quantity, unit_price)</td></tr>
 <tr><td>Status: 
-<img width="100" height="20" src="https://via.placeholder.com/400x120/808080/ffffff?text=pending"></td></tr>
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
 
 <tr><td>
 <img width="768px" src="https://user-images.githubusercontent.com/67976753/145665731-3440929d-b40f-4731-aa8b-702be446ddfc.png">
@@ -674,7 +673,7 @@ Milestone 2
 <table>
 <tr><td>F1 - Checkout Form / User will be asked for their Address for shipping purposes</td></tr>
 <tr><td>Status: 
-<img width="100" height="20" src="https://via.placeholder.com/400x120/808080/ffffff?text=pending"></td></tr>
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
 
 <tr><td>
 <img width="768px" src="https://user-images.githubusercontent.com/67976753/145665759-55c72c50-4434-40f6-9a3b-346d611618c2.png">
@@ -690,7 +689,7 @@ Milestone 2
 <table>
 <tr><td>F1 - Order Process</td></tr>
 <tr><td>Status: 
-<img width="100" height="20" src="https://via.placeholder.com/400x120/808080/ffffff?text=pending"></td></tr>
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
 
 <tr><td>
 <img width="768px" src="https://user-images.githubusercontent.com/67976753/145665792-ab08b53e-585d-46fb-8a00-dd98589e9479.png">
@@ -701,6 +700,22 @@ Milestone 2
 <tr><td>
 <img width="768px" src="https://user-images.githubusercontent.com/67976753/145665842-b1ef156e-f9cd-4ec7-ae9a-0e8f3a6ea29c.png">
 <p>Redirects user to a confirmation page</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Clear out the user’s cart after successful order</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145666292-637c1c8b-83aa-4d39-9a78-1b9ea7af3f4a.png">
+<p>Upon successful order, cart will be cleared. </p>
 </td></tr>
 
 </td>
