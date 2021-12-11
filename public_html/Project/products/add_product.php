@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . "../../../../partials/nav.php");
 if (!is_logged_in() || has_role("default")) {
-	die(header("Location: " . get_url("index.php")));
+	redirect(get_url('index.php'));
 }
 ?>
 <div class="container mx-auto my-8" id="form-container">
