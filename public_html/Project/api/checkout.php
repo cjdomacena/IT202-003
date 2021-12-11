@@ -29,8 +29,8 @@ if (isset($_POST["type"])) {
 				$stmt->execute([":product_id" => $user_cart[$i]["product_id"]]);
 				$product_qty = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				if ((int)$user_cart[$i]["quantity"] > (int)$product_qty[0]["stock"]) {
-					$holdMessage = "Available stock for ". $user_cart[$i]["name"] .": " . (int)$product_qty[0]["stock"] . ", Cart Qty: " . $user_cart[$i]["quantity"] ;
-					array_push($message, $holdMessage) ;
+					$holdMessage = "Available stock for " . $user_cart[$i]["name"] . ": " . (int)$product_qty[0]["stock"] . ", Cart Qty: " . $user_cart[$i]["quantity"];
+					array_push($message, $holdMessage);
 				}
 				$total += $user_cart[$i]["cost"] * $user_cart[$i]["quantity"];
 			} catch (PDOException $e) {
@@ -58,11 +58,21 @@ if (isset($_POST["type"])) {
 				$errors = [];
 
 				$i = 0;
-				while ($i < count($r)) {
+				while ($i < count($user_cart)) {
 					// cost, quantity, image, description, cart_id, id (product_id)
 					$stmt = $db->prepare("INSERT INTO OrderItems (order_id,product_id, quantity) VALUES(:order_id,:product_id, :quantity)");
 					try {
-						$stmt->execute([":order_id" => $order_id, ":product_id" => $r[$i]['id'], ":quantity" => $r[$i]['quantity']]);
+						$stmt->execute([":order_id" => $order_id, ":product_id" => $user_cart[$i]['product_id'], ":quantity" => $user_cart[$i]['quantity']]);
+					} catch (PDOException $e) {
+						$hasError++;
+						array_push($errors, $e);
+					}
+
+					$stmt = $db->prepare("UPDATE Products SET stock = stock - :cart_qty WHERE id = :product_id");
+					try {
+						$stmt->bindValue(":cart_qty", $user_cart[$i]['quantity'], PDO::PARAM_INT);
+						$stmt->bindValue(":product_id", $user_cart[$i]['product_id'], PDO::PARAM_INT);
+						$stmt->execute();
 					} catch (PDOException $e) {
 						$hasError++;
 						array_push($errors, $e);
