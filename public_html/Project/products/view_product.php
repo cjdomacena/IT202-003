@@ -109,7 +109,7 @@ $current_page = se($_GET, 'page', 1, false);
 					<?php if (!is_logged_in()) : ?>
 						<button class="py-2 px-4 rounded bg-indigo-400" disabled>Must be logged in</button>
 					<?php else : ?>
-						<button class="py-2 px-4 hover:bg-indigo-300 rounded bg-indigo-400" onclick="submitReview()">Submit</button>
+						<button class="py-2 px-4 hover:bg-indigo-300 rounded bg-indigo-400" onclick=submitReview(event)>Submit</button>
 					<?php endif ?>
 				</div>
 			</div>
@@ -117,15 +117,17 @@ $current_page = se($_GET, 'page', 1, false);
 
 		<div class="w-4/5">
 			<div class="flex items-center justify-between">
-				<h3 class="my-4">Reviews:</h3>
+				<h3 class="my-4">Reviews: Average rating: <?php se($product['avg_rating']) ?></h3>
 				<div class="space-x-4">
 					<select class="rounded" id="direction" onchange="showReviews()">
-						<option value="asc" default>Ascending</option>
-						<option value="desc">Descending</option>
+						<option value="desc" default>Descending</option>
+						<option value="asc">Ascending</option>
+
 					</select>
 					<select class="rounded" id="type" onchange="showReviews()">
-						<option value="date" default>Date</option>
-						<option value="ratings">Ratings</option>
+						<option value="ratings" default>Ratings</option>
+						<option value="date">Date</option>
+
 					</select>
 					<button class="text-sm hover:bg-gray-200 text-gray-900 px-4 py-2 bg-gray-300" onclick="clearFilter()">Clear Filters</button>
 				</div>
@@ -143,9 +145,16 @@ $current_page = se($_GET, 'page', 1, false);
 				</div>
 			</div>
 			<input id="offset" value="<?php se($current_page); ?>" class="hidden" />
-		
-				<?php include __DIR__ . '/../utils/pagination.php' ?>
 
+			<?php if ($total_pages > 0) : ?>
+				<?php include __DIR__ . '/../utils/pagination.php' ?>
+			<?php elseif ($total_pages == 0) : ?>
+				<div class="p-4 bg-gray-100 rounded my-4">
+					<div class="space-y-2 ">
+						<h4 class="text-gray-700">No reviews for this product</h4>
+					</div>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
@@ -171,7 +180,8 @@ $current_page = se($_GET, 'page', 1, false);
 		})
 	}
 
-	const submitReview = () => {
+	const submitReview = (e) => {
+		e.preventDefault();
 		const comment = document.getElementById('comment').value;
 		const product_id = document.getElementById('product_id').value;
 		let errors = 0;
@@ -196,7 +206,7 @@ $current_page = se($_GET, 'page', 1, false);
 				beforeSend: () => {
 					const loading = document.getElementById("loading");
 					loading.classList.remove("hidden");
-				}
+				},
 			}).done((jsonres, x, y) => {
 				const loading = document.getElementById("loading");
 				loading.classList.add("hidden");
@@ -238,7 +248,7 @@ $current_page = se($_GET, 'page', 1, false);
 			success: (data) => {
 				const reviewLoader = document.getElementById('review-loading')
 				reviewLoader.classList.add('hidden');
-				$('#reviews').html(data)
+				$('#reviews').html(data);
 			}
 		})
 	}

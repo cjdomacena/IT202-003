@@ -8,8 +8,26 @@ $db = getDB();
 
 $offset = 5;
 $limit = 5;
+
+
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $product_id = se($_GET, 'product_id', -1, false);
+
+$stmt = $db->prepare('SELECT * FROM Ratings WHERE product_id = :product_id');
+try{
+	$stmt->execute([':product_id' => $product_id]);
+	$s = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$row_count = $stmt->rowCount();
+}catch(PDOException $e){
+	flash($e, 'bg-red-200');
+}
+
+if($row_count >= 5){
+	$limit = 5;
+}else{
+	$limit = $row_count;
+}
+
 $r = [];
 $params = [];
 $q = "SELECT Ratings.comment, Ratings.rating, Ratings.created, Users.username FROM Ratings LEFT JOIN Users ON Ratings.user_id WHERE Ratings.product_id = :product_id ";
@@ -47,7 +65,9 @@ if (isset($_GET['direction'])) {
 if (isset($_GET['page'])) {
 	$offset = se($_GET, 'page', 1, false) * 5;
 }
-$q .= " LIMIT :offset, :limit";
+
+	$q .= " LIMIT :offset, :limit";
+
 
 $stmt = $db->prepare($q);
 
