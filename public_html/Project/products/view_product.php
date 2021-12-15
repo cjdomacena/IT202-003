@@ -18,7 +18,15 @@ if (isset($_GET["id"])) {
 }
 // id, user_id, name, description, stock, cost, image
 ?>
-
+<div class="bg-indigo-900 w-screen h-screen fixed top-0 left-0 grid place-items-center hidden" id="loading">
+	<div class="flex text-white">
+		<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+			<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+			<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+		</svg>
+		Processing...
+	</div>
+</div>
 <div class="container mx-auto mt-8">
 	<ul class="text-sm font-semibold my-2 flex space-x-2">
 		<li class="text-gray-600"><a href="<?php echo get_url('index.php') ?>">Products</a></li>
@@ -52,7 +60,7 @@ if (isset($_GET["id"])) {
 			<button class="text-indigo-800 font-medium text-sm py-2 text-center inline-flex items-center mt-4" id="<?php echo $product["id"]; ?>" onclick="product_page_add_to_cart(this)">
 				Add to Cart
 			</button>
-
+			<input value="<?php se($id) ?>" id="product_id" class="hidden" />
 		</div>
 	</div>
 	<hr class="mt-24" />
@@ -128,6 +136,7 @@ if (isset($_GET["id"])) {
 
 	const submitReview = () => {
 		const comment = document.getElementById('comment').value;
+		const product_id = document.getElementById('product_id').value;
 		let errors = 0;
 		if (comment.length === 0) {
 			window.scrollTo(0, 0);
@@ -145,11 +154,25 @@ if (isset($_GET["id"])) {
 				data: {
 					comment: comment,
 					rate: rate,
-					
+					product_id: product_id
+				},
+				beforeSend: () => {
+					const loading = document.getElementById("loading");
+					loading.classList.remove("hidden");
 				}
+			}).done((jsonres, x, y) => {
+				const loading = document.getElementById("loading");
+				loading.classList.add("hidden");
+				let res = JSON.parse(y.responseText);
+				if (res.status === 200) {
+					flash(res.message, "bg-green-200", 1000, 'fade');
+				} else {
+					flash(res.message, "bg-red-200", 1000, 'fade');
+				}
+				document.getElementById('comment').value = ""
+				reset();
 			})
 		}
-
 	}
 
 	$(document).ready(
