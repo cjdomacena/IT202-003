@@ -15,8 +15,17 @@ if (isset($_GET["id"])) {
 			flash("Something went wrong...", "bg-red-200");
 		}
 	}
+	$stmt = $db->prepare('SELECT * FROM Ratings WHERE product_id = :id');
+	try {
+		$stmt->execute([':id' => $id]);
+		$total_pages = ceil($stmt->rowCount() / 5);
+	} catch (PDOException $e) {
+		flash('Something went wrong...' . $e, 'bg-red-200');
+	}
+} else {
+	redirect("index.php");
 }
-// id, user_id, name, description, stock, cost, image
+$current_page = se($_GET, 'page', 1, false);
 ?>
 <div class="bg-indigo-900 w-screen h-screen fixed top-0 left-0 grid place-items-center hidden" id="loading">
 	<div class="flex text-white">
@@ -34,7 +43,6 @@ if (isset($_GET["id"])) {
 		<li> <?php echo $product["name"] ?> </li>
 	</ul>
 	<hr />
-
 </div>
 
 <div class="container mx-auto my-24 px-4 h-auto">
@@ -64,7 +72,7 @@ if (isset($_GET["id"])) {
 		</div>
 	</div>
 	<hr class="mt-24" />
-	<div class="flex mt-4 space-x-4">
+	<div class="flex mt-4 space-x-12">
 		<div class="w-96">
 			<div class="flex flex-col space-y-2 mt-4 w-full" id='ratings'>
 				<div class="flex items-center justify-between">
@@ -106,7 +114,37 @@ if (isset($_GET["id"])) {
 				</div>
 			</div>
 		</div>
-		<div id="reviews" class="flex-auto">
+
+		<div class="w-4/5">
+			<div class="flex items-center justify-between">
+				<h3 class="my-4">Reviews:</h3>
+				<div class="space-x-4">
+					<select class="rounded" id="direction" onchange="showReviews()">
+						<option value="asc" default>Ascending</option>
+						<option value="desc">Descending</option>
+					</select>
+					<select class="rounded" id="type" onchange="showReviews()">
+						<option value="date" default>Date</option>
+						<option value="ratings">Ratings</option>
+					</select>
+					<button class="text-sm hover:bg-gray-200 text-gray-900 px-4 py-2 bg-gray-300" onclick="clearFilter()">Clear Filters</button>
+				</div>
+			</div>
+			<div id="reviews" class="flex-auto">
+
+			</div>
+			<div class="p-4 bg-gray-100 rounded hidden" id="review-loading">
+				<div class="animate-pulse space-y-2">
+					<div class="h-2 bg-gray-300 rounded w-24"></div>
+					<div class="h-2 bg-gray-300 rounded w-52"></div>
+					<div class="h-2 bg-gray-300 rounded w-96"></div>
+					<div class="h-2 bg-gray-300 rounded w-96"></div>
+					<div class="h-2 bg-gray-300 rounded w-96"></div>
+				</div>
+			</div>
+			<input id="offset" value="<?php se($current_page); ?>" class="hidden" />
+		
+				<?php include __DIR__ . '/../utils/pagination.php' ?>
 
 		</div>
 	</div>
@@ -120,7 +158,6 @@ if (isset($_GET["id"])) {
 			const index = rating.dataset.index;
 			rate = rating.dataset.index;
 			if (e.currentTarget.contains(rating)) {
-
 				for (let i = 0; i < index; i++) {
 					ratings[i].classList.add('fill-current')
 				}
@@ -171,10 +208,44 @@ if (isset($_GET["id"])) {
 				}
 				document.getElementById('comment').value = ""
 				reset();
+				showReviews();
 			})
 		}
 	}
+	const clearFilter = () => {
+		document.getElementById('type').value = 'date';
+		document.getElementById('direction').value = 'asc';
+		showReviews();
+	}
+	const showReviews = () => {
+		const product_id = document.getElementById('product_id').value;
+		const offset = document.getElementById('offset').value;
+		const type = document.getElementById('type').value;
+		const direction = document.getElementById('direction').value;
+		$.ajax({
+			type: 'GET',
+			url: './../api/get_comments.php',
+			data: {
+				product_id: product_id,
+				page: offset,
+				type: type,
+				direction: direction
+			},
+			beforeSend: () => {
+				const reviewLoader = document.getElementById('review-loading')
+				reviewLoader.classList.remove('hidden');
+			},
+			success: (data) => {
+				const reviewLoader = document.getElementById('review-loading')
+				reviewLoader.classList.add('hidden');
+				$('#reviews').html(data)
+			}
+		})
+	}
 
+	$(document).ready(
+		showReviews()
+	)
 	$(document).ready(
 		product_page_get_cart_count()
 	)
