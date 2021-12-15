@@ -65,9 +65,14 @@ require_once(__DIR__ . "/../lib/functions.php");
                         <li>
                             <a href="<?php echo get_url('profile.php'); ?>" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Edit Profile</a>
                         </li>
-                        <?php if (has_role('shopper') || has_role('default')) : ?>
+                        <?php if (has_role('shopper')) : ?>
                             <li class="hover:text-indigo-200">
                                 <a class="text-sm hover:bg-gray-100 block px-4 py-2 text-gray-700" href="<?php echo get_url('account/purchase_history.php') ?>">Purchase History</a>
+                            </li>
+                        <?php endif ?>
+                        <?php if (has_role('seller') || has_role('admin')) : ?>
+                            <li class="hover:text-indigo-200">
+                                <a class="text-sm hover:bg-gray-100 block px-4 py-2 text-gray-700" href="<?php echo get_url('admin/purchase_history.php') ?>">Order History</a>
                             </li>
                         <?php endif ?>
                         <li>
@@ -102,6 +107,8 @@ require_once(__DIR__ . "/../lib/functions.php");
 
         <?php if (is_logged_in()) : ?>
             <li class="hover:text-indigo-200 text-red-500"><a href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
+            <li> | </li>
+            <li class="capitalize">Role: <?php echo get_role()[0]["name"] == 'default' ? get_role()[1]["name"] : get_role()[0]["name"] ?></li>
         <?php endif; ?>
         <li class="border-l-2 pl-3 border-gray-900  border-opacity-25 hover:text-gray-400 text-white">
             <a href="<?php echo get_url('cart.php'); ?>" class="flex">

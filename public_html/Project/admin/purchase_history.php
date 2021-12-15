@@ -8,13 +8,6 @@ if (has_role('seller') || has_role('admin')) {
 	$uid = get_user_id();
 	$orders = null;
 
-	// $stmt = $db->prepare('SELECT * FROM Orders WHERE user_id = :uid ORDER BY created DESC LIMIT 10');
-	// try {
-	// 	$stmt->execute([":uid" => $uid]);
-	// 	$orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	// } catch (PDOException $e) {
-	// 	flash($e, "bg-red-200");
-	// }
 	$stmt = $db->prepare('SELECT * FROM Products, OrderItems WHERE Products.id = OrderItems.product_id AND Products.user_id = :uid LIMIT 10');
 
 	try {
