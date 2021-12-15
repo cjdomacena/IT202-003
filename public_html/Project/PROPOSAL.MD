@@ -533,8 +533,8 @@
 
 </details>
   
-<details open>
-<summary><strong>Milestone 2</strong></summary>
+
+Milestone 2
 <table><tr><td>Milestone 2</td></tr><tr><td><table><tr><td>F1 - User with an admin role or shop owner role will be able to add products to inventory</td></tr><tr><td>Links:<p>
 
  [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/api/add_product.php ](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/api/add_product.php )</p><p>
@@ -594,48 +594,223 @@
  [https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/helper.js](https://github.com/cjdomacena/IT202-003/blob/development/public_html/Project/helper.js)</p></td></tr><tr><td>PRs:<p>
 
  [https://github.com/cjdomacena/IT202-003/pull/94](https://github.com/cjdomacena/IT202-003/pull/94)</p></td></tr><tr><td><table><tr><td>F11 - Clear Cart<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988904-dc4abf31-f281-452b-b345-0f199a25e1d0.png"><p>Modal appears to confirm choice to remove all items on cart</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/67976753/143988936-d4415059-9b19-483b-8a5d-3b804bf6dd8b.png"><p>Cart is cleared</td></tr></td></tr></table></td></tr></td></tr></table>
-  </details>
 
-- Milestone 3
-- [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Order Confirmation Page
 
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
+<table>
+<tr><td>Milestone 3</td></tr><tr><td>
+<table>
+<tr><td>F1 - User will be able to purchase items in their Cart w/ (Order process & Checkout Form) (2021-12-02)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
 
-- [ ] \(mm/dd/yyyy of completion) User will be able to see their Purchase History
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/cart/checkout.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/cart/checkout.php)</p><p>
 
-  - List of Evidence of Feature Completion
-  - Status: Pending (Completed, Partially working, Incomplete, Pending)
-  - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-  - Pull Requests
-    - PR link #1 (repeat as necessary)
-  - Screenshots
-    - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-      - Screenshot #1 description explaining what you're trying to show
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/api/checkout.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/api/checkout.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/112](https://github.com/cjdomacena/IT202-003/pull/112)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/113](https://github.com/cjdomacena/IT202-003/pull/113)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/114](https://github.com/cjdomacena/IT202-003/pull/114)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/112](https://github.com/cjdomacena/IT202-003/pull/112)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/115](https://github.com/cjdomacena/IT202-003/pull/115)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/119](https://github.com/cjdomacena/IT202-003/pull/119)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/120](https://github.com/cjdomacena/IT202-003/pull/120)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F1 - Create an Orders table (id, user_id, created, total_price, address, payment_method)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145665680-4d0bf6ae-684d-47cf-85e9-5d0baeae3551.png">
+<p>Orders table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will not be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145665714-84799489-7b15-4f83-af82-f02e7ed7d036.png">
+<p>Only asks for input for payment.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Create an OrderItems table (id, order_id, product_id, quantity, unit_price)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145665731-3440929d-b40f-4731-aa8b-702be446ddfc.png">
+<p>Order Items table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Checkout Form / User will be asked for their Address for shipping purposes</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145665759-55c72c50-4434-40f6-9a3b-346d611618c2.png">
+<p></p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Order Process</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145665792-ab08b53e-585d-46fb-8a00-dd98589e9479.png">
+<p>Upon checkout user will see their cart summary with the original price, stock available. 
+</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145665842-b1ef156e-f9cd-4ec7-ae9a-0e8f3a6ea29c.png">
+<p>Redirects user to a confirmation page</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Clear out the user’s cart after successful order</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145666292-637c1c8b-83aa-4d39-9a78-1b9ea7af3f4a.png">
+<p>Upon successful order, cart will be cleared. </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - Order Confirmation Page (2021-12-10)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://cd395-prod.herokuapp.com/Project/cart/order_confirmation.php?order_id=4](https://cd395-prod.herokuapp.com/Project/cart/order_confirmation.php?order_id=4)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/121](https://github.com/cjdomacena/IT202-003/pull/121)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F2 - Show the entire order details from the Order and OrderItems table (similar to cart) and Displays Thank you message</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145665842-b1ef156e-f9cd-4ec7-ae9a-0e8f3a6ea29c.png">
+<p>Displays order upon successful checkout.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User will be able to see their Purchase History (2021-12-11)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://cd395-prod.herokuapp.com/Project/account/purchase_history.php](https://cd395-prod.herokuapp.com/Project/account/purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/122](https://github.com/cjdomacena/IT202-003/pull/122)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F3 - Limit to 10 most recent Purchase History</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145666011-d7a5a756-787d-4f3a-9789-37ee7e2f69d7.png">
+<p>User must have a 'shopper' or 'default' role to view purchase history. 
+you can use uname: shopper, pw: @Shopper1</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/145666050-f99d7dd5-efbf-45e1-b12b-853c05405f08.png">
+<p>Similar to the confirmation page. Displays order related to the clicked page.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store Owner will be able to see all Purchase History  ()</td></tr>
+<tr><td>Status: pending</td></tr>
+<tr><td>Links:</td></tr>
+<tr><td>PRs:</td></tr>
+<tr><td>
+<table>
+<tr><td>F4 - item 1</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/808080/ffffff?text=pending"></td></tr>
+
+<tr><td>
+<img width="768px" src="">
+<p></p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
 
 - Milestone 4
 <table><tr><td>milestone 4</td></tr><tr><td><table><tr><td>F1 - User can set their profile to be public or private (will need another column in Users table) ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F1 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F2 - User will be able to rate a product they purchased ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F2 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F3 - User’s Purchase History Changes ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F3 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F4 - Store Owner Purchase History Changes ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F4 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F5 - Add pagination to Shop Page (and any other product lists not yet mentioned) ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F5 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F6 - Store Owner will be able to see all products out of stock ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F6 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F7 - User can sort products by average rating on the Shop Page ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F7 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr></td></tr></table>
