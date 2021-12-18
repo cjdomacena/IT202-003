@@ -2,12 +2,21 @@
 require(__DIR__ . "/../../partials/nav.php");
 
 $categories = null;
-
 $db = getDB();
 $stmt = $db->prepare("SELECT DISTINCT category FROM Products");
 $stmt->execute();
 $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$stmt = $db->prepare('SELECT COUNT(*) as total FROM Products WHERE visibility = 1 AND stock > 0');
+$stmt->execute();
+$r = $stmt->fetch();
+$total_pages = ceil($r['total'] / 5);
+
+if (!isset($_GET['page'])) {
+	$current_page = se($_GET, 'page', 1, false);
+} else {
+	$current_page = se($_GET, 'page', 1, false);
+}
 ?>
 
 
@@ -45,7 +54,8 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<div id="userItems">
 
 	</div>
-	<?php require('./utils/pagination.php')?>
+	<input value="<?php se($current_page) ?>" class="hidden" id="page" />
+	<?php require('./utils/pagination.php') ?>
 </div>
 
 <?php
@@ -54,12 +64,14 @@ require(__DIR__ . "/../../partials/flash.php");
 
 <script>
 	get_cart_count();
+	const page = document.getElementById('page').value;
 	$(document).ready(
 		$.ajax({
 			type: "GET",
 			url: "./products/all_products.php",
 			data: {
 				sort: "all_products",
+				page: page
 			},
 			success: (data) => {
 				$("#userItems").html(data);
