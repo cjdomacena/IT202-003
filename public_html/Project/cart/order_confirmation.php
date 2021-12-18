@@ -42,7 +42,7 @@ if (isset($_GET["order_id"])) {
 			<?php if ($isHistory) : ?>
 				<h1>Purchase History</h1>
 				<h2>Order #<?php echo $order_id ?></h2>
-			<?php else: ?>
+			<?php else : ?>
 				<h1>Order Confirmation #<?php echo $order_id ?></h1>
 				<h2 class="text-lg font-semibold text-gray-900">Thank you for your purchase!</h2>
 			<?php endif ?>
@@ -93,3 +93,5 @@ if (isset($_GET["order_id"])) {
 <?php
 require_once(__DIR__ . "../../../../partials/flash.php");
 ?>
+
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
