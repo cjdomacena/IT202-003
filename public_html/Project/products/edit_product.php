@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "../../../../partials/nav.php");
-if (!is_logged_in() || has_role("default")) {
+if (!is_logged_in() || !has_role('seller')) {
 	redirect(get_url('index.php'));
 }
 if (isset($_GET["id"])) {
@@ -41,9 +41,7 @@ if (isset($_GET["id"])) {
 			<!-- Product Description -->
 			<div>
 				<label for="product_description" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-400">Description</label>
-				<textarea id="product_description" name="product_description" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Product Description..." required>
-				<?php se($product, "description", "", true) ?>
-				</textarea>
+				<textarea id="product_description" name="product_description" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Product Description..." required><?php se($product, "description", "", true) ?></textarea>
 			</div>
 			<!-- Product Cost  -->
 			<div>
@@ -127,7 +125,7 @@ if (isset($_GET["id"])) {
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 							</svg>
 							<h3 class="text-lg font-normal text-gray-500 mb-5 dark:text-gray-400">Are you sure you want to remove this Item?</h3>
-							<button data-modal-toggle="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" onclick="delete_product('./../api/delete_product.php')">
+							<button data-modal-toggle="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" onclick="deleteProduct(this)" value="<?php echo $id ?>">
 								Yes, I'm sure
 							</button>
 							<button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600">No, cancel</button>
@@ -138,7 +136,20 @@ if (isset($_GET["id"])) {
 		</div>
 	</div>
 </div>
-
+<script>
+	function deleteProduct(e) {
+		$.ajax({
+			type: 'POST',
+			url: '../api/delete_product.php',
+			data: {
+				product_id: e.value
+			},
+		}).done(() => {
+			location.replace('../shop.php')
+		})
+	}
+</script>
 <?php
 require_once(__DIR__ . "../../../../partials/flash.php");
 ?>
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>

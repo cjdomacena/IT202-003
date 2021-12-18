@@ -77,7 +77,7 @@ try {
 } catch (PDOException $e) {
 	flash($e, 'bg-red-200');
 }
-;
+
 ?>
 
 <?php if ($r) : ?>

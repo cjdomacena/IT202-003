@@ -2,7 +2,9 @@
 	require_once(__DIR__ . "../../../../lib/functions.php");
 	require_once(__DIR__ . "../../../../lib/db.php");
 	session_start();
-
+	if (!is_logged_in()) {
+		redirect(get_url('index.php'));
+	}
 	$products = [];
 	$db = getDB();
 	$sort = se($_GET, "sort", "", false);
@@ -13,19 +15,37 @@
 	$q = "SELECT * FROM Products WHERE user_id =:uid AND 1 = 1";
 	$params[":uid"] = get_user_id();
 
-	if ($sort == "filter_by_name") {
-		$sort = "name";
-		$dir = "ASC";
-	} else if ($sort == "filter_by_price_desc") {
-		$sort = "cost";
-		$dir = "DESC";
-	} else if ($sort == "filter_by_price_asc") {
-		$sort = "cost";
-		$dir = "ASC";
-	} else {
-		$sort = "name";
-		$dir = "ASC";
-	};
+	if ($sort == 'filter_by_stock') {
+		$q .= ' AND stock = 0';
+	}
+
+
+	switch ($sort) {
+		case "filter_by_name":
+			$sort = "name";
+			$dir = "ASC";
+			break;
+		case "filter_by_price_desc":
+			$sort = "cost";
+			$dir = "DESC";
+			break;
+		case "filter_by_price_asc":
+			$sort = "cost";
+			$dir = "ASC";
+			break;
+		case "filter_by_rating_asc":
+			$sort = "avg_rating";
+			$dir = "ASC";
+			break;
+		case "filter_by_rating_desc":
+			$sort = "avg_rating";
+			$dir = "DESC";
+			break;
+		default:
+			$sort = "avg_rating";
+			$dir = "DESC";
+			break;
+	}
 
 	if ($category == "filter_by_accessories") {
 		$category = "Accessories";
@@ -76,40 +96,42 @@
 	?>
 
 
- <div class="grid xl:grid-cols-4 lg:grid-cols:4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mx-auto gap-4 m-4 w-full" id="card-container">
+ <div class="grid xl:grid-cols-4 lg:grid-cols:4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mx-auto gap-4 m-4 container" id="card-container">
  	<?php foreach ($products as $index => $product) : ?>
- 		<div class="bg-white shadow-md border border-gray-200 rounded-lg transform w-full">
- 			<a href="<?php echo get_url('./products/edit_product.php') ?>?id=<?php echo se($product, 'id'); ?>">
- 				<img class="rounded-t-lg object-cover h-64 w-full" src="<?php echo $product['image'] ?>" alt="" />
- 			</a>
- 			<div class="p-5 flex flex-col space-y-4">
- 				<a href="<?php echo get_url('./products/edit_product.php') ?>?id=<?php echo se($product, 'id'); ?>">
- 					<h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2"><?php echo $product['name'] ?></h5>
- 				</a>
+ 		<div class="bg-white shadow-md border border-gray-200 rounded-lg h-auto min-h-56 flex flex-col ">
+ 			<img class="rounded-t-lg object-cover max-h-64 w-full justify-self-start" src="<?php echo $product['image'] ?>" alt="" />
+ 			<div class="p-5 flex flex-col space-y-4  h-auto max-w-md">
+ 				<div>
+ 					<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id'); ?>">
+ 						<h5 class="text-gray-900 font-bold text-2xl tracking-tight "><?php echo $product['name'] ?></h5>
+ 					</a>
+ 					<?php if (se($product, 'avg_rating', 0, false) == 0) : ?>
+ 						<span class="text-xs text-gray-500">Product Rating: Not available</span>
+ 					<?php else : ?>
+ 						<span class="text-xs">Product Rating: <?php se($product, 'avg_rating') ?></span>
+ 					<?php endif ?>
+
+ 				</div>
  				<div>
  					<p class="font-normal text-gray-700 mb-3 truncate "><?php echo $product['description'] ?>
  					</p>
  					<p class="text-indigo-800 font-medium text-sm text-center inline-flex items-center">
  						<?php
+
 							$cost = doubleval(se($product, 'cost', "", false));
 							echo "$" . $cost;
 							?>
  					</p>
  				</div>
- 				<div class="mt-2 flex justify-between">
+
+ 				<div class="mt-2">
  					<span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><?php se($product, 'category') ?></span>
- 					<?php if (se($product, 'stock', -1, false) <= 0) : ?>
- 						<span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Out of stock</span>
- 					<?php endif; ?>
- 					<?php if (se($product, 'stock', -1, false) > 0) : ?>
- 						<span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Available stock: <?php se($product, 'stock', -1, true) ?></span>
- 					<?php endif; ?>
  				</div>
- 				<div class="flex pt-4 space-x-4">
+ 				<div class="flex space-x-4">
  					<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-indigo-800 font-medium text-sm  text-center justify-self-end">
  						View
  					</a>
- 					<a href="<?php echo get_url('./products/edit_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-yellow-600 font-medium text-sm text-center justify-self-end">
+ 					<a href="<?php echo get_url('./products/edit_product.php') ?>?id=<?php se($product, 'id', -1, true); ?>" class="text-yellow-600 font-medium text-sm text-center justify-self-end">
  						Edit
  					</a>
  					<div>
@@ -135,7 +157,7 @@
  											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
  										</svg>
  										<h3 class="text-lg font-normal text-gray-500 mb-5 dark:text-gray-400">Are you sure you want to remove this Item?</h3>
- 										<button data-modal-toggle="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" onclick="delete_product('./../api/delete_product.php')">
+ 										<button data-modal-toggle="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" onclick="deleteProduct(this)" value="<?php se($product, 'id') ?>">
  											Yes, I'm sure
  										</button>
  										<button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600">No, cancel</button>
@@ -146,10 +168,25 @@
 
  					</div>
  				</div>
-
  			</div>
-
  		</div>
-
  	<?php endforeach ?>
  </div>
+ <script>
+ 	function deleteProduct(e) {
+ 		$.ajax({
+ 			type: 'POST',
+ 			url: 'api/delete_product.php',
+ 			data: {
+ 				product_id: e.value
+ 			},
+ 		}).done(() => {
+ 			location.replace('shop.php')
+ 		})
+ 	}
+ </script>
+
+ <?php
+	require_once(__DIR__ . "../../../../partials/flash.php");
+	?>
+ <script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>

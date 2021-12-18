@@ -203,26 +203,6 @@ function upload_image(e)
 }
 
 
-function delete_product(path, id = "")
-{
-    let product_id = -1;
-    if (id)
-    {
-        product_id = id;
-    } else
-    {
-        product_id = document.getElementById("product_id").value;
-    }
-
-
-
-    $.post(`${ path }`, {
-        product_id: product_id
-    }, (data, status) =>        
-    {
-        location.assign(`${ location.origin }/Project/shop.php`);
-    })
-}
 
 function checkout()
 {
@@ -320,13 +300,5 @@ function validateCheckout(fName, lName, zip, payment, total, apt, address)
     {
         errors.push("Payment amount not does not match total: ", total);
     }
-    // if (regex.test(apt))
-    // {
-    //     errors.push("Building information is not valid. (Must contain building no. or Suite no.)");
-    // }
-    // if (regex.test(address))
-    // {
-    //     errors.push("Address is not valid. (Must contain streen no.)");
-    // }
     return errors;
 }
