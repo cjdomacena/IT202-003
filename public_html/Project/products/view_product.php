@@ -325,3 +325,4 @@ $current_page = se($_GET, 'page', 1, false);
 <?php
 require(__DIR__ . "../../../../partials/flash.php");
 ?>
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>

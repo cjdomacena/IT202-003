@@ -26,5 +26,5 @@ if (is_logged_in()) {
 
 	echo json_encode($r);
 } else {
-	die(header("Location: /../.././login.php"));
+	redirect(get_url('index.php'));
 }
