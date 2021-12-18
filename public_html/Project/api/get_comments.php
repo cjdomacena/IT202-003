@@ -3,35 +3,31 @@ require_once(__DIR__ . "../../../../lib/functions.php");
 require_once(__DIR__ . "../../../../lib/db.php");
 session_start();
 
-
 $db = getDB();
 
-$offset = 5;
-$limit = 5;
-
-
-$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $product_id = se($_GET, 'product_id', -1, false);
 
+$limit = 5;
 $stmt = $db->prepare('SELECT * FROM Ratings WHERE product_id = :product_id');
-try{
+try {
 	$stmt->execute([':product_id' => $product_id]);
 	$s = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	$row_count = $stmt->rowCount();
-}catch(PDOException $e){
+} catch (PDOException $e) {
 	flash($e, 'bg-red-200');
 }
 
-if($row_count >= 5){
+
+if ($row_count >= 5) {
 	$limit = 5;
-}else{
+}else {
 	$limit = $row_count;
 }
 
+
 $r = [];
 $params = [];
-$q = "SELECT Ratings.comment, Ratings.rating, Ratings.created, Users.username FROM Ratings LEFT JOIN Users ON Ratings.user_id WHERE Ratings.product_id = :product_id ";
-
+$q = "SELECT * FROM Ratings WHERE product_id = :product_id";
 if (isset($_GET['type'])) {
 	$type = se($_GET, 'type', 'id', false);
 	switch ($type) {
@@ -60,26 +56,28 @@ if (isset($_GET['direction'])) {
 			$q .= ' ASC';
 			break;
 	}
+
 }
 
-if (isset($_GET['page'])) {
-	$offset = se($_GET, 'page', 1, false) * 5;
-}
-
-	$q .= " LIMIT :offset, :limit";
+$page = se($_GET, 'page', 1, false);
 
 
+$q .= " LIMIT :limit OFFSET :offset";
+$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $stmt = $db->prepare($q);
-
+$offset = ($page - 1) * 5;
 try {
-	$params[':product_id'] = $product_id;
-	$params[':offset'] = $offset;
-	$params[':limit'] = $limit;
-	$stmt->execute($params);
+	$stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+	$stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+	$stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+	$stmt->execute();
 	$r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	
 } catch (PDOException $e) {
 	flash($e, 'bg-red-200');
 }
+;
 ?>
 
 <?php if ($r) : ?>

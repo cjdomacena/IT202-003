@@ -26,8 +26,8 @@ if (!isset($total_pages)) {
 			</a>
 		<?php endif ?>
 	</li>
-	<?php for ($i = 0; $i < $total_pages - 1; $i++) : ?>
-		<?php if ($i + 1 == $current_page) : ?>
+	<?php for ($i = 0; $i < $total_pages; $i++) : ?>
+		<?php if ($i  == $current_page - 1) : ?>
 			<li>
 				<a href="?<?php pagination_filter($i + 1) ?>" class="px-3 py-2 bg-indigo-600 rounded leading-tight text-gray-50 bg-white border border-gray-300 hover:bg-indigo-500"><?php echo $i + 1 ?></a>
 			</li>
