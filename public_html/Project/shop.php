@@ -1,21 +1,34 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
-// if (is_logged_in()) {
-//     $roles = get_role();
-//     // flash("Wecome! " . get_username(), "bg-green-200",);
-//     echo "<script>get_cart_count();</script>";
-// }
-// 
+
 $categories = null;
 $roles = get_role();
 
-if (!is_logged_in() || !has_role("admin") || !has_role("seller")) {
-   redirect("index.php");
+if (!is_logged_in() || !has_role("seller")) {
+    redirect("index.php");
 } else {
     $db = getDB();
     $stmt = $db->prepare("SELECT DISTINCT category FROM Products");
     $stmt->execute();
     $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt = $db->prepare('SELECT COUNT(*) as count FROM Products WHERE user_id = :uid');
+    try {
+        $stmt->execute([':uid' => get_user_id()]);
+        $r = $stmt->fetch();
+    } catch (PDOException $e) {
+        flash('Something went wrong...' . var_export($e), 'bg-red-200');
+    }
+    if ($r) {
+        $total_pages = ceil($r['count'] / 4);
+    } else {
+        $total_pages = 1;
+    }
+    if (!isset($_GET['page'])) {
+        $current_page = 1;
+    } else {
+        $current_page = se($_GET, 'page', 1, false);
+    }
 }
 
 ?>
@@ -49,6 +62,8 @@ if (!is_logged_in() || !has_role("admin") || !has_role("seller")) {
     <div id="userItems">
 
     </div>
+    <input value="<?php se($current_page) ?>" class="hidden" id="page" />
+    <?php require('./utils/pagination.php') ?>
 </div>
 
 <div class="my-4 container mx-auto">
@@ -56,12 +71,14 @@ if (!is_logged_in() || !has_role("admin") || !has_role("seller")) {
 </div>
 <script>
     get_cart_count();
+    const page = document.getElementById('page').value;
     $(document).ready(
         $.ajax({
             type: "GET",
             url: "./products/user_products.php",
             data: {
                 sort: "all_products",
+                page:page,
             },
             success: (data) => {
                 $("#userItems").html(data);

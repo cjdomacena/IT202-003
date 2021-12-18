@@ -50,15 +50,21 @@
 	if (!empty($sort)) {
 		$q .= " ORDER BY $sort $dir";
 	}
-
-
-
+	$limit = 4;
+	$page = se($_GET, 'page', 1, false);
+	$q .= " LIMIT :limit OFFSET :offset";
+	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$stmt = $db->prepare($q);
+	$offset = ($page - 1) * $limit;
 	try {
 		if (count($params) < 1) {
+			$stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+			$stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 			$stmt->execute();
 			$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		} else {
+			$params['limit'] = $limit;
+			$params['offset'] = $offset;
 			$stmt->execute($params);
 			$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
