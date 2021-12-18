@@ -117,7 +117,19 @@ $current_page = se($_GET, 'page', 1, false);
 
 		<div class="w-4/5">
 			<div class="flex items-center justify-between">
-				<h3 class="my-4">Reviews: Average rating: <?php se($product['avg_rating']) ?></h3>
+				<div class="my-4">
+					<h3>Reviews: </h3>
+					<div class="flex space-x-1 items-center">
+						<p class="text-xs">Average rating: </p>
+						<?php if ($product['avg_rating'] == 0) : ?>
+							<span class="text-xs">Not available</span>
+						<?php else : ?>
+
+							<span class="text-xs"><b><?php se($product, 'avg_rating') ?></b> out of 5</span>
+						<?php endif ?>
+
+					</div>
+				</div>
 				<div class="space-x-4">
 					<select class="rounded" id="direction" onchange="showReviews()">
 						<option value="desc" default>High to Low</option>
@@ -203,8 +215,8 @@ $current_page = se($_GET, 'page', 1, false);
 			success: (data) => {
 				const reviewLoader = document.getElementById('review-loading')
 				reviewLoader.classList.add('hidden');
-				$('#reviews').replaceWith(data);
-				// $('#reviews').html(data);
+
+				$('#reviews').html(data);
 			}
 		})
 	}
@@ -254,8 +266,8 @@ $current_page = se($_GET, 'page', 1, false);
 		}
 	}
 	const clearFilter = () => {
-		document.getElementById('type').value = 'date';
-		document.getElementById('direction').value = 'asc';
+		document.getElementById('type').value = 'ratings';
+		document.getElementById('direction').value = 'desc';
 		showReviews();
 	}
 
