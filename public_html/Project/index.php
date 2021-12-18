@@ -45,6 +45,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<div id="userItems">
 
 	</div>
+	<?php require('./utils/pagination.php')?>
 </div>
 
 <?php

@@ -120,8 +120,8 @@ $current_page = se($_GET, 'page', 1, false);
 				<h3 class="my-4">Reviews: Average rating: <?php se($product['avg_rating']) ?></h3>
 				<div class="space-x-4">
 					<select class="rounded" id="direction" onchange="showReviews()">
-						<option value="desc" default>Descending</option>
-						<option value="asc">Ascending</option>
+						<option value="desc" default>High to Low</option>
+						<option value="asc">Low to High</option>
 
 					</select>
 					<select class="rounded" id="type" onchange="showReviews()">
@@ -144,7 +144,7 @@ $current_page = se($_GET, 'page', 1, false);
 					<div class="h-2 bg-gray-300 rounded w-96"></div>
 				</div>
 			</div>
-			<input id="offset" value="<?php se($current_page); ?>" class="hidden" />
+			<input id="page" value="<?php se($current_page); ?>" class="hidden" />
 
 			<?php if ($total_pages > 0) : ?>
 				<?php include __DIR__ . '/../utils/pagination.php' ?>
@@ -178,8 +178,36 @@ $current_page = se($_GET, 'page', 1, false);
 		ratings.forEach(rating => {
 			rating.classList.remove('fill-current');
 		})
+		document.getElementById('comment').value = "";
+		document.getElementById('product_id').value = "";
 	}
+	const showReviews = () => {
+		const product_id = document.getElementById('product_id').value;
+		const page = document.getElementById('page').value;
+		const type = document.getElementById('type').value;
+		const direction = document.getElementById('direction').value;
 
+		$.ajax({
+			type: 'GET',
+			url: './../api/get_comments.php',
+			data: {
+				product_id: product_id,
+				page: page,
+				type: type,
+				direction: direction
+			},
+			beforeSend: () => {
+				const reviewLoader = document.getElementById('review-loading')
+				reviewLoader.classList.remove('hidden');
+			},
+			success: (data) => {
+				const reviewLoader = document.getElementById('review-loading')
+				reviewLoader.classList.add('hidden');
+				$('#reviews').replaceWith(data);
+				// $('#reviews').html(data);
+			}
+		})
+	}
 	const submitReview = (e) => {
 		e.preventDefault();
 		const comment = document.getElementById('comment').value;
@@ -210,15 +238,18 @@ $current_page = se($_GET, 'page', 1, false);
 			}).done((jsonres, x, y) => {
 				const loading = document.getElementById("loading");
 				loading.classList.add("hidden");
-				let res = JSON.parse(y.responseText);
+				let res = JSON.parse(jsonres);
 				if (res.status === 200) {
 					flash(res.message, "bg-green-200", 1000, 'fade');
+					location.reload();
+				} else if (res.status === 500) {
+					flash(res.message, "bg-yellow-200", 1000, 'fade');
 				} else {
 					flash(res.message, "bg-red-200", 1000, 'fade');
 				}
+				window.scrollTo(0, 0);
 				document.getElementById('comment').value = ""
 				reset();
-				showReviews();
 			})
 		}
 	}
@@ -227,31 +258,7 @@ $current_page = se($_GET, 'page', 1, false);
 		document.getElementById('direction').value = 'asc';
 		showReviews();
 	}
-	const showReviews = () => {
-		const product_id = document.getElementById('product_id').value;
-		const offset = document.getElementById('offset').value;
-		const type = document.getElementById('type').value;
-		const direction = document.getElementById('direction').value;
-		$.ajax({
-			type: 'GET',
-			url: './../api/get_comments.php',
-			data: {
-				product_id: product_id,
-				page: offset,
-				type: type,
-				direction: direction
-			},
-			beforeSend: () => {
-				const reviewLoader = document.getElementById('review-loading')
-				reviewLoader.classList.remove('hidden');
-			},
-			success: (data) => {
-				const reviewLoader = document.getElementById('review-loading')
-				reviewLoader.classList.add('hidden');
-				$('#reviews').html(data);
-			}
-		})
-	}
+
 
 	$(document).ready(
 		showReviews()
