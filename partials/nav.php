@@ -23,9 +23,9 @@ session_start();
 require_once(__DIR__ . "/../lib/functions.php");
 
 ?>
-<meta charset="UTF-8" />
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.min.css" />
+
 <!-- include css and js files -->
 <script src="<?php echo get_url("utils/index.js") ?>" defer></script>
 <script src="<?php echo get_url('helper.js'); ?>"></script>
@@ -35,6 +35,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 <!-- Include the storage api -->
 <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
 <script src="<?php echo get_url('firebase.js'); ?>"></script>
+<link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.min.css" />
 <header class="w-full">
     <nav class="container-2xl bg-indigo-600 p-4 flex justify-between px-8 shadow">
         <div id="logo" class="h-8">

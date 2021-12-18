@@ -17,6 +17,5 @@ if (!is_logged_in()) {
 	} catch (PDOException $e) {
 		flash($e, "bg-red-200");
 	}
-
 }
 
