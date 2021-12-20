@@ -37,9 +37,6 @@ $username = get_username();
 	</div>
 </div>
 
-<script>
-
-</script>
 <?php
 require_once(__DIR__ . "/../../../partials/flash.php");
 ?>
