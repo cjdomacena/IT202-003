@@ -4,10 +4,10 @@ require(__DIR__ . "/../../partials/nav.php");
 
 if (isset($_GET['user'])) {
 	$db = getDB();
-	$username = se($_GET, 'user', '', false);
-	$stmt = $db->prepare('SELECT * FROM Users WHERE username = :username');
+	$uid =  se($_GET, 'user', -1, false);
+	$stmt = $db->prepare('SELECT * FROM Users WHERE id = :uid');
 	try {
-		$stmt->execute([':username' => $username]);
+		$stmt->execute([':uid' => $uid]);
 		$user = $stmt->fetch();
 	} catch (PDOException $e) {
 		flash($e->errorInfo, 'bg-red-200');
@@ -15,7 +15,6 @@ if (isset($_GET['user'])) {
 } else {
 	redirect(get_url('index.php'));
 }
-
 ?>
 
 <div class="container mx-auto p-4 mt-4 grid place-items-center space-y-4 mt-12">
