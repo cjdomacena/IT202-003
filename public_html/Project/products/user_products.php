@@ -12,7 +12,7 @@
 	$dir = "ASC";
 	$search = se($_GET, "search", "", false);
 	$params = [];
-	$q = "SELECT * FROM Products WHERE user_id =:uid AND 1 = 1";
+	$q = "SELECT Products.id, Products.image, Products.id, Products.avg_rating, Products.description,Products.category, Products.cost,Products.name,Users.username, Users.id as uid FROM Products JOIN Users ON (Products.user_id = Users.id) WHERE user_id =:uid AND 1 = 1";
 	$params[":uid"] = get_user_id();
 
 	if ($sort == 'filter_by_stock') {
@@ -132,6 +132,9 @@
  					<?php if (se($product, 'stock', -1, false) > 0) : ?>
  						<span class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Available stock: <?php se($product, 'stock', -1, true) ?></span>
  					<?php endif; ?>
+ 				</div>
+ 				<div class="cursor-pointer">
+ 					<span class="text-blue-800 text-xs font-semibold py-0.5 rounded hover:text-gray-900">Seller:<a href="profile_view.php?user=<?php se($product, 'uid') ?>"> <?php se($product, 'username') ?></a></span>
  				</div>
  				<div class="flex space-x-4">
  					<a href="<?php echo get_url('./products/view_product.php') ?>?id=<?php echo se($product, 'id'); ?>" class="text-indigo-800 font-medium text-sm  text-center justify-self-end">

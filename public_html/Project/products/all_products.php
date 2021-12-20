@@ -12,7 +12,7 @@
 	$search = se($_GET, "search", "", false);
 
 	$params = [];
-	$q = "SELECT * FROM Products WHERE visibility = 1 AND stock > 0  AND 1=1";
+	$q = "SELECT Products.id, Products.image, Products.id, Products.avg_rating, Products.description,Products.category, Products.cost,Products.name,Users.username, Users.id as uid FROM Products JOIN Users ON (Products.user_id = Users.id) WHERE Products.visibility = 1 AND Products.stock > 0  AND 1=1";
 
 
 
@@ -123,8 +123,13 @@
  					</p>
  				</div>
 
- 				<div>
+ 				<div class="flex items-center">
  					<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"><?php se($product, 'category') ?></span>
+
+
+ 				</div>
+ 				<div class="cursor-pointer">
+ 					<span class="text-blue-800 text-xs font-semibold py-0.5 rounded hover:text-gray-900">Seller:<a href="profile_view.php?user=<?php se($product, 'uid') ?>"> <?php se($product, 'username') ?></a></span>
  				</div>
 
  				<div class="flex space-x-4">
@@ -141,4 +146,3 @@
 
  	<?php endforeach ?>
  </div>
- 
