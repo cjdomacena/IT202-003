@@ -7,7 +7,7 @@ if (isset($_GET["id"])) {
 	if ($id != -1) {
 		$db = getDB();
 		$product = "";
-		$stmt = $db->prepare('SELECT * FROM Products WHERE id = :id');
+		$stmt = $db->prepare('SELECT Products.name, Products.description, Products.stock, Products.image, Products.category,Products.avg_rating, Products.id, Products.cost,Users.id as uid, Users.username  FROM Products JOIN Users ON Users.id = Products.user_id WHERE Products.id = :id');
 		try {
 			$stmt->execute([':id' => $id]);
 			$product = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -64,6 +64,11 @@ $current_page = se($_GET, 'page', 1, false);
 			<div class="w-64 flex space-x-4 items-center">
 				<label for="quantity" class="text-sm">Qty</label>
 				<input type="number" min=1 max=99 value="1" name="quantity" id="quantity" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 my-4 w-24" />
+			</div>
+			<div>
+				<div class="cursor-pointer">
+					<span class="text-blue-800 text-xs font-semibold py-0.5 rounded hover:text-gray-900">Seller:<a href="../profile_view.php?user=<?php se($product, 'uid') ?>"> <?php se($product, 'username') ?></a></span>
+				</div>
 			</div>
 			<button class="text-indigo-800 font-medium text-sm py-2 text-center inline-flex items-center mt-4" id="<?php echo $product["id"]; ?>" onclick="product_page_add_to_cart(this)">
 				Add to Cart
