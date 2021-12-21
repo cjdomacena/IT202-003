@@ -2,7 +2,6 @@
 require_once(__DIR__ . "../../../../lib/functions.php");
 require_once(__DIR__ . "../../../../lib/db.php");
 session_start();
-
 if (has_role('seller') || has_role('admin')) {
 	$start = "";
 	$end = "";
@@ -16,16 +15,15 @@ if (has_role('seller') || has_role('admin')) {
 	$start = se($_GET, 'start', date('Y-m-d', strtotime("-1 month")), false);
 	$end = se($_GET, 'end', date('Y-m-d'), false);
 
-	$q.= " AND OrderItems.created BETWEEN :start and :end ";
+	$q .= " AND OrderItems.created BETWEEN :start and :end ";
 	$params[':start'] = $start;
 	$params[':end'] = $end;
 
 	$type = se($_GET, 'type', 'all', false);
-	$direction = se($_GET, 'direction', 'desc',false);
-
-	switch($type){
+	$direction = se($_GET, 'direction', 'desc', false);
+	switch ($type) {
 		case 'all':
-			$q.= ' ORDER BY Products.name ';
+			$q .= ' ORDER BY Products.name ';
 			break;
 		case 'total':
 			$q .= ' ORDER BY cost_on_purchase ';
@@ -38,21 +36,35 @@ if (has_role('seller') || has_role('admin')) {
 			break;
 	}
 
-	if($direction == 'asc'){
+	if ($direction == 'asc') {
 		$q .= ' ASC ';
-	}
-	else{
+	} else {
 		$q .= ' DESC ';
 	}
+	$row_count = se($_GET, 'rowCount', 4, false);
+	if ($row_count >= 2) {
+		$limit = 2;
+	} else {
+		$limit = $row_count;
+	}
+	
+	$page = se($_GET, 'page', 1, false);
+	
+	$q .= " LIMIT :offset, :limit";
 
-
+	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$stmt = $db->prepare($q);
+	$offset = ($page - 1) * 2;
 	try {
+		$params[':limit'] = (int)$limit;
+		$params[':offset'] = (int)$offset;
 		$stmt->execute($params);
 		$orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	} catch (PDOException $e) {
 		flash(var_export($e, true), 'bg-red-200');
 	}
+	$row_count = count($orders);
+	echo "OFFSET: $offset, LIMIT: $limit, TYPE: $type, DIRECTION: $direction ";
 }
 ?>
 
@@ -92,3 +104,4 @@ if (has_role('seller') || has_role('admin')) {
 			</div>
 		</div>
 	<?php endif; ?>
+	<input value="<?php se($row_count) ?>" class="hidden" id="row-count" />

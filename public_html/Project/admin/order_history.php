@@ -5,6 +5,23 @@ if (!is_logged_in()) {
 }
 $start = date('Y-m-d', strtotime("-1 month"));
 $end = date('Y-m-d', strtotime('today'));
+
+$db = getDB();
+$uid = (int)get_user_id();
+$stmt = $db->prepare('SELECT COUNT(*) as row_count FROM Products, OrderItems WHERE Products.id = OrderItems.product_id AND Products.user_id = :uid');
+try {
+	$stmt->execute([':uid' => $uid]);
+	$r = $stmt->fetch();
+} catch (PDOException $e) {
+	flash(var_export($e->errorInfo, true), 'bg-red-200');
+}
+if (isset($_GET['page'])) {
+	$current_page = se($_GET, 'page', 1, false);
+} else {
+	$current_page = 1;
+}
+$total_pages = ceil($r['row_count'] / 2);
+
 ?>
 
 <div class="container mx-auto h-auto my-24">
@@ -21,15 +38,15 @@ $end = date('Y-m-d', strtotime('today'));
 			</div>
 		</div>
 		<div class="flex items-center space-x-4">
-			<select class="py-1" id="type" onchange="filterHistory(); return false;">
-				<option value="all" selected>Filter</option>
+			<select class="py-1" id="type" onchange="filterHistory()">
+				<option value="all">Filter</option>
 				<option value="total">Total</option>
 				<option value="created">Date Purchased</option>
 				<option value="qty">Quantity </option>
 			</select>
 
-			<select class="py-1" id="dir" onchange="filterHistory(); return false;">
-				<option value="desc" selected>High to Low</option>
+			<select class="py-1" id="dir" onchange="filterHistory()">
+				<option value="desc">High to Low</option>
 				<option value="asc">Low to High</option>
 			</select>
 		</div>
@@ -72,33 +89,27 @@ $end = date('Y-m-d', strtotime('today'));
 	<div id="data">
 
 	</div>
+	<div>
+		<?php require('./../utils/pagination.php') ?>
+	</div>
 </div>
+<input id="current-page" value="<?php echo $current_page ?>" class="hidden" />
+<input id="row-count" value="<?php se($r, 'row_count') ?>" class="hidden" />
 <script>
 	get_cart_count();
-	$(document).ready(
-		$.ajax({
-			type: 'GET',
-			url: './purchase_history.php',
-			beforeSend: () => {
-				document.getElementById('loading').classList.remove('hidden');
-			},
-			success: (data) => {
-				$('#data').html(data);
-			}
-		}).done(() => {
-			document.getElementById('loading').classList.add('hidden');
-		})
-	)
+	let i = 0;
+	let start = document.getElementById('start');
+	let end = document.getElementById('end');
+	let type = document.getElementById('type');
+	let dir = document.getElementById('dir');
+	let row_count = document.getElementById('row-count');
+	let current_page = document.getElementById('current-page').value;
+
 	const filterHistory = () => {
-		const start = document.getElementById('start');
-		const end = document.getElementById('end');
-		const type = document.getElementById('type');
-		const dir = document.getElementById('dir');
-		console.log(type.value);
-		console.log(dir.value)
+		prevType = type.value;
 		$.ajax({
 			type: 'GET',
-			url: './purchase_history.php',
+			url: `./purchase_history.php?page=${current_page}`,
 			data: {
 				start: start.value,
 				end: end.value,
@@ -108,13 +119,15 @@ $end = date('Y-m-d', strtotime('today'));
 			beforeSend: () => {
 				document.getElementById('loading').classList.remove('hidden');
 			},
-			success: (data) => {
-				$('#data').html(data)
-			}
-		}).done(() => {
+		}).done((data) => {
+			$('#data').html(data);
 			document.getElementById('loading').classList.add('hidden');
 		})
+
+		return false;
 	}
+
+	$(document).ready(filterHistory());
 </script>
 
 
