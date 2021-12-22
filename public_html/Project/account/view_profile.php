@@ -2,32 +2,42 @@
 require_once(__DIR__ . "/../../../partials/nav.php");
 if (!is_logged_in()) {
 	redirect(get_url('index.php'));
+} else {
+	$db = getDB();
+	$uid = (int)get_user_id();
+	$stmt = $db->prepare('SELECT visibility FROM Users WHERE id = :uid');
+	try {
+		$stmt->execute([':uid' => $uid]);
+		$isVisible = $stmt->fetch();
+	} catch (PDOException $e) {
+		flash(var_export($e, true), "bg-red-200");
+	}
 }
 ?>
-
-
-
 
 <?php
 $email = get_user_email();
 $username = get_username();
 ?>
-<div class="w-1/2 mx-auto p-4 mt-4">
-	<div class="my-4 space-y-4 p-4 bg-indigo-400 rounded text-white">
-		<h1 class="text-xl ">View Profile</h1>
+<div class="container mx-auto p-4 mt-4 grid place-items-center space-y-4 mt-12">
+	<div class="w-20 h-20 rounded-full bg-center bg-gray-100 bg-cover" style="background-image: url(https://ui-avatars.com/api/?name=<?php se($username) ?>&font-size=0.24&rounded=true&background=5850EC&color=fff&size=128);"></div>
+	<div class="text-center space-y-1">
+		<h1 class="capitalize"><?php se($username) ?></h1>
+		<?php if ($isVisible['visibility']) : ?>
+			<p><?php se($email) ?></p>
+		<?php endif; ?>
+		<?php if ($isVisible['visibility']) : ?>
+			<p>Profile: Public</p>
+		<?php else : ?>
+			<p>Profile: Private</p>
+		<?php endif; ?>
 	</div>
-	<form method="POST" onsubmit="return validate(this);">
-		<div class="mb-3">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email" value="<?php se($email); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" disabled />
-		</div>
-		<div class="mb-3">
-			<label for="username">Username</label>
-			<input type="text" name="username" id="username" value="<?php se($username); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" disabled />
-		</div>
-	</form>
+	<div>
+		<h2>Rated Products:</h2>
+	</div>
 </div>
 
 <?php
 require_once(__DIR__ . "/../../../partials/flash.php");
 ?>
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>

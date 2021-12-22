@@ -173,6 +173,3 @@ if (isset($_POST["type"])) {
 </div>
 
 <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
-
-<script>
-</script>

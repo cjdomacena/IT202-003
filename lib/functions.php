@@ -155,3 +155,9 @@ function redirect($path)
     echo "<noscript><meta http-equiv=\"refresh\" content=\"0;url=" . get_url($path) . "\"/></noscript>";
     die();
 }
+
+function pagination_filter($newPage)
+{
+    $_GET['page'] = $newPage;
+    return se(http_build_query($_GET));
+}

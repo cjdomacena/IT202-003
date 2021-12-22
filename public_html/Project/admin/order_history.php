@@ -1,33 +1,31 @@
 <?php
-require_once(__DIR__ . "/../../../partials/nav.php");
+require(__DIR__ . "/../../../partials/nav.php");
 if (!is_logged_in()) {
 	redirect(get_url('index.php'));
 }
-
-$db = getDB();
-$uid = get_user_id();
-$orders = null;
-
-$stmt = $db->prepare('SELECT * FROM Orders WHERE user_id = :uid ORDER BY created DESC LIMIT 10');
-try {
-	$stmt->execute([":uid" => $uid]);
-	$orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-	flash($e, "bg-red-200");
-}
-
-
 $start = date('Y-m-d', strtotime("-1 month"));
 $end = date('Y-m-d', strtotime('today'));
-$current_page = 1;
+
+$db = getDB();
+$uid = (int)get_user_id();
+$stmt = $db->prepare('SELECT COUNT(*) as row_count FROM Products, OrderItems WHERE Products.id = OrderItems.product_id AND Products.user_id = :uid');
+try {
+	$stmt->execute([':uid' => $uid]);
+	$r = $stmt->fetch();
+} catch (PDOException $e) {
+	flash(var_export($e->errorInfo, true), 'bg-red-200');
+}
 if (isset($_GET['page'])) {
 	$current_page = se($_GET, 'page', 1, false);
+} else {
+	$current_page = 1;
 }
-$total_pages = ceil(count($orders) / 2);
+$total_pages = ceil($r['row_count'] / 2);
+
 ?>
 
 <div class="container mx-auto h-auto my-24">
-	<h1>Purchase History</h1>
+	<h1>Order History</h1>
 	<div class="flex items-center mt-4 justify-between">
 		<div class="flex items-center space-x-4">
 			<div>
@@ -105,10 +103,11 @@ $total_pages = ceil(count($orders) / 2);
 	let dir = document.getElementById('dir');
 	let row_count = document.getElementById('row-count');
 	let current_page = document.getElementById('current-page').value;
+
 	const filterHistory = () => {
 		$.ajax({
 			type: 'GET',
-			url: `./getPurchaseHistory.php?page=${current_page}&start=${start.value}&end=${end.value}&type=${type.value}&direction=${dir.value}`,
+			url: `./purchase_history.php?page=${current_page}`,
 			data: {
 				start: start.value,
 				end: end.value,
@@ -127,15 +126,15 @@ $total_pages = ceil(count($orders) / 2);
 			document.getElementById('loading').classList.add('hidden');
 			const table = document.getElementById('table');
 			table.classList.remove('hidden');
-
-
 		})
 
 		return false;
 	}
 
-	$(document).ready(filterHistory())
+	$(document).ready(filterHistory());
 </script>
+
+
 <?php
 require_once(__DIR__ . "/../../../partials/flash.php");
 ?>

@@ -7,18 +7,20 @@ if (!is_logged_in()) {
 <?php
 $email = get_user_email();
 $username = get_username();
+$visiblity = $_SESSION['user']['visibility'];
+
 ?>
 
 <?php
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
-
-    $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
-    // $password = se($_POST, "currentPassword", "", false);
+    $visiblity = se($_POST, 'visibility', 1, false);
+    $params = [":email" => $email, ":username" => $username, ":id" => get_user_id(), ":visibility" => $visiblity];
+    $password = se($_POST, "currentPassword", "", false);
     $db = getDB();
 
-    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username, visibility = :visibility where id = :id");
     $hasError = false;
     $email = sanitize_email($email);
     if (!is_valid_email($email)) {
@@ -57,14 +59,14 @@ if (isset($_POST["save"])) {
         }
     }
     //select fresh data from table
-    $stmt = $db->prepare("SELECT id, email, IFNULL(username, email) as `username` from Users where id = :id LIMIT 1");
+    $stmt = $db->prepare("SELECT id, email, IFNULL(username, email) as `username`, visibility from Users where id = :id LIMIT 1");
     try {
         $stmt->execute([":id" => get_user_id()]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) {
-            //$_SESSION["user"] = $user;
             $_SESSION["user"]["email"] = $user["email"];
             $_SESSION["user"]["username"] = $user["username"];
+            $visiblity = $user['visibility'];
         } else {
             flash("User doesn't exist", "danger");
         }
@@ -76,11 +78,11 @@ if (isset($_POST["save"])) {
 ?>
 
 
-<div class="w-1/2 mx-auto p-4 mt-4">
-    <div class="my-4 space-y-4 p-4 bg-yellow-300">
-        <h1 class="text-xl ">View Profile</h1>
+<div class="container mx-auto p-4 mt-4">
+    <div class="my-4 space-y-4 p-4 bg-indigo-400 rounded">
+        <h1 class="text-xl ">Edit Profile</h1>
     </div>
-    <form method="POST" onsubmit="return validate(this);">
+    <form method="POST" onsubmit="return validate(this);" class="space-y-8">
         <div class="mb-3">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" value="<?php se($email); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
@@ -88,6 +90,20 @@ if (isset($_POST["save"])) {
         <div class="mb-3">
             <label for="username">Username</label>
             <input type="text" name="username" id="username" value="<?php se($username); ?>" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" />
+        </div>
+        <div class="mb-3">
+            <label for="visible">Visibility: </label>
+            <select id="visibility" name="visibility">
+                <?php if ($visiblity) : ?>
+                    <option value="1" selected>Public</option>
+                    <option value="0">Private</option>
+                <?php else : ?>
+                    <option value="1">Public</option>
+                    <option value="0" selected>Private</option>
+                <?php endif; ?>
+
+
+            </select>
         </div>
 
 
@@ -124,3 +140,4 @@ require_once(__DIR__ . "/../../partials/flash.php");
         }
     }
 </script>
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>

@@ -4,7 +4,7 @@ require_once(__DIR__ . "../../../../lib/db.php");
 session_start();
 
 if (!is_logged_in()) {
-	die(header("Location: " . get_url('index.php')));
+	redirect(get_url('index.php'));
 }
 
 if (isset($_POST["name"])) {

@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "../../../../partials/nav.php");
-if (!is_logged_in() || has_role("default")) {
+if (!is_logged_in()) {
 	redirect(get_url('index.php'));
 }
 ?>
@@ -78,3 +78,4 @@ if (!is_logged_in() || has_role("default")) {
 <?php
 require_once(__DIR__ . "../../../../partials/flash.php");
 ?>
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>

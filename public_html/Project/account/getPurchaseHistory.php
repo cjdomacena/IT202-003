@@ -2,20 +2,20 @@
 require_once(__DIR__ . "../../../../lib/functions.php");
 require_once(__DIR__ . "../../../../lib/db.php");
 session_start();
-if (has_role('seller') || has_role('admin')) {
+if (has_role('shopper') || has_role('admin')) {
 	$start = "";
 	$end = "";
 	$db = getDB();
 	$uid = get_user_id();
 	$orders = null;
-	$q = "SELECT * FROM Products, OrderItems WHERE Products.id = OrderItems.product_id AND Products.user_id = :uid";
+	$q = "SELECT * FROM Orders JOIN OrderItems ON OrderItems.order_id = Orders.id WHERE Orders.user_id = :uid";
 	$params = [];
 	$params[':uid'] = (int)$uid;
 
 	$start = se($_GET, 'start', date('Y-m-d', strtotime("-1 month")), false);
 	$end = se($_GET, 'end', date('Y-m-d'), false);
 
-	$q .= " AND OrderItems.created BETWEEN :start and :end ";
+	$q .= " AND Orders.created BETWEEN :start and :end ";
 	$params[':start'] = $start;
 	$params[':end'] = $end;
 
@@ -23,16 +23,16 @@ if (has_role('seller') || has_role('admin')) {
 	$direction = se($_GET, 'direction', 'desc', false);
 	switch ($type) {
 		case 'all':
-			$q .= ' ORDER BY Products.name ';
+			$q .= ' ORDER BY OrderItems.order_id ';
 			break;
 		case 'total':
-			$q .= ' ORDER BY cost_on_purchase ';
+			$q .= ' ORDER BY OrderItems.cost_on_purchase ';
 			break;
 		case 'created':
 			$q .= ' ORDER BY OrderItems.created';
 			break;
 		case 'qty':
-			$q .= ' ORDER BY quantity ';
+			$q .= ' ORDER BY OrderItems.quantity ';
 			break;
 	}
 
@@ -72,6 +72,7 @@ if (has_role('seller') || has_role('admin')) {
 		}
 	}
 }
+$total = 0;
 ?>
 
 
@@ -81,7 +82,8 @@ if (has_role('seller') || has_role('admin')) {
 			<thead>
 				<tr class="text-left bg-gray-900 rounded text-gray-50 divide-y">
 					<th class="px-8 py-4 text-xs ">ID</th>
-					<th class="px-8 py-4 text-xs ">Shipping Information</th>
+					<th class="px-8 py-4 text-xs ">Item</th>
+					<th class="px-8 py-4 text-xs ">Order Quantity</th>
 					<th class="px-8 py-4 text-xs ">Total Paid</th>
 					<th class="px-8 py-4 text-xs ">Date</th>
 					<th class="px-8 py-4 text-xs ">View Orders</th>
@@ -91,14 +93,17 @@ if (has_role('seller') || has_role('admin')) {
 				<?php foreach ($orders as $order) : ?>
 					<tr class="hover:bg-gray-200">
 						<td class="px-8 py-4"><?php se($order, "id") ?></td>
-						<td class="px-8 py-4"><?php se($order, "address") ?>, <?php se($order, "state") ?></td>
-						<td class="px-8 py-4">$<?php se($order, "total_price") ?></td>
+						<td class="px-8 py-4"><?php se($order, "name") ?></td>
+						<td class="px-8 py-4">x<?php se($order, "quantity") ?></td>
+						<td class="px-8 py-4">$<?php se($order, "cost_on_purchase") ?></td>
 						<td class="px-8 py-4"><?php se($order, "created") ?></td>
 						<td class="px-8 py-4 cursor-pointer">
-							<a href="../cart/order_confirmation.php?order_id=<?php se($order, "id"); ?>&type=history"> View Order # <?php se($order, "id") ?></a>
+							<a href="../cart/order_confirmation.php?order_id=<?php se($order, "order_id"); ?>&type=history"> View Order # <?php se($order, "order_id") ?></a>
 						</td>
 					</tr>
+					<?php $total += $order['cost_on_purchase'] * $order['quantity']?>
 				<?php endforeach; ?>
+
 			</tbody>
 		</table>
 

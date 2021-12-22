@@ -3,8 +3,7 @@
 require(__DIR__ . "/../../../partials/nav.php");
 
 if (!has_role("admin")) {
-    flash("You don't have permission to view this page", "warning");
-    die(header("Location: $BASE_PATH" . "home.php"));
+    redirect(get_url('index.php'));
 }
 
 
@@ -45,13 +44,11 @@ try {
 } catch (PDOException $e) {
     flash(var_export($e->errorInfo, true), "danger");
 }
-
-
-
-//search for user by username
 $users = [];
-if (isset($_POST["username"])) {
 
+// search for user by username
+
+if (isset($_POST["username"])) {
     $username = se($_POST, "username", "", false);
     if (!empty($username)) {
         $db = getDB();
@@ -67,13 +64,29 @@ if (isset($_POST["username"])) {
         } catch (PDOException $e) {
             flash(var_export($e->errorInfo, true), "bg-red-200");
         }
-    } else {
+    } else { // Displays available users
         flash("Username must not be empty", "bg-yellow-300");
+        $stmt = $db->prepare("SELECT Users.id, username, (SELECT GROUP_CONCAT(name, '(', IF(UserRoles.is_active = 1, 'active','inactive'), ')') FROM UserRoles JOIN Roles ON UserRoles.role_id = Roles.id WHERE UserRoles.user_id = Users.id) as roles FROM Users");
+        try {
+            $stmt->execute();
+            $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            flash($e, "bg-red-200");
+        }
     }
+}else{
+
+    $stmt = $db->prepare("SELECT Users.id, username, (SELECT GROUP_CONCAT(name, '(', IF(UserRoles.is_active = 1, 'active','inactive'), ')') FROM UserRoles JOIN Roles ON UserRoles.role_id = Roles.id WHERE UserRoles.user_id = Users.id) as roles FROM Users");
+    try {
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        flash($e, "bg-red-200");
+    }
+
 }
-
-
 ?>
+
 <div class="w-1/2 mx-auto mt-8">
     <div class="my-4">
         <h1 class="text-xl">Assign Roles</h1>
@@ -148,3 +161,4 @@ if (isset($_POST["username"])) {
 //note we need to go up 1 more directory
 require_once(__DIR__ . "/../../../partials/flash.php");
 ?>
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
