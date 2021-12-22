@@ -69,7 +69,7 @@ if (has_role('seller') || has_role('admin')) {
 ?>
 
 
-<div class="flex items-center mt-4 justify-between">
+<div class="flex items-center mt-4 justify-between" id="table">
 	<?php if (!empty($orders)) : ?>
 		<table class="w-full mt-4 border rounded">
 			<thead>

@@ -73,7 +73,7 @@ require_once(__DIR__ . "/../lib/functions.php");
                         <?php endif ?>
                         <?php if (has_role('seller') || has_role('admin')) : ?>
                             <li class="hover:text-indigo-200">
-                                <a class="text-sm hover:bg-gray-100 block px-4 py-2 text-gray-700" href="<?php echo get_url('admin/purchase_history.php') ?>">Order History</a>
+                                <a class="text-sm hover:bg-gray-100 block px-4 py-2 text-gray-700" href="<?php echo get_url('admin/order_history.php') ?>">Order History</a>
                             </li>
                         <?php endif ?>
                         <li>

@@ -143,6 +143,7 @@ if (!isset($_GET['page'])) {
 <script>
 	get_cart_count();
 	const page = document.getElementById('page').value;
+
 	$(document).ready(
 		$.ajax({
 			type: "GET",

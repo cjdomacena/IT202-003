@@ -51,7 +51,7 @@ $total_pages = ceil($r['row_count'] / 2);
 			</select>
 		</div>
 	</div>
-	<table class="w-full border rounded hidden" id="loading">
+	<table class="w-full border rounded hidden mt-8" id="loading">
 		<thead>
 			<tr class="text-left bg-gray-900 rounded text-gray-50 divide-y">
 				<th class="px-8 py-4 text-xs ">ID</th>
@@ -97,7 +97,6 @@ $total_pages = ceil($r['row_count'] / 2);
 <input id="row-count" value="<?php se($r, 'row_count') ?>" class="hidden" />
 <script>
 	get_cart_count();
-	let i = 0;
 	let start = document.getElementById('start');
 	let end = document.getElementById('end');
 	let type = document.getElementById('type');
@@ -106,7 +105,6 @@ $total_pages = ceil($r['row_count'] / 2);
 	let current_page = document.getElementById('current-page').value;
 
 	const filterHistory = () => {
-		prevType = type.value;
 		$.ajax({
 			type: 'GET',
 			url: `./purchase_history.php?page=${current_page}`,
@@ -118,10 +116,16 @@ $total_pages = ceil($r['row_count'] / 2);
 			},
 			beforeSend: () => {
 				document.getElementById('loading').classList.remove('hidden');
+				const table = document.getElementById('table');
+				if (table) {
+					table.classList.add('hidden');
+				}
 			},
 		}).done((data) => {
 			$('#data').html(data);
 			document.getElementById('loading').classList.add('hidden');
+			const table = document.getElementById('table');
+			table.classList.remove('hidden');
 		})
 
 		return false;
