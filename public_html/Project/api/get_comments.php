@@ -72,8 +72,6 @@ try {
 	$stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 	$stmt->execute();
 	$r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-	
 } catch (PDOException $e) {
 	flash($e, 'bg-red-200');
 }

@@ -85,9 +85,6 @@ if (isset($_POST["username"])) {
     }
 
 }
-
-
-
 ?>
 
 <div class="w-1/2 mx-auto mt-8">
