@@ -47,9 +47,9 @@ if (has_role('seller') || has_role('admin')) {
 	} else {
 		$limit = $row_count;
 	}
-	
+
 	$page = se($_GET, 'page', 1, false);
-	
+
 	$q .= " LIMIT :offset, :limit";
 
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -65,11 +65,18 @@ if (has_role('seller') || has_role('admin')) {
 	}
 	$row_count = count($orders);
 	echo "OFFSET: $offset, LIMIT: $limit, TYPE: $type, DIRECTION: $direction ";
+	$total = 0;
+	if (!empty($orders)) {
+		foreach ($orders as $order) {
+			$total += $order['quantity'] * $order['cost_on_purchase'];
+		
+		}
+	}
 }
 ?>
 
 
-<div class="flex items-center mt-4 justify-between" id="table">
+<div class="mt-4" id="table">
 	<?php if (!empty($orders)) : ?>
 		<table class="w-full mt-4 border rounded">
 			<thead>
@@ -97,6 +104,7 @@ if (has_role('seller') || has_role('admin')) {
 				<?php endforeach; ?>
 			</tbody>
 		</table>
+
 	<?php else : ?>
 		<div class="w-full mt-4">
 			<div class="p-4 w-full bg-gray-100">
@@ -104,4 +112,8 @@ if (has_role('seller') || has_role('admin')) {
 			</div>
 		</div>
 	<?php endif; ?>
+	<div class="w-full p-4 bg-gray-100">
+		<h1>Total: <?php echo $total ?></h1>
+	</div>
 	<input value="<?php se($row_count) ?>" class="hidden" id="row-count" />
+</div>
