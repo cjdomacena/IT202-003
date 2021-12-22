@@ -8,7 +8,7 @@ if (has_role('seller') || has_role('admin')) {
 	$db = getDB();
 	$uid = get_user_id();
 	$orders = null;
-	$q = "SELECT * FROM Products, OrderItems WHERE Products.id = OrderItems.product_id AND Products.user_id = :uid";
+	$q = "SELECT * FROM Products, OrderItems, Orders WHERE Products.id = OrderItems.product_id AND Products.user_id = :uid AND Orders.id = OrderItems.order_id";
 	$params = [];
 	$params[':uid'] = (int)$uid;
 
@@ -72,6 +72,7 @@ if (has_role('seller') || has_role('admin')) {
 		}
 	}
 }
+
 ?>
 
 
@@ -92,7 +93,7 @@ if (has_role('seller') || has_role('admin')) {
 					<tr class="hover:bg-gray-200">
 						<td class="px-8 py-4"><?php se($order, "id") ?></td>
 						<td class="px-8 py-4"><?php se($order, "address") ?>, <?php se($order, "state") ?></td>
-						<td class="px-8 py-4">$<?php se($order, "total_price") ?></td>
+						<td class="px-8 py-4">$<?php se($order, "cost_on_purchase") ?></td>
 						<td class="px-8 py-4"><?php se($order, "created") ?></td>
 						<td class="px-8 py-4 cursor-pointer">
 							<a href="../cart/order_confirmation.php?order_id=<?php se($order, "id"); ?>&type=history"> View Order # <?php se($order, "id") ?></a>
