@@ -814,8 +814,307 @@ you can use uname: shopper, pw: @Shopper1</p>
 </td>
 </tr></td></tr></table>
 
-- Milestone 4
-<table><tr><td>milestone 4</td></tr><tr><td><table><tr><td>F1 - User can set their profile to be public or private (will need another column in Users table) ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F1 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F2 - User will be able to rate a product they purchased ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F2 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F3 - User’s Purchase History Changes ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F3 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F4 - Store Owner Purchase History Changes ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F4 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F5 - Add pagination to Shop Page (and any other product lists not yet mentioned) ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F5 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F6 - Store Owner will be able to see all products out of stock ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F6 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr><table><tr><td>F7 - User can sort products by average rating on the Shop Page ()</td></tr><tr><td>Status: pending</td></tr><tr><td>Links:</td></tr><tr><td>PRs:</td></tr><tr><td><table><tr><td>F7 - item 1<tr><td>Status: pending</td></tr><tr><td><img width="600px" src=""><p></td></tr></td></tr></table></td></tr></td></tr></table>
+<table>
+<tr><td>Milestone 4</td></tr><tr><td>
+<table>
+<tr><td>F1 - User can set their profile to be public or private (will need another column in Users table) (2021-12-19)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/profile_view.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/profile_view.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/issues/124](https://github.com/cjdomacena/IT202-003/issues/124)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F1 - Users' table with column private/public</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/146136113-50b2adf3-5b16-4814-a6c7-4d4d3bec55eb.png">
+<p>Table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Seller name is visible for all products and Email is shown when user's profile is public.</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/808080/ffffff?text=pending"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147032519-76eb92cc-18b2-48d2-bdf2-0d6eee4a8747.png">
+<p>Name of seller is visible and is clickable</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147032600-fa55da50-c02c-4fb4-a2ce-b47dfaf14418.png">
+<p>User's information. Email is shown when user's profile is public.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - User will be able to rate a product they purchased (2021-12-18)</td></tr>
+<tr><td>Status: incomplete</td></tr>
+<tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/view_product.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/view_product.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/133](https://github.com/cjdomacena/IT202-003/pull/133)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/134](https://github.com/cjdomacena/IT202-003/pull/134)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/135](https://github.com/cjdomacena/IT202-003/pull/135)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F2 - Create table called Ratings (id, product_id, user_id, rating, comment, created) 1-5 rating Text Comment (use TEXT data type in sql) Must be done on the Product Details Page Ratings and Rating Comments will be visible on the Product Details page Show the latest 10 reviews Paginate anything beyond 10 Show the average rating on the Product Details Page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=incomplete"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147033063-0d94086f-9933-470d-b444-b5b5275bc79f.png">
+<p>Comment section</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147033132-6e0be06b-d253-4db4-99a5-24196d423bed.png">
+<p>Ratings table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User’s Purchase History Changes (2021-12-20)</td></tr>
+<tr><td>Status: incomplete</td></tr>
+<tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/account/purchase_history.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/account/purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/144](https://github.com/cjdomacena/IT202-003/pull/144)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F3 - Add Filters and Pagination</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=incomplete"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147033569-bc2da2a1-57df-46a8-9394-30e04a940c17.png">
+<p>With pagination and date's purchased filter on just for evidence </p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Problem</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/808080/ffffff?text=pending"></td></tr>
+
+<tr><td>
+<img width="768px" src="">
+<p>I have not figured out how to persists the filters when moving to next page.</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store Owner Purchase History Changes (2021-12-21)</td></tr>
+<tr><td>Status: incomplete</td></tr>
+<tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/admin/order_history.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/admin/order_history.php)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/admin/purchase_history.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/admin/purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [Store Owner Purchase History Changes](Store Owner Purchase History Changes)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F4 - Filters and Pagination</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=incomplete"></td></tr>
+
+<tr><td>
+<img width="768px" src="">
+<p></p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F5 - Add pagination to Shop Page (and any other product lists not yet mentioned) (2021-12-20)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/index.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/index.php)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/shop.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/shop.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/136](https://github.com/cjdomacena/IT202-003/pull/136)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/137](https://github.com/cjdomacena/IT202-003/pull/137)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/138](https://github.com/cjdomacena/IT202-003/pull/138)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F5 - Pagination for homepage</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147034454-540cf4fc-e953-40be-9906-f7e6b0922e85.png">
+<p>Homepage pagination</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F5 - Shop page (Seller's shop)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147034535-34202b78-4e0d-4c6c-9e0c-34facfae87bf.png">
+<p></p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F6 - Store Owner will be able to see all products out of stock  (2021-12-18)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/shop.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/shop.php)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/user_products.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/user_products.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/140](https://github.com/cjdomacena/IT202-003/pull/140)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F6 - Display sold out items to seller only.</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147035265-06f01271-8739-4ae2-920d-72effb02838e.png">
+<p>Without filter</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F6 - Sold out filter</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147035296-bff1cdd3-83f0-4fca-8150-79fd22541225.png">
+<p></p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F7 - User can sort products by average rating on the Shop Page (2021-12-18)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/all_products.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/products/all_products.php)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/index.php](https://github.com/cjdomacena/IT202-003/blob/production/public_html/Project/index.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/138](https://github.com/cjdomacena/IT202-003/pull/138)</p><p>
+
+ [https://github.com/cjdomacena/IT202-003/pull/139](https://github.com/cjdomacena/IT202-003/pull/139)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F7 - Filter</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147035447-68f2c71e-74bc-4c19-b898-c0d6d8920662.png">
+<p>Without filter applied</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F7 - Filter applied (Low to High)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147035520-d300ca38-04b3-4b41-b24b-8b0d758b8495.png">
+<p></p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F7 - Filter Applied (High to Low)</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/67976753/147035558-af57e6b9-8198-438b-a200-a5e416cc8b60.png">
+<p></p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
 ### Intructions
 
 #### Don't delete this
